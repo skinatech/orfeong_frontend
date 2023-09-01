@@ -1,0 +1,39 @@
+{
+    "users": [
+        { "name": "Manage users", "route": "/users-index/false", "operacion": "version1%user%index", "icon": "person" },
+        { "name": "Manage profiles", "route": "/roles-index", "operacion": "version1%roles%roles%index", "icon": "people" },
+        { "name": "Manage operations", "route": "/operations-index", "operacion": "version1%roles%roles-operaciones%index", "icon": "build" }
+    ],
+    "documentManagement": [
+        { "name": "Dependencies", "route": "/dependencies-index", "operacion": "version1%gestionDocumental%trd-dependencias%index", "icon": "dns" },
+        { "name": "Upload TRD", "route": "/upload-trd", "operacion": "version1%gestionDocumental%trd%load-trd-file", "icon": "settings_applications" },
+        { "name": "Folder", "route": "/folder-index", "operacion": "version1%gestionDocumental%expedientes%index", "icon": "fact_check" }
+    ],
+    "correspondenceManagement": [
+        { "name": "Distribution Shipping", "route": "/distribution-shipping-index", "operacion": "version1%radicacion%distribuciony-envio%index", "icon": "dynamic_feed" },
+        { "name": "Annulment", "route": "/annulment-index", "operacion": "version1%radicacion%anulacion%index", "icon": "pan_tool" }
+    ],
+    "filing": [
+        { "name": "Standard filing", "route": "/filing-index/false", "operacion": "version1%radicacion%radicados%index", "icon": "description" },
+        { "name": "Email filing", "route": "/filing-email-index", "operacion": "version1%radicacion%radicacion-email%login-email", "icon": "contact_mail" }
+    ],
+    "setting": [
+        { "name": "Shipping providers", "route": "/providers-index", "operacion": "version1%configuracionApp%cg-proveedores%index", "icon": "local_shipping" },
+        { "name": "Working hours", "route": "/times-response-index", "operacion": "version1%configuracionApp%cg-tiempos-respuesta%index", "icon": "query_builder" },
+        { "name": "Non-working days", "route": "/non-working-days-index", "operacion": "version1%configuracionApp%dias-no-laborados%index", "icon": "alarm_off" },
+        { "name": "Template management", "route": "/templates-index", "operacion": "version1%configuracionApp%cg-gestion-plantillas%index", "icon": "widgets" },
+        { "name": "Template Variables", "route": "/templates-variables-index", "operacion": "version1%configuracionApp%cg-plantilla-variables%index", "icon": "mark_chat_read" },
+        { "name": "General configuration", "route": "/general-setting-update", "operacion": "version1%configuracionApp%configuracion-general%index-one", "icon": "policy" },
+        { "name": "Filing label", "route": "/filing-label-index", "operacion": "version1%configuracionApp%configuracion-general%index-label", "icon": "point_of_sale" },
+        { "name": "Third party management", "route": "/third-management-index", "operacion": "version1%configuracionApp%cg-gestion-terceros%index", "icon": "person_search" }
+    ],
+    "reports": [
+        { "name": "Reports", "route": "/reports-index", "operacion": "version1%reportes%index-list", "icon": "api" }
+    ],
+    "audit": [
+        { "name": "Audit log", "route": "/log-audit-index", "operacion": "version1%configuracionApp%log%index", "icon": "timer" }
+    ],
+    "about": [
+        { "name": "About", "route": "/about-view/MjYw", "operacion": "version1%default%view", "icon": "info" }
+    ]
+}

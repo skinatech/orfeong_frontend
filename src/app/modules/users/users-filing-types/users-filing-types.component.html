@@ -1,0 +1,62 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card ">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                        </div>
+                        <h4 class="card-title">{{ textFormRol | translate }} {{ paramOName }} </h4>
+                    </div>
+                    <div class="card-body ">
+                        <form [formGroup]="form" class="form-horizontal" (ngSubmit)="submit()">
+
+                            <div id="accordion" role="tablist">
+                                <div class="card-collapse" *ngFor="let module of modulos; let i = index">
+                                    <div class="card-header" role="tab" [attr.id]="'heading' + i">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <a data-toggle="collapse" [attr.href]="'#collapse' + i" aria-expanded="true" aria-controls="collapseOne" class="collapsed"> 
+                                                    {{ module.name | translate }}
+                                                </a>
+                                                <input class="form-check-input" (change)="validateInputParent($event)" value="{{ module.name }}" type="checkbox" [checked]="module.value" name="{{ module.name }}" >
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div [attr.id]="'collapse' + i" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion" style="">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" *ngFor="let operation of operations[module.name]">
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" (change)="validateInputChildren($event)" type="checkbox" name="{{ module.name }}" [checked]="operation.value" value="{{ operation.id }}"> {{ operation.name }}
+                                                                <span class="form-check-sign">
+                                                                    <span class="check"></span>
+                                                               </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-footer text-right ">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"></div>
+                                <button mat-raised-button type="submit" id="sendForm" style="display: none;" class="btn btn-fill btn-rose">{{ textButtonForm }}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <app-floating-button [iconMenu]="iconMenu" (menuPrimaryEmiterData)="menuPrimaryReceiveData($event)"></app-floating-button>
+</div>

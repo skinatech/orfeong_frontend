@@ -1,0 +1,18 @@
+.contentAuth {
+  background: yellow;
+  height: 150px;
+  /*IMPORTANTE*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000000;
+  position: absolute;
+}
+
+/*.loadingAuth {
+  position: relative;
+  top: -50%;
+  border: 1px #000 solid;
+  margin: 0 auto;
+  display: inline-block;
+}*/

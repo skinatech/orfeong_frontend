@@ -1,0 +1,8 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<app-initial-list *ngIf="statusInital" [initCardHeaderStatus]="initCardHeaderStatus" [initCardHeaderIcon]="initCardHeaderIcon" [initCardHeaderTitle]="initCardHeaderTitle" [dtTitles]="dtTitles" [routeLoadDataTablesService]="routeLoadDataTablesService" [initBotonCreateRoute]="initBotonCreateRoute"
+    (selectedRowsEmiter)="selectedRowsReceiveData($event)" [routeChangeStatus]="routeChangeStatus" [routeData]="route" [dataFilter]="dataFilter"></app-initial-list>
+<!-- Accion Solicitar préstamo y transferencia documental -->
+<app-observation-loans *ngIf="statusModalMain" [textFormObservaHeader]="textFormObservaHeader" (closeObservaEmiter)="closeObserva($event)"></app-observation-loans>
+<!-- Modal de archivar-->
+<app-arc-manag-modal-archive *ngIf="statusArchiveModal" [textFormHeader]="textFormHeader" (closeModalEmiter)="closeObserva($event)"></app-arc-manag-modal-archive>
+<app-floating-button *ngIf="statusButton" [menuButtons]="menuButtons" (menuEmiterData)="menuReceiveData($event)"></app-floating-button>

@@ -1,0 +1,30 @@
+/*.btnFloatContent {
+  position: fixed;
+  bottom: 15px;
+}*/
+
+.buttonIconMenu {
+    background-color: #e18838 !important;
+}
+
+.buttonIconSubmenu {
+    background-color: #F1F1F1 !important;
+    color: rgb(99, 98, 98) !important;
+}
+
+.marginIconSubmenu {
+  margin-left: 5px !important;
+}
+
+.customButtonBar {
+  width: 60px;
+  height: 503px; 
+  overflow-y: auto; 
+  padding: 0px 0px 0px 0px;
+  top: -503px;
+  left: 3px;
+}
+
+.customButtonBarNone {
+  display: none;
+}

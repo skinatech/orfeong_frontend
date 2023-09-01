@@ -1,0 +1,119 @@
+<nav #navbar class="navbar navbar-expand-lg navbar-transparent navbar-absolute-skn">
+  <div class="container-fluid">
+    <div class="navbar-wrapper">
+      <div class="navbar-minimize">
+        <button mat-raised-button (click)="minimizeSidebar()" class="btn btn-just-icon btn-white btn-fab btn-round">
+          <i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+          <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
+        </button>
+      </div>
+      <!-- <a class="navbar-brand" href="{{getPath()}}"> {{getTitle()}}</a> -->
+      <a class="navbar-brand">{{ topNavBarTitle | translate }}</a>
+    </div>
+    <button mat-button class="navbar-toggler btn-no-ripple" type="button" (click)="sidebarToggle()">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="navbar-toggler-icon icon-bar"></span>
+      <span class="navbar-toggler-icon icon-bar"></span>
+      <span class="navbar-toggler-icon icon-bar"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+      <ul class="navbar-nav">
+        <li class="nav-item" (click)="changeLanguage({ data: 'es' })">
+          <div class="input-group no-border search">
+            <button
+              class="btn btn-white btn-round btn-just-icon mat-raised-button"
+              mat-raised-button=""
+              type="button"
+              (click)="getSearchDocumentManagement()"
+            >
+              <span class="material-icons">content_paste_search</span>
+            </button>
+          </div>
+        </li>
+        <li class="nav-item" (click)="changeLanguage({ data: 'es' })">
+          <div class="input-group no-border search">
+            <button
+              class="btn btn-white btn-round btn-just-icon mat-raised-button"
+              mat-raised-button=""
+              type="button"
+              (click)="getSearch()"
+            >
+              <span class="mat-button-wrapper">
+                <i class="material-icons">search</i>
+              </span>
+            </button>
+          </div>
+        </li>
+        <li class="nav-item" (click)="changeLanguage({ data: 'es' })">
+          <img
+            class="imgI18n"
+            src="./assets/img/i18n/001-colombia.png"
+            alt="{{ 'Español' | translate }}"
+            title="{{ 'Español' | translate }}"
+          />
+        </li>
+        <li class="nav-item" (click)="changeLanguage({ data: 'en' })">
+          <img
+            class="imgI18n"
+            src="./assets/img/i18n/003-united-states.png"
+            alt="{{ 'Ingles' | translate }}"
+            title="{{ 'Ingles' | translate }}"
+          />
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link"
+            href="#pablo"
+            id="navbarDropdownMenuLink"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            title="{{ 'Notificaciones' | translate }}"
+          >
+            <i class="material-icons">notifications</i>
+            <span class="notification">{{ countNotification }}</span>
+            <p>
+              <span class="d-lg-none d-md-block">Some Actions</span>
+            </p>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+            <a
+              *ngFor="let dataNoti of dataNotification ? dataNotification.slice(0, 10) : dataNotification"
+              class="dropdown-item"
+              [routerLink]="['/' + dataNoti.url]"
+              title="{{ dataNoti.creatorUser + ' - ' + dataNoti.date }}"
+              (click)="chageStatusNotification(dataNoti)"
+            >
+              {{ dataNoti.notification }}
+            </a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            style="cursor: help"
+            [routerLink]="['/help']"
+            data-toggle="tooltip"
+            title="{{ 'Ayuda' | translate }}"
+          >
+            <i class="material-icons">contact_support</i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            style="cursor: pointer"
+            (click)="logout()"
+            data-toggle="tooltip"
+            title="{{ 'Cerrar sesión' | translate }}"
+          >
+            <i class="material-icons">exit_to_app</i>
+            <p>
+              <span class="d-lg-none d-md-block">Exit</span>
+            </p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

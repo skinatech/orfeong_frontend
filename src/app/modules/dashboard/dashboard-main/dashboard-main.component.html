@@ -1,0 +1,265 @@
+<div class="wrapper">
+    <div class="sidebar" data-color="white" data-background-color="blue" data-image="./assets/img/fondos/sidebar.jpg">
+        <app-admin-aside-nav-bar></app-admin-aside-nav-bar>
+        <div class="sidebar-background" style="background-image: url(assets/img/fondos/sidebar.jpg)"></div>
+    </div>
+    <div class="main-panel">
+        <app-admin-top-nav-bar [topNavBarTitle]="topNavBarTitle" [topNavBarOn]="topNavBarOn" [topNavBarRouteActive]="topNavBarRouteActive"></app-admin-top-nav-bar>
+
+
+        <!-- Data Tables -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+
+                        <!-- Administrador Gestion Documental: -->
+                        <!-- Préstamos abiertos -->
+                        <div *ngIf="dtOpenLoansStatus" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <app-initial-list [initCardHeaderStatus]="initCardHeaderStatusOpenLoans" [initCardHeaderIcon]="initCardHeaderIconOpenLoans" [initCardHeaderTitle]="initCardHeaderTitleOpenLoans" [dtTitles]="dtTitlesOpenLoans" [routeLoadDataTablesService]="routeLoadDataTablesServiceOpenLoans"
+                                [viewColumStatus]="viewColumStatusOpenLoans" [showButtonFiltrer]="false" [sweetLoadingInitStatus]="false" (selectedRowsEmiter)="selectedRowsReceiveDataOpenLoans($event)" [routeData]="route" [authorization]="authorization" [classDataTableResponsive]="classDataTableResponsive"
+                                [classMainConten]="classMainConten" [classContainerFluid]="classContainerFluid">
+                            </app-initial-list>
+                        </div>
+                        <!-- /Préstamos abiertos -->
+
+                        <!-- Préstamos abiertos por expediente -->
+                        <div *ngIf="dtClosedLoansStatus" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <app-initial-list [initCardHeaderStatus]="initCardHeaderStatusClosedLoans" [initCardHeaderIcon]="initCardHeaderIconClosedLoans" [initCardHeaderTitle]="initCardHeaderTitleClosedLoans" [dtTitles]="dtTitlesClosedLoans" [routeLoadDataTablesService]="routeLoadDataTablesServiceClosedLoans"
+                                [viewColumStatus]="viewColumStatusClosedLoans" [showButtonFiltrer]="false" [sweetLoadingInitStatus]="false" (selectedRowsEmiter)="selectedRowsReceiveDataClosedLoans($event)" [routeData]="route" [authorization]="authorization"
+                                [classDataTableResponsive]="classDataTableResponsive" [classMainConten]="classMainConten" [classContainerFluid]="classContainerFluid">
+                            </app-initial-list>
+                        </div>
+                        <!-- /Préstamos abiertos por expediente -->
+
+                        <!-- Préstamos cerrados (No se usará por ahora) -->
+                        <!-- <div *ngIf="dtClosedLoansStatus" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <app-initial-list [initCardHeaderStatus]="initCardHeaderStatusClosedLoans" [initCardHeaderIcon]="initCardHeaderIconClosedLoans" [initCardHeaderTitle]="initCardHeaderTitleClosedLoans" [dtTitles]="dtTitlesClosedLoans" [routeLoadDataTablesService]="routeLoadDataTablesServiceClosedLoans"
+                                [viewColumStatus]="viewColumStatusClosedLoans" [showButtonFiltrer]="false" [sweetLoadingInitStatus]="false" (selectedRowsEmiter)="selectedRowsReceiveDataClosedLoans($event)" [routeData]="route" [authorization]="authorization"
+                                [classDataTableResponsive]="classDataTableResponsive" [classMainConten]="classMainConten" [classContainerFluid]="classContainerFluid">
+                            </app-initial-list>
+                        </div> -->
+                        <!-- /Préstamos cerrados -->
+
+                        <!-- Transferencias realizadas -->
+                        <div *ngIf="dtTransfersAcceptedStatus" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <app-initial-list [initCardHeaderStatus]="initCardHeaderStatusTransfersAccepted" [initCardHeaderIcon]="initCardHeaderIconTransfersAccepted" [initCardHeaderTitle]="initCardHeaderTitleTransfersAccepted" [dtTitles]="dtTitlesTransfersAccepted" [routeLoadDataTablesService]="routeLoadDataTablesServiceTransfersAccepted"
+                                [viewColumStatus]="viewColumStatusTransfersAccepted" [showButtonFiltrer]="false" [sweetLoadingInitStatus]="false" (selectedRowsEmiter)="selectedRowsReceiveDataTransfersAccepted($event)" [routeData]="route" [authorization]="authorization"
+                                [classDataTableResponsive]="classDataTableResponsive" [classMainConten]="classMainConten" [classContainerFluid]="classContainerFluid">
+                            </app-initial-list>
+                        </div>
+                        <!-- /Transferencias realizadas -->
+
+                        <!-- Transferencias de gestión documental -->
+                        <div *ngIf="dtTransfersGesDocStatus" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <app-initial-list [initCardHeaderStatus]="initCardHeaderStatusTransfersGesDoc" [initCardHeaderIcon]="initCardHeaderIconTransfersGesDoc" [initCardHeaderTitle]="initCardHeaderTitleTransfersGesDoc" [dtTitles]="dtTitlesTransfersGesDoc" [routeLoadDataTablesService]="routeLoadDataTablesServiceTransfersGesDoc"
+                                [viewColumStatus]="viewColumStatusTransfersGesDoc" [showButtonFiltrer]="false" [sweetLoadingInitStatus]="false" (selectedRowsEmiter)="selectedRowsReceiveDataTransfersGesDoc($event)" [routeData]="route" [authorization]="authorization"
+                                [classDataTableResponsive]="classDataTableResponsive" [classMainConten]="classMainConten" [classContainerFluid]="classContainerFluid">
+                            </app-initial-list>
+                        </div>
+                        <!-- /Transferencia de gestión documental -->
+
+                        <!-- Radicados creados entrada y salida hoy -->
+                        <div *ngIf="dtCreateWindowTodayAdmStatus" [class]="dtCreateWindowTodayAdmClass">
+                            <app-initial-list [initCardHeaderStatus]="initCardHeaderStatusCreateWindowToday" [initCardHeaderIcon]="initCardHeaderIconCreateWindowToday" [initCardHeaderTitle]="initCardHeaderTitleCreateWindowToday" [dtTitles]="dtTitlesCreateWindowToday" [routeLoadDataTablesService]="routeLoadDataTablesServiceCreateWindowToday"
+                                [viewColumStatus]="viewColumStatusCreateWindowToday" [showButtonFiltrer]="false" [sweetLoadingInitStatus]="false" (selectedRowsEmiter)="selectedRowsReceiveDataCreateWindowToday($event)" [routeData]="route" [authorization]="authorization"
+                                [classDataTableResponsive]="classDataTableResponsive" [classMainConten]="classMainConten" [classContainerFluid]="classContainerFluid">
+                            </app-initial-list>
+                        </div>
+                        <!-- /Radicados creados entrada y salida hoy -->
+
+                        <!-- Usuario funcional -->
+                        <!-- Radicados Vencidos (No se usara por ahora) jobando -->
+                        <div *ngIf="dtFileExpiredOfficialStatus" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <app-initial-list [initCardHeaderStatus]="initCardHeaderStatusFileExpiredOfficial" [initCardHeaderIcon]="initCardHeaderIconFileExpiredOfficial" [initCardHeaderTitle]="initCardHeaderTitleFileExpiredOfficial" [dtTitles]="dtTitlesFileExpiredOfficial" [routeLoadDataTablesService]="routeLoadDataTablesServiceFileExpiredOfficial"
+                                [viewColumStatus]="viewColumStatusFileExpiredOfficial" [showButtonFiltrer]="false" [sweetLoadingInitStatus]="false" (selectedRowsEmiter)="selectedRowsReceiveDataFileExpiredOfficial($event)" [routeData]="route" [authorization]="authorization"
+                                [classDataTableResponsive]="classDataTableResponsive" [classMainConten]="classMainConten" [classContainerFluid]="classContainerFluid">
+                            </app-initial-list>
+                        </div>
+                        <!-- /Radicados Vencidos -->
+
+                        <!-- Radicados devueltos (No se usara por ahora) jobando -->
+                        <div *ngIf="dtReturnFileOfficialStatus" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <app-initial-list [initCardHeaderStatus]="initCardHeaderStatusReturnFileOfficial" [initCardHeaderIcon]="initCardHeaderIconReturnFileOfficial" [initCardHeaderTitle]="initCardHeaderTitleReturnFileOfficial" [dtTitles]="dtTitlesReturnFileOfficial" [routeLoadDataTablesService]="routeLoadDataTablesServiceReturnFileOfficial"
+                                [viewColumStatus]="viewColumStatusReturnFileOfficial" [showButtonFiltrer]="false" [sweetLoadingInitStatus]="false" (selectedRowsEmiter)="selectedRowsReceiveDataReturnFileOfficial($event)" [routeData]="route" [authorization]="authorization"
+                                [classDataTableResponsive]="classDataTableResponsive" [classMainConten]="classMainConten" [classContainerFluid]="classContainerFluid">
+                            </app-initial-list>
+                        </div>
+                        <!-- /Radicados devueltos -->
+
+                        <!-- Radicados asignados jobando -->
+                        <div *ngIf="dtFuncionalRadiAsignados" class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+                            <app-initial-list [initCardHeaderStatus]="initCardHeaderStatusFuncionalRadiAsignados" [initCardHeaderIcon]="initCardHeaderIconFuncionalRadiAsignados" [initCardHeaderTitle]="initCardHeaderTitleFuncionalRadiAsignados" [dtTitles]="dtTitlesFuncionalRadiAsignados" [routeLoadDataTablesService]="routeLoadDataTablesServiceFuncionalRadiAsignados"
+                                [viewColumStatus]="viewColumStatusReturnFileOfficial" [showButtonFiltrer]="false" [sweetLoadingInitStatus]="false" (selectedRowsEmiter)="selectedRowsReceiveDataFuncionalRadiAsignados($event)" [routeData]="route" [authorization]="authorization"
+                                [classDataTableResponsive]="classDataTableResponsive" [classMainConten]="classMainConten" [classContainerFluid]="classContainerFluid">
+                            </app-initial-list>
+                        </div>
+                        <!-- /Radicados asignados -->
+
+                        <!-- Radicados informados -->
+                        <div *ngIf="dtFileInformedStatus" [class]="dtFileInformedClass">
+                            <app-initial-list [initCardHeaderStatus]="initCardHeaderStatusFileInformed" [initCardHeaderIcon]="initCardHeaderIconFileInformed" [initCardHeaderTitle]="initCardHeaderTitleFileInformed" [dtTitles]="dtTitlesFileInformed" [routeLoadDataTablesService]="routeLoadDataTablesServiceFileInformed"
+                                [viewColumStatus]="viewColumStatusFileInformed" [showButtonFiltrer]="false" [sweetLoadingInitStatus]="false" (selectedRowsEmiter)="selectedRowsReceiveDataFileInformed($event)" [routeData]="route" [authorization]="authorization"
+                                [classDataTableResponsive]="classDataTableResponsive" [classMainConten]="classMainConten" [classContainerFluid]="classContainerFluid">
+                            </app-initial-list>
+                        </div>
+                        <!-- /Radicados informados -->
+
+                        <!-- Radicados creados en ventanilla hoy -->
+                        <div *ngIf="dtCreateWindowTodayStatus" [class]="dtCreateWindowTodayClass">
+                            <app-initial-list [initCardHeaderStatus]="initCardHeaderStatusCreateWindowToday" [initCardHeaderIcon]="initCardHeaderIconCreateWindowToday" [initCardHeaderTitle]="initCardHeaderTitleCreateWindowToday" [dtTitles]="dtTitlesCreateWindowToday" [routeLoadDataTablesService]="routeLoadDataTablesServiceCreateWindowToday"
+                                [viewColumStatus]="viewColumStatusCreateWindowToday" [showButtonFiltrer]="false" [sweetLoadingInitStatus]="false" (selectedRowsEmiter)="selectedRowsReceiveDataCreateWindowToday($event)" [routeData]="route" [authorization]="authorization"
+                                [classDataTableResponsive]="classDataTableResponsive" [classMainConten]="classMainConten" [classContainerFluid]="classContainerFluid">
+                            </app-initial-list>
+                        </div>
+                        <!-- /Radicados creados en ventanilla hoy -->
+
+                        <!-- Jefe -->
+                        <!-- Solicitudes de visto bueno -->
+                        <div *ngIf="dtVoboRequestBossStatus" class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                            <app-initial-list [initCardHeaderStatus]="initCardHeaderStatusVoboRequestBoss" [initCardHeaderIcon]="initCardHeaderIconVoboRequestBoss" [initCardHeaderTitle]="initCardHeaderTitleVoboRequestBoss" [dtTitles]="dtTitlesVoboRequestBoss" [routeLoadDataTablesService]="routeLoadDataTablesServiceVoboRequestBoss"
+                                [viewColumStatus]="viewColumStatusVoboRequestBoss" [showButtonFiltrer]="false" [sweetLoadingInitStatus]="false" (selectedRowsEmiter)="selectedRowsReceiveDataVoboRequestBoss($event)" [routeData]="route" [authorization]="authorization"
+                                [classDataTableResponsive]="classDataTableResponsive" [classMainConten]="classMainConten" [classContainerFluid]="classContainerFluid">
+                            </app-initial-list>
+                        </div>
+                        <!-- /Solicitudes de visto bueno -->
+
+                        <!-- sguarin Documentos pendientes firma, ejecutor dashboard --> 
+                        <div *ngIf="dtUnsignedDocumentsStatus" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <app-initial-list [initCardHeaderStatus]="initCardHeaderStatusUnsignedDocuments" [initCardHeaderIcon]="initCardHeaderIconUnsignedDocuments" [initCardHeaderTitle]="initCardHeaderTitleUnsignedDocuments" [dtTitles]="dtTitlesUnsignedDocuments" [routeLoadDataTablesService]="routeLoadDataTablesServiceUnsignedDocuments"
+                                [viewColumStatus]="viewColumStatusUnsignedDocuments" [showButtonFiltrer]="false" [sweetLoadingInitStatus]="false" (selectedRowsEmiter)="selectedRowsReceiveDataUnsignedDocuments($event)" [routeData]="route" [authorization]="authorization"
+                                [classDataTableResponsive]="classDataTableResponsive" [classMainConten]="classMainConten" [classContainerFluid]="classContainerFluid">
+                            </app-initial-list>
+                        </div>
+                        <!-- /sguarin Documento pendiente firma, ejecutor dashboard -->
+
+                        <!-- sguarin radicados asignados a la dependencia, ejecutor dashboard --> 
+                        <div *ngIf="dtRadiAsigDepStatus" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <app-initial-list [initCardHeaderStatus]="initCardHeaderStatusRadiAsigDep" [initCardHeaderIcon]="initCardHeaderIconRadiAsigDep" [initCardHeaderTitle]="initCardHeaderTitleRadiAsigDep" [dtTitles]="dtTitlesRadiAsigDep" [routeLoadDataTablesService]="routeLoadDataTablesServiceRadiAsigDep"
+                                [viewColumStatus]="viewColumStatusRadiAsigDep" [showButtonFiltrer]="false" [sweetLoadingInitStatus]="false" (selectedRowsEmiter)="selectedRowsReceiveDataRadiAsigDep($event)" [routeData]="route" [authorization]="authorization"
+                                [classDataTableResponsive]="classDataTableResponsive" [classMainConten]="classMainConten" [classContainerFluid]="classContainerFluid">
+                            </app-initial-list>
+                        </div>
+                        <!-- /sguarin Documento pendiente firma, ejecutor dashboard -->
+
+                        <!-- Radicados Vencidos Jefe (No se usará por ahora) -->
+                        <!-- <div *ngIf="dtFileExpiredBossStatus" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <app-initial-list [initCardHeaderStatus]="initCardHeaderStatusFileExpiredBoss" [initCardHeaderIcon]="initCardHeaderIconFileExpiredBoss" [initCardHeaderTitle]="initCardHeaderTitleFileExpiredBoss" [dtTitles]="dtTitlesFileExpiredBoss" [routeLoadDataTablesService]="routeLoadDataTablesServiceFileExpiredBoss"
+                                [viewColumStatus]="viewColumStatusFileExpiredBoss" [showButtonFiltrer]="false" [sweetLoadingInitStatus]="false" (selectedRowsEmiter)="selectedRowsReceiveDataFileExpiredBoss($event)" [routeData]="route" [authorization]="authorization"
+                                [classDataTableResponsive]="classDataTableResponsive" [classMainConten]="classMainConten" [classContainerFluid]="classContainerFluid">
+                            </app-initial-list>
+                        </div> -->
+                        <!-- /Radicados Vencidos Jefe -->
+
+                        <!-- Administrador del sistema -->
+                        <!-- Primera columna de 6 para usuario admin -->
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="row">
+
+                                <!-- Usuarios activos vs Usuarios inactivos -->
+                                <div *ngIf="cardUserCounterStatus" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="card card-stats">
+                                        <a routerLink="/users/users-index/{{ dataUrlActivo }}">
+                                            <div class="card-header card-header-info card-header-icon">
+                                                <div class="card-icon">
+                                                    <i class="material-icons">people</i>
+                                                </div>
+                                                <h4 class="card-title text-right">{{ 'Usuarios activos' | translate }}</h4>
+                                                <h4 class="card-title text-right"><b>{{ countActiveUsers }}</b></h4>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="stats">
+                                                    <i class="material-icons">link</i> {{ 'Listado de usuarios' | translate }}
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="cardUserCounterStatus" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="card card-stats">
+                                        <a routerLink="/users/users-index/{{ dataUrlInactivo }}">
+                                            <div class="card-header card-header-danger card-header-icon">
+                                                <div class="card-icon">
+                                                    <i class="material-icons">people</i>
+                                                </div>
+                                                <h4 class="card-title text-right">{{ 'Usuarios inactivos' | translate }}</h4>
+                                                <h4 class="card-title text-right"><b>{{ countInactiveUsers }}</b></h4>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="stats">
+                                                    <i class="material-icons">link</i> {{ 'Listado de usuarios' | translate }}
+                                                </div>
+                                            </div>
+                                            <!-- end content-->
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- /Usuarios activos vs Usuarios inactivos -->
+
+                                <!-- Últimas entradas del log -->
+                                <div *ngIf="dtLastLogEntriesStatus" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <app-initial-list [initCardHeaderStatus]="initCardHeaderStatusLastLogEntries" [initCardHeaderIcon]="initCardHeaderIconLastLogEntries" [initCardHeaderTitle]="initCardHeaderTitleLastLogEntries" [dtTitles]="dtTitlesLastLogEntries" [routeLoadDataTablesService]="routeLoadDataTablesServiceLastLogEntries"
+                                        [viewColumStatus]="viewColumStatusLastLogEntries" [showButtonFiltrer]="false" [sweetLoadingInitStatus]="false" (selectedRowsEmiter)="selectedRowsReceiveDataLastLogEntries($event)" [routeData]="route" [authorization]="authorization"
+                                        [classDataTableResponsive]="classDataTableResponsive" [classMainConten]="classMainConten" [classContainerFluid]="classContainerFluid">
+                                    </app-initial-list>
+                                </div>
+                                <!-- /Últimas entradas del log -->
+
+                            </div>
+                        </div>
+                        <!-- /Primera columna de 6 para usuario admin -->
+
+                        <!-- Segunda columna de 6 para usuario admin -->
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="row">
+
+                                <!-- Usuarios por dependencia -->
+                                <div *ngIf="dtUserByDependencyStatus" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <app-initial-list [initCardHeaderStatus]="initCardHeaderStatusUserByDependency" [initCardHeaderIcon]="initCardHeaderIconUserByDependency" [initCardHeaderTitle]="initCardHeaderTitleUserByDependency" [dtTitles]="dtTitlesUserByDependency" [routeLoadDataTablesService]="routeLoadDataTablesServiceUserByDependency"
+                                        [viewColumStatus]="viewColumStatusUserByDependency" [showButtonFiltrer]="false" [sweetLoadingInitStatus]="false" (selectedRowsEmiter)="selectedRowsReceiveDataUserByDependency($event)" [routeData]="route" [authorization]="authorization"
+                                        [classDataTableResponsive]="classDataTableResponsive" [classMainConten]="classMainConten" [classContainerFluid]="classContainerFluid">
+                                    </app-initial-list>
+                                </div>
+                                <!-- /Usuarios por dependencia -->
+
+                                <!-- Usuarios por perfil -->
+                                <div *ngIf="dtUserByProfileStatus" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <app-initial-list [initCardHeaderStatus]="initCardHeaderStatusUserByProfile" [initCardHeaderIcon]="initCardHeaderIconUserByProfile" [initCardHeaderTitle]="initCardHeaderTitleUserByProfile" [dtTitles]="dtTitlesUserByProfile" [routeLoadDataTablesService]="routeLoadDataTablesServiceUserByProfile"
+                                        [viewColumStatus]="viewColumStatusUserByProfile" [showButtonFiltrer]="false" [sweetLoadingInitStatus]="false" (selectedRowsEmiter)="selectedRowsReceiveDataUserByProfile($event)" [routeData]="route" [authorization]="authorization"
+                                        [classDataTableResponsive]="classDataTableResponsive" [classMainConten]="classMainConten" [classContainerFluid]="classContainerFluid">
+                                    </app-initial-list>
+                                </div>
+                                <!-- /Usuarios por perfil -->
+
+                            </div>
+                        </div>
+                        <!-- /Segunda columna de 6 para usuario admin -->
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Data Tables -->
+        <!-- Floating Button -->
+        <app-floating-button [menuButtons]="menuButtons" (menuEmiterData)="menuReceiveData($event)"></app-floating-button>
+
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card ">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  -->
+        <div *ngIf="!isMap()">
+            <app-admin-footer-nav-bar></app-admin-footer-nav-bar>
+        </div>
+    </div>
+    <!-- <app-fixedplugin></app-fixedplugin> -->
+</div>

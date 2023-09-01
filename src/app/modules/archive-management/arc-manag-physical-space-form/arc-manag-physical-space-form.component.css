@@ -1,0 +1,21 @@
+.marginNotification {
+    margin-top: 20px !important;
+}
+
+.tabledep {
+    text-align: center;
+    border: 1px #b7b2b285 solid;
+    padding: 5px;
+    margin: 5px;
+}
+
+table,
+th,
+td {
+    border: 1px #b7b2b285 solid;
+    padding: 5px;
+    margin: 5px;
+}
+i {
+    cursor: pointer;
+}

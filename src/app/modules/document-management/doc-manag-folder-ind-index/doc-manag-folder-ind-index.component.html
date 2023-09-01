@@ -1,0 +1,5 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<app-initial-list *ngIf="statusInitialList" [paramOID]="paramOID" [showButtonFiltrer]="showButtonFiltrer" [viewColumStatus]="viewColumStatus" [initCardHeaderStatus]="initCardHeaderStatus" [initCardHeaderIcon]="initCardHeaderIcon" [initCardHeaderTitle]="initCardHeaderTitle"
+    [dtTitles]="dtTitles" [routeLoadDataTablesService]="routeLoadDataTablesService" [initBotonCreateRoute]="initBotonCreateRoute" (selectedRowsEmiter)="selectedRowsReceiveData($event)" [routeChangeStatus]="routeChangeStatus" [routeData]="route"></app-initial-list>
+<app-doc-manag-folder-create *ngIf="statusCreateFolder" (closeFolderEmiter)="closeDialog($event)"></app-doc-manag-folder-create>
+<app-floating-button *ngIf="statusButton" [menuButtons]="menuButtons" (menuEmiterData)="menuReceiveData($event)"></app-floating-button>

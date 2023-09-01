@@ -1,0 +1,102 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <form [formGroup]="moduleForm" class="form-horizontal" (ngSubmit)="submitForm()">
+                    <div class="card">
+
+                        <div class="card-header card-header-info card-header-icon row">
+                            <div class="card-icon">
+                                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                            </div>
+                            <h4 class="card-title">{{ textForm | translate }}</h4>
+
+                            <div class="col-lg-12">
+                                <button *ngIf="showButtonDowload" mat-raised-button class="btn btn-primary btn-round" title="{{ 'Descargar Formato' | translate }}" (click)="onDownloadFormat()" style="float: right;">
+                                    <i class="material-icons">import_export</i>
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <div class="card-body">
+
+                            <!-- Start File Name -->
+                            <div *ngIf="statusNameFile" class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ labelNameFile | translate }}</mat-label>
+                                        <input matInput type="text" id="nameFile" formControlName="nameFile" placeholder="{{ placeHolderNameFile | translate }}" maxlength="80" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'nameFile').valid && moduleForm.get( 'nameFile').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <!-- End File Name -->
+
+                            <!-- Start Documentary Type -->
+                            <div *ngIf="showTipoDocumental" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2">
+                                <mat-form-field>
+                                    <mat-label>{{ 'Tipos documentales' | translate }}</mat-label>
+                                    <mat-select id="idTipoDocumental" formControlName="idTipoDocumental" name="idTipoDocumental" required>
+                                        <mat-option>
+                                            <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listTipoDocumentalFilter" [searching]="true"></ngx-mat-select-search>
+                                        </mat-option>
+                                        <mat-option *ngFor="let tipDocumental of filteredlistTipoDocumental | async" [value]="tipDocumental.id">
+                                            {{ tipDocumental.val }}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="!moduleForm.get( 'idTipoDocumental').valid && moduleForm.get( 'idTipoDocumental').touched ">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!-- End Documentary Type -->
+
+                            <!-- Start Observation -->
+                            <div *ngIf="showObservacion" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2">
+                                <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                    <mat-label>{{ textFormObserva | translate }}</mat-label>
+                                    <textarea #observacion matInput type="text" id="observacion" formControlName="observacion" placeholder="{{ 'Ingrese una descripción' | translate }}" maxlength="500" required rows="5"></textarea>
+                                    <mat-error *ngIf="!moduleForm.get( 'observacion').valid && moduleForm.get( 'observacion').touched ">
+                                        {{ 'El campo es obligatorio' | translate }}.
+                                    </mat-error>
+                                    <mat-hint>{{ observacion.value.length }} / 500</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <!-- End Observation -->
+                            <hr>
+                            <div *ngIf="uploadProcess" class="row">
+                                <div class="col-lg-12" style="margin-top: 20px;">
+                                    <mat-progress-bar mode="determinate" value="{{ uploadResponse.proccess }}"></mat-progress-bar>
+                                </div>
+                                <div class="col-lg-12">
+                                    <p style="font-weight: bold;">{{ uploadResponse.proccess }}%</p>
+                                </div>
+                            </div>
+
+                            <div *ngIf="!uploadProcess" class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <label for="fileUpload">{{ 'Seleccione el archivo' | translate }}</label>
+                                    <input #inputFile type="file" name="fileUpload" class="form-control" (change)="onSelectedFile($event)" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-footer">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: right; padding: 0px !important;">
+                                <button [disabled]="!uploadValid" type="submit" title="{{ 'Cargar archivo' | translate }}" mat-raised-button class="btn btn-just-icon btn-round buttonIconMenu">
+                                    <mat-icon>cloud_upload</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>

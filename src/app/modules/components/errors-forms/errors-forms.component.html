@@ -1,0 +1,8 @@
+<div class="alert alert-danger col-sm-12" *ngIf="resErrsJsonStatus">
+  <!-- <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <i class="material-icons">close</i>
+  </button> -->
+  <span *ngFor="let err of resErrsJson | keyvalue">
+      {{ err.value }}
+  </span>
+</div>

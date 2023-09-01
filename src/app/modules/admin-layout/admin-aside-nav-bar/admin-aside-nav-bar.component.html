@@ -1,0 +1,156 @@
+<div class="logo">
+  <a [routerLink]="['/dashboard']" class="simple-imagen logo-mini-2">
+    <img width="61px" src="./assets/img/logos/84x54_logo.png" style="margin-left: -4px" />
+  </a>
+  <a [routerLink]="['/dashboard']" class="simple-imagen logo-normal-2">
+    <img width="200px" style="margin-left: 17px" src="./assets/img/logos/logo_798x264.png" />
+  </a>
+</div>
+
+<div class="sidebar-wrapper">
+  <div class="user">
+    <div class="photo">
+      <img src="./assets/img/faces/face.png" />
+    </div>
+    <div class="user-info">
+      <a data-toggle="collapse" href="#collapseUser" class="collapsed">
+        <!-- <a data-toggle="collapse" [routerLink]="[rutaMiCuenta]" class="collapsed"> -->
+        <span> {{ userName | translate }}<b class="caret"></b> </span>
+      </a>
+
+      <!-- Sub menu -->
+      <div class="collapse" id="collapseUser">
+        <ul class="nav">
+          <li class="nav-item">
+            <a [routerLink]="[rutaMiCuenta]" class="nav-link">
+              <span class="sidebar-mini">
+                <i class="material-icons">person</i>
+              </span>
+              <span class="sidebar-normal">{{ "adminAsside.myAcount" | translate }}</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="logout()">
+              <span class="sidebar-mini">
+                <i class="material-icons">lock</i>
+              </span>
+              <span class="sidebar-normal">{{ "adminAsside.logout" | translate }}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- Fin Sub menu -->
+    </div>
+  </div>
+  <!-- Fin menu usuario -->
+
+  <div *ngIf="isMobileMenu()">
+    <!-- Start Seach movil -->
+    <div class="nav">
+      <div class="input-group no-border search" style="margin: 10px 15px 0; width: 95%">
+        <input
+          class="form-control"
+          placeholder="{{ 'adminAsside.search' | translate }}"
+          type="text"
+          value=""
+          style="color: white !important"
+        />
+        <button class="btn btn-white btn-round btn-just-icon mat-raised-button" mat-raised-button="" type="submit">
+          <span class="mat-button-wrapper">
+            <i class="material-icons">search</i>
+          </span>
+        </button>
+      </div>
+    </div>
+    <!-- End Seach movil -->
+  </div>
+
+  <ul class="nav">
+    <li routerLinkActive="active" class="nav-item">
+      <!--If is a single link-->
+      <a [routerLink]="['/dashboard']" class="nav-link">
+        <i class="material-icons">dashboard</i>
+        <p>{{ "Tablero de inicio" | translate }}</p>
+      </a>
+    </li>
+
+    <!-- /Items estáticos -->
+    <li routerLinkActive="active" *ngFor="let menuitem of menuItems; index as i" class="nav-item">
+      <!--If is a single link-->
+      <a
+        data-toggle="collapse"
+        href="#{{ menuitem.collapse }}"
+        *ngIf="menuitem.type === 'link'"
+        class="nav-link collapsed"
+      >
+        <i class="material-icons">{{ menuitem.icontype }}</i>
+        <p>
+          {{ menuitem.nombre | translate }}
+          <!-- <b class="caret"></b> -->
+        </p>
+      </a>
+
+      <!--If it have a submenu-->
+      <div class="collapse" id="{{ menuitem.collapse }}">
+        <ul class="nav">
+          <li class="nav-item" *ngFor="let subMenuCol of subMenuCols[i]">
+            <a routerLink="/{{ menuitem.ruta }}/{{ subMenuCol.route }}" class="nav-link">
+              <span class="sidebar-mini">
+                <i class="material-icons">{{ subMenuCol.icon }}</i>
+              </span>
+              <span class="sidebar-normal">{{ subMenuCol.name }}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+
+  <div *ngIf="isMobileMenu()">
+    <!-- Start config Mobile -->
+    <ul class="nav">
+      <li routerLinkActive="active" class="nav-item">
+        <a data-toggle="collapse" href="#configHelp" class="nav-link collapsed">
+          <i class="material-icons">add</i>
+          <p>{{ "Opciones" | translate }}</p>
+        </a>
+        <!-- Component Call -->
+        <div class="collapse" id="configHelp">
+          <ul class="nav">
+            <li class="nav-item" (click)="changeLanguage({ data: 'es' })">
+              <a class="nav-link">
+                <div class="photoLanguage">
+                  <img
+                    src="./assets/img/i18n/001-colombia.png"
+                    alt="{{ 'Español' | translate }}"
+                    title="{{ 'Español' | translate }}"
+                  />
+                </div>
+                <span class="sidebar-normal">{{ "Español" | translate }}</span>
+              </a>
+            </li>
+            <li class="nav-item" (click)="changeLanguage({ data: 'en' })">
+              <a class="nav-link">
+                <div class="photoLanguage">
+                  <img
+                    src="./assets/img/i18n/003-united-states.png"
+                    alt="{{ 'Ingles' | translate }}"
+                    title="{{ 'Ingles' | translate }}"
+                  />
+                </div>
+                <span class="sidebar-normal">{{ "Ingles" | translate }}</span>
+              </a>
+            </li>
+            <a class="nav-item" [routerLink]="['/help']">
+              <a class="nav-link">
+                <i class="material-icons">contact_support</i>
+                <span class="sidebar-normal">{{ "Ayuda" | translate }}</span>
+              </a>
+            </a>
+          </ul>
+        </div>
+      </li>
+    </ul>
+    <!-- End config Mobile -->
+  </div>
+</div>

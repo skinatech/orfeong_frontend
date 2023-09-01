@@ -1,0 +1,72 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card ">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                        </div>
+                        <h4 class="card-title">{{ textFormRol | translate }}</h4>
+                    </div>
+                    <form [formGroup]="moduleForm" class="form-horizontal" (ngSubmit)="submitRol()">
+                        <div class="card-body ">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Ruta' | translate }}</mat-label>
+                                        <input matInput type="text" id="nombreRolOperacion" formControlName="nombreRolOperacion" placeholder="{{ 'Ingrese la ruta' | translate }}" maxlength="80" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'nombreRolOperacion').valid && moduleForm.get( 'nombreRolOperacion').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Seleccione el módulo en el menú' | translate }}</mat-label>
+                                        <mat-select id="idRolModuloOperacion" formControlName="idRolModuloOperacion" name="idRolModuloOperacion" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="bankFilterCtrl" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let idModulo of filteredBanks | async" [value]="idModulo">
+                                                {{ idModulo.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'idRolModuloOperacion').valid && moduleForm.get( 'idRolModuloOperacion').touched ">{{ 'El campo es obligatorio' | translate }}.</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Nombre' | translate }}</mat-label>
+                                        <input matInput type="text" id="aliasRolOperacion" formControlName="aliasRolOperacion" placeholder="{{ 'Ingrese el nombre' | translate }}" maxlength="80" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'aliasRolOperacion').valid && moduleForm.get( 'aliasRolOperacion').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Módulo' | translate }}</mat-label>
+                                        <input matInput type="text" id="moduloRolOperacion" formControlName="moduloRolOperacion" placeholder="{{ 'Ingrese el módulo' | translate }}" maxlength="80" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'moduloRolOperacion').valid && moduleForm.get( 'moduloRolOperacion').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"></div>
+                            <button mat-raised-button type="submit" id="sendForm" style="display: none;" class="btn btn-fill btn-rose">{{ textButtonForm }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <app-floating-button [iconMenu]="iconMenu" (menuPrimaryEmiterData)="menuPrimaryReceiveData($event)"></app-floating-button>
+</div>

@@ -1,0 +1,98 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <form [formGroup]="moduleForm" class="form-horizontal" (ngSubmit)="submitForm()">
+                    <div class="card">
+
+                        <div class="card-header card-header-info card-header-icon row">
+                            <div class="card-icon">
+                                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                            </div>
+                            <h4 class="card-title">{{ textForm | translate }}</h4>
+
+                        </div>
+
+                        <div class="card-body">
+                                <div class="row">
+
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <mat-form-field>
+                                            <mat-label>{{ 'Nombre (Del medio)' | translate }}</mat-label>
+                                            <input matInput type="text" value="" formControlName="nombreGdReferenciaCruzada" maxlength="80" required>
+                                            <mat-error *ngIf="!moduleForm.get('nombreGdReferenciaCruzada').valid || moduleForm.get( 'nombreGdReferenciaCruzada').touched ">
+                                                {{ 'El campo es obligatorio' | translate }}.
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <mat-form-field>
+                                            <mat-label>{{ 'Cantidad' | translate }}</mat-label>
+                                            <input matInput type="text" value="" formControlName="cantidadGdReferenciaCruzada" maxlength="10" (keypress)="onlyNumberKey($event)" required>
+                                            <mat-error *ngIf="!moduleForm.get('cantidadGdReferenciaCruzada').valid || moduleForm.get( 'cantidadGdReferenciaCruzada').touched ">
+                                                {{ 'El campo es obligatorio' | translate }}.
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div [class]="classIdGdTipoAnexoFisico">
+                                        <mat-form-field>
+                                            <mat-label>{{ 'Seleccione los tipos de anexo físico' | translate }}</mat-label>
+                                            <!-- <mat-select multiple id="idGdTipoAnexoFisico" formControlName="idGdTipoAnexoFisico" name="idGdTipoAnexoFisico" ariaLabel="tipoAnexoFisico[0]" (selectionChange)="onChangeGdTipoAnexoFisico()" required> -->
+                                                <mat-select multiple id="idGdTipoAnexoFisico" formControlName="idGdTipoAnexoFisico" name="idGdTipoAnexoFisico" (selectionChange)="onChangeGdTipoAnexoFisico()" required>
+                                                <mat-option>
+                                                    <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listGdTiposAnexosFisicosFilter" [searching]="true"></ngx-mat-select-search>
+                                                </mat-option>
+                                                <mat-option *ngFor="let tipoAnexoFisico of filteredlistGdTiposAnexosFisicos | async" [value]="tipoAnexoFisico.id">
+                                                    {{ tipoAnexoFisico.val }}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error *ngIf="!moduleForm.get('idGdTipoAnexoFisico').valid">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" *ngIf="statusTipoAnexoGdReferenciaCruzada">
+                                        <mat-form-field>
+                                            <mat-label>{{ 'Otro tipo de anexo físico' | translate }}</mat-label>
+                                            <input matInput type="text" value="" formControlName="tipoAnexoGdReferenciaCruzada" maxlength="80" required>
+                                            <mat-error *ngIf="!moduleForm.get('tipoAnexoGdReferenciaCruzada').valid || moduleForm.get( 'tipoAnexoGdReferenciaCruzada').touched ">
+                                                {{ 'El campo es obligatorio' | translate }}.
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <mat-form-field>
+                                            <mat-label>{{ 'Ubicación' | translate }}</mat-label>
+                                            <input matInput type="text" value="" formControlName="ubicacionGdReferenciaCruzada" maxlength="80" required>
+                                            <mat-error *ngIf="!moduleForm.get('ubicacionGdReferenciaCruzada').valid || moduleForm.get( 'ubicacionGdReferenciaCruzada').touched ">
+                                                {{ 'El campo es obligatorio' | translate }}.
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: right; padding: 0px !important;">
+                                <button mat-raised-button class="btn btn-primary btn-round" type="submit">
+                                    <span>
+                                        {{ 'Guardar' | translate }}
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>

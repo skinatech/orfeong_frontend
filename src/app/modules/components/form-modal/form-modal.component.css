@@ -1,0 +1,30 @@
+.cdk-overlay-connected-position-bounding-box{
+    z-index: inherit;
+}
+
+    .modal-header .close {
+        padding: 1rem 1rem;
+        margin: -1rem -1rem -1rem auto;
+        background-color: white!important;
+    }
+
+            .cdk-overlay-container {
+                position: fixed;
+                z-index: 1030!important;
+            }
+    
+
+    /* Flash- Message-Modal */
+    .alert {
+        position: relative;
+        /* padding: .75rem 1.25rem; */
+        margin-bottom: 5px;
+        border: 1px solid transparent;
+        border-radius: .25rem;
+        box-shadow: none;
+    }
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }

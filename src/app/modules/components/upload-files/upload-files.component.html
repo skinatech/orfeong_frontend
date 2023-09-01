@@ -1,0 +1,93 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="{{ subMenuNotificationClassAlert }} marginNotification" *ngIf="subMenuNotificationStatus" data-notify="container">
+                    <i class="material-icons" data-notify="icon">notifications</i>
+                    <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="material-icons">close</i>
+                    </button>
+                    <span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span>
+                    <span data-html="true" data-notify="message">{{ subMenuNotificationMessage | translate }}</span>
+                </div>
+
+                <div class="{{ subMenuNotificationClassAlert }} marginNotification" *ngIf="subMenuNotificationStatusTable" data-notify="container">
+                    <i class="material-icons" data-notify="icon">notifications</i>
+                    <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="material-icons">close</i>
+                    </button>
+                    <div class="row">
+                        <div class="col-lg-12">{{ subMenuNotificationMessageUno | translate }}</div>
+                        <div class="col-lg-12">{{ subMenuNotificationMessageDos | translate }}</div>
+                        <div class="col-lg-12">{{ subMenuNotificationMessageTres | translate }}</div>
+                        <div class="col-lg-12">{{ subMenuNotificationMessageCuatro | translate }}</div>
+                        <div class="col-lg-12">{{ subMenuNotificationMessageCinco | translate }}</div>
+                    </div>
+                </div>
+
+                <form [formGroup]="moduleForm" class="form-horizontal" (ngSubmit)="submitForm()">
+                    <div class="card">
+
+                        <div class="card-header card-header-info card-header-icon row">
+                            <div class="card-icon">
+                                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                            </div>
+                            <h4 class="card-title">{{ textForm | translate }}</h4>
+
+                            <div class="col-lg-12">
+                                <button *ngIf="showButtonDowload" type="button" mat-raised-button class="btn btn-primary btn-round" title="{{ 'Descargar Formato' | translate }}" (click)="onDownloadFormat()" style="float: right;">
+                                    <i class="material-icons">import_export</i> {{ 'Descargar Formato' | translate }}
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <div class="card-body">
+
+                            <div *ngIf="statusNameFile" class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ labelNameFile | translate }}</mat-label>
+                                        <input matInput type="text" id="nameFile" formControlName="nameFile" placeholder="{{ placeHolderNameFile | translate }}" maxlength="{{ maxlengthNameFile }}" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'nameFile').valid && moduleForm.get( 'nameFile').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div *ngIf="uploadProcess" class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 20px;">
+                                    <mat-progress-bar mode="determinate" value="{{ uploadResponse.proccess }}"></mat-progress-bar>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <p style="font-weight: bold;">{{ uploadResponse.proccess }}%</p>
+                                </div>
+                            </div>
+
+                            <div *ngIf="!uploadProcess" class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <label for="fileUpload">{{ 'Seleccione el archivo' | translate }}</label>
+                                    <input #inputFile type="file" name="fileUpload" class="form-control" (change)="onSelectedFile($event)" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-footer">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: right; padding: 0px !important;">
+                                <button [disabled]="!uploadValid" type="submit" title="{{ 'Cargar archivo' | translate }}" mat-raised-button class="btn btn-just-icon btn-round buttonIconMenu">
+                                    <mat-icon>cloud_upload</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>

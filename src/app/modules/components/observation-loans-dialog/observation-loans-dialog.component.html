@@ -1,0 +1,103 @@
+<form [formGroup]="moduleForm" class="form-horizontal" (ngSubmit)="submitForm()">
+    <div class="row">
+        <div *ngIf="textFormObservaHeader" class="modal-header col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-2">
+            <h4 class="modal-title w-100" id="myModalLabel">
+                <mat-label><b> {{ textFormObservaHeader | translate }} </b></mat-label>
+            </h4>
+            <button mat-button type="button" (click)="closeDialog()" title="{{ 'Cerrar' | translate }}" class="close" data-dismiss="alert" aria-label="Close">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+        <!-- Notification -->
+        <div class="{{ initialNotificationClassAlert }} marginNotification" *ngIf="initialNotificationMessageArray.length > 0" data-notify="container">
+            <i class="material-icons" data-notify="icon">notifications</i>
+            <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <i class="material-icons">close</i>
+            </button>
+            <div *ngIf="initialNotificationMessageArray.length > 0">
+                <div *ngFor="let rowNotification of initialNotificationMessageArray" class="col-lg-12">
+                    {{ rowNotification | translate }}
+                </div>
+            </div>
+        </div>
+        <!-- /Notification -->
+        <!-- Inicio Solicita prestamo -->
+        <div *ngIf="showSoliPrestamo" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2">
+            <mat-form-field>
+                <mat-label>{{ 'Tipo préstamo' | translate }}</mat-label>
+                <mat-select id="tipoPrestamo" formControlName="tipoPrestamo" name="tipoPrestamo" required>
+                    <mat-option>
+                        <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listTipoPrestamoFilter" [searching]="true"></ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option *ngFor="let tipoPres of filteredlistTipoPrestamo | async" [value]="tipoPres.id">
+                        {{ tipoPres.val }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="!moduleForm.get( 'tipoPrestamo').valid && moduleForm.get( 'tipoPrestamo').touched ">{{ 'El campo es obligatorio' | translate }}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div *ngIf="showSoliPrestamo" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2">
+            <mat-form-field>
+                <mat-label>{{ 'Requerimiento' | translate }}</mat-label>
+                <mat-select id="requerimiento" formControlName="requerimiento" name="requerimiento" required>
+                    <mat-option>
+                        <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listRequerimientoFilter" [searching]="true"></ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option *ngFor="let reque of filteredlistRequerimiento | async" [value]="reque.id">
+                        {{ reque.val }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="!moduleForm.get( 'requerimiento').valid && moduleForm.get( 'requerimiento').touched ">{{ 'El campo es obligatorio' | translate }}</mat-error>
+            </mat-form-field>
+        </div>
+        <!-- Fin Solicita prestamo -->
+
+        <!--Inicio Acepta prestamo -->
+        <div *ngIf="prestamoFisico" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2" style="z-index: 1040!important;">
+            <mat-form-field>
+                <mat-label>{{ titleFecha | translate }}</mat-label>
+                <input matInput id="fecha" [min]="minDate" [max]="maxDate" formControlName="fecha" [matDatepicker]="picker" placeholder="{{ 'Ingrese una fecha' | translate }}" (click)="picker.open()">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #picker></mat-datepicker>
+                <mat-error *ngIf="!moduleForm.get( 'fecha').valid && moduleForm.get( 'fecha').touched ">
+                    {{ 'El campo es obligatorio' | translate }}.
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <!--Fin Acepta prestamo -->
+
+        <!-- Inicio Observacion -->
+        <div *ngIf="observacionModal"  class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2">
+            <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                <mat-label>{{ 'Observación' | translate }}</mat-label>
+                <textarea #observacion matInput type="text" id="observacion" formControlName="observacion" placeholder="{{ 'Ingrese una observación' | translate }}" maxlength="500" required rows="5"></textarea>
+                <mat-error *ngIf="!moduleForm.get( 'observacion').valid && moduleForm.get( 'observacion').touched ">
+                    {{ 'El campo es obligatorio' | translate }}.
+                </mat-error>
+                <mat-hint>{{ observacion.value.length }} / 500</mat-hint>
+            </mat-form-field>
+        </div>
+        <!-- Fin Observacion -->
+
+        <!-- Campo de contraseña -->
+        <div *ngIf="showPass" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                <mat-label>{{ textPassword | translate }}</mat-label>
+                <input matInput type="password" id="passUser" formControlName="passUser" placeholder="{{ 'login.placeholderPassword' | translate }}" autocomplete="off" maxlength="25" required>
+                <mat-error *ngIf="!moduleForm.get( 'passUser').valid && moduleForm.get( 'passUser').touched ">
+                    {{ 'El campo es obligatorio' | translate }}
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <!-- Campo de contraseña -->
+    </div>
+
+    <div mat-dialog-actions style="float: right !important;">
+        <button mat-raised-button class="btn btn-primary btn-round" type="submit">
+            <span>
+                <i class="material-icons">{{ botonSubmitIcon }}</i>
+            </span>
+        </button>
+    </div>
+</form>

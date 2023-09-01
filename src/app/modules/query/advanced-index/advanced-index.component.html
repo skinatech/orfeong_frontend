@@ -1,0 +1,11 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+
+<app-initial-list [viewColumStatus]="viewColumStatus" [initCardHeaderStatus]="initCardHeaderStatus" [initCardHeaderIcon]="initCardHeaderIcon" [initCardHeaderTitle]="initCardHeaderTitle" [dtTitles]="dtTitles" [routeLoadDataTablesService]="routeLoadDataTablesService"
+    (selectedRowsEmiter)="selectedRowsReceiveData($event)" [routeData]="route">
+</app-initial-list>
+<!-- View PDF -->
+<app-view-pdf-modal *ngIf="statusModalviewPdf" [idDocument]="paramsDownload" [ruoteServiceDocuments]="ruoteServiceDownload" (closeModalEmiter)="closePdfModal($event)"></app-view-pdf-modal>
+<!-- View Contect -->
+<app-simple-text-modal *ngIf="statusTextModal" [initCardHeaderIconMod]="initCardHeaderIcon" [initCardHeaderTitleMod]="initCardHeaderTitle" [dataText]="dataText" (closeModalEmiter)="closePdfModal($event)"></app-simple-text-modal>
+<!-- Buttons -->
+<app-floating-button [menuButtons]="menuButtons" (menuEmiterData)="menuReceiveData($event)"></app-floating-button>

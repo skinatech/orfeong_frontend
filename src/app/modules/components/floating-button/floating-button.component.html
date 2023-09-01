@@ -1,0 +1,13 @@
+<div class="btnFloatContent" [ngStyle]="styleButtonFloat">
+    <eco-fab-speed-dial>
+        <eco-fab-speed-dial-trigger [spin]="spin">
+            <button title='{{ titleButton }}' class="buttonIconMenu" [ngStyle]="styleButtonIcon" (click)="menuButtonPrimaryClick()" mat-fab>
+                <mat-icon [ngStyle]="styleIcon">{{ iconMenu }}</mat-icon> 
+            </button>
+        </eco-fab-speed-dial-trigger>
+
+        <eco-fab-speed-dial-actions class="customButtonBar" [ngClass]="{'customButtonBarNone' : validDataMenu() }">
+            <button class="buttonIconSubmenu marginIconSubmenu" *ngFor="let button of menuButtons" mat-mini-fab (click)="menuButtonClick(button)" title="{{ button.title | translate }}"><mat-icon>{{ button.icon }}</mat-icon></button>
+        </eco-fab-speed-dial-actions>
+    </eco-fab-speed-dial>
+</div>

@@ -1,0 +1,16 @@
+<div class="wrapper">
+    <div class="sidebar" data-color="white" data-background-color="blue" data-image="./assets/img/fondos/sidebar.jpg">
+        <app-admin-aside-nav-bar></app-admin-aside-nav-bar>
+        <div class="sidebar-background" style="background-image: url(assets/img/fondos/sidebar.jpg)"></div>
+    </div>
+    <div class="main-panel">
+        <app-admin-top-nav-bar [topNavBarTitle]="topNavBarTitle" [topNavBarOn]="topNavBarOn" [topNavBarRouteActive]="topNavBarRouteActive"></app-admin-top-nav-bar>
+        <router-outlet (activate)="onActivate()"></router-outlet>
+        <app-sub-menu [subMenuStatus]="subMenuStatus" [subMenuTitle]="subMenuTitle" [subMenuActive]="subMenuActive" [subMenuNotificationStatus]="subMenuNotificationStatus" [subMenuNotificationClassAlert]="subMenuNotificationClassAlert" [subMenuNotificationMessage]="subMenuNotificationMessage">
+        </app-sub-menu>
+        <div *ngIf="!isMap()">
+            <app-admin-footer-nav-bar></app-admin-footer-nav-bar>
+        </div>
+    </div>
+    <!-- <app-fixedplugin></app-fixedplugin> -->
+</div>

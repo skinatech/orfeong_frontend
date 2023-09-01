@@ -1,0 +1,106 @@
+<app-auth-nav></app-auth-nav>
+
+<div class="wrapper wrapper-full-page">
+    <div class="page-header register-page header-filter" filter-color="black" style="background-image: url('./assets/img/fondos/aeropuerto-10-10_azul.jpg'); background-size: cover; background-position: top center;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 ml-auto mr-auto">
+                    <div class="card card-signup">
+                        <h2 class="card-title text-center">Información</h2>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 ml-auto mr-auto">
+                                    <div class="info info-horizontal">
+                                        <div class="icon icon-rose">
+                                            <i class="material-icons">fact_check</i>
+                                        </div>
+                                        <div class="description">
+                                            <h4 class="info-title">Información firma</h4>
+
+                                            <div class="description">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th>Fecha de firma</th>
+                                                                        <td>{{ fechaFirma }}</td>
+                                                                        <th>Hora de firma</th>
+                                                                        <td>{{ horaFirma }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Código dependencia</th>
+                                                                        <td>{{ codigoDependencia }}</td>
+                                                                        <th>Nombre dependencia</th>
+                                                                        <td>{{ nombreDependencia }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Nombre usuario</th>
+                                                                        <td>{{ nombreUserDetallesFirma }}</td>
+                                                                        <th>Apellido usuario</th>
+                                                                        <td>{{ apellidoUserDetallesFirma }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>{{ labelRadiFirma }}</th>
+                                                                        <td>{{ numeroRadicadoFirma }}</td>
+                                                                        <th>Fecha radicación</th>
+                                                                        <td>{{ creacionRadiFirma }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Nombre documento</th>
+                                                                        <td>{{ nombreDocumento }}</td>
+                                                                        <th>Fecha documento</th>
+                                                                        <td>{{ fechaDocumento }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Asunto</th>
+                                                                        <td colspan="3">{{ asuntoRadiFirma }}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="info info-horizontal" *ngIf="statusRadiPadre">
+                                        <div class="icon icon-primary">
+                                            <i class="material-icons">assignment</i>
+                                        </div>
+                                        <div class="description">
+                                            <h4 class="info-title">{{ titleRadiPadre }}</h4>
+                                            <div class="description">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th>{{ labelRadiPadre }}</th>
+                                                                        <td>{{ numeroRadiPadre }}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <app-auth-footer></app-auth-footer>
+
+    </div>
+</div>

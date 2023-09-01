@@ -1,0 +1,33 @@
+{
+    "manuales": [
+        { "name": "Interfaz", "nameDownload": "manual-interfaz.pdf", "file": "assets/manuales/manual_interfaz.pdf", "icon": "help" },
+        { "name": "Inicio de sesión", "nameDownload": "manual-inicio-sesion.pdf", "file": "assets/manuales/manual_inicio_sesion.pdf", "icon": "help" },
+        { "name": "Administrar usuarios", "nameDownload": "manual-administrar-usuarios.pdf", "file": "assets/manuales/manual_administrar_usuarios.pdf", "icon": "help" },
+        { "name": "Administrar perfiles", "nameDownload": "manual-administrar-perfiles.pdf", "file": "assets/manuales/manual_administrar_perfiles.pdf", "icon": "help" },
+        { "name": "Configuración carga TRD", "nameDownload": "manual-config-carga-trd.pdf", "file": "assets/manuales/manual_configuracion_carga_trd.pdf", "icon": "help" },
+        { "name": "Configuración proveedores de envío", "nameDownload": "manual-config-proveedores-envio.pdf", "file": "assets/manuales/manual_configuracion_proveedores_envio.pdf", "icon": "help" },
+        { "name": "Configuración tipos de radicado", "nameDownload": "manual-config-tipos-radicado.pdf", "file": "assets/manuales/manual_tipos_radicado.pdf", "icon": "help" },
+        { "name": "Configuración grupos de usuarios", "nameDownload": "manual-config-grupos-usuarios.pdf", "file": "assets/manuales/manual_grupos_usuarios.pdf", "icon": "help" },
+        { "name": "Configuración horario laboral", "nameDownload": "manual-config-horario-laboral.pdf", "file": "assets/manuales/manual_horario_laboral.pdf", "icon": "help" },
+        { "name": "Configuración días no laborados", "nameDownload": "manual-config-horario-dias-no-laborados.pdf", "file": "assets/manuales/manual_horario_dias_no_laborados.pdf", "icon": "help" },
+        { "name": "Configuración gestión de plantillas", "nameDownload": "manual-config-gestion-plantillas.pdf", "file": "assets/manuales/manual_gestion_plantillas.pdf", "icon": "help" },
+        { "name": "Configuración variables de plantillas", "nameDownload": "manual-config-variables-plantillas.pdf", "file": "assets/manuales/manual_variables_plantillas.pdf", "icon": "help" },
+        { "name": "Configuración usuarios interoperabilidad", "nameDownload": "manual-config-usuarios-interoperabilidad.pdf", "file": "assets/manuales/manual_usuarios_interoperabilidad.pdf", "icon": "help" },
+        { "name": "Configuración encuesta de satisfacción", "nameDownload": "manual-config-encuesta-satisfaccion.pdf", "file": "assets/manuales/manual_encuesta_satisfaccion.pdf", "icon": "help" },
+        { "name": "Configuración principal y regionales", "nameDownload": "manual-config-principal-regionales.pdf", "file": "assets/manuales/manual_principal_regional.pdf", "icon": "help" },
+        { "name": "Gestión documental dependencia", "nameDownload": "manual-gestion-documental-dependencia.pdf", "file": "assets/manuales/manual_dependencias.pdf", "icon": "help" },
+        { "name": "Gestión documental carga TRD", "nameDownload": "manual-gestion-documental-carga-trd.pdf", "file": "assets/manuales/manual_carga_trd.pdf", "icon": "help" },
+        { "name": "Gestión documental expedientes", "nameDownload": "manual-gestion-documental-expedientes.pdf", "file": "assets/manuales/manual_expedientes.pdf", "icon": "help" },
+        { "name": "Radicación estándar", "nameDownload": "manual-radicacion-estandar.pdf", "file": "assets/manuales/manual_radicacion_estandar.pdf", "icon": "help" },
+        { "name": "Gestión correspondencia distribuciones y envío", "nameDownload": "manual-gestion-correspondencia-distribuciones-envio.pdf", "file": "assets/manuales/manual_distribucion_envio.pdf", "icon": "help" },
+        { "name": "Gestión correspondencia reasignación masiva", "nameDownload": "manual-gestion-correspondencia-reasignacion-masiva.pdf", "file": "assets/manuales/manual_reasignacion_masiva.pdf", "icon": "help" },
+        { "name": "Gestión correspondencia reasignación masiva", "nameDownload": "manual-gestion-correspondencia-reasignacion-masiva.pdf", "file": "assets/manuales/manual_reasignacion_masiva.pdf", "icon": "help" },
+        { "name": "Gestión correspondencia anulación", "nameDownload": "manual-gestion-correspondencia-anulacion.pdf", "file": "assets/manuales/manual_anulacion_radicados.pdf", "icon": "help" },
+        { "name": "Gestión archivo asignación espacio físico", "nameDownload": "manual-gestion-archivo-asignacion-espacio-fisico.pdf", "file": "assets/manuales/manual_administracion_espacio_fisico.pdf", "icon": "help" },
+        { "name": "Gestión archivo archivar expediente", "nameDownload": "manual-gestion-archivo-archivar-expediente.pdf", "file": "assets/manuales/manual_archivar_expediente.pdf", "icon": "help" },
+        { "name": "Gestión archivo transferencias documentales", "nameDownload": "manual-gestion-archivo-transferencias-documentales.pdf", "file": "assets/manuales/manual_transferencias_documentales.pdf", "icon": "help" },
+        { "name": "Reportes", "nameDownload": "manual-reportes.pdf", "file": "assets/manuales/manual_reportes.pdf", "icon": "help" },
+        { "name": "Reportes personalizados", "nameDownload": "manual-reportes-personalizados.pdf", "file": "assets/manuales/manual_reportes_personalizados.pdf", "icon": "help" },
+        { "name": "Proceso firma Certificada", "nameDownload": "manual_firma_certificada.pdf", "file": "assets/manuales/manual_firma_certificada.pdf", "icon": "help" }
+    ]
+}

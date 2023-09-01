@@ -1,0 +1,20 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+                <form id="moduleForm" [formGroup]="moduleForm" class="form-horizontal" (ngSubmit)="submitForm()">
+
+                    <!-- Start card One -->
+                    <!-- End card One -->
+
+                    <button type="submit" id="sendForm" style="display: none;"></button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- <app-floating-button [iconMenu]="iconMenu" (menuPrimaryEmiterData)="menuPrimaryReceiveData($event)"></app-floating-button>-->
+</div>

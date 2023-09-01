@@ -1,0 +1,66 @@
+{
+    "users": [
+        { "name": "Manage users", "route": "/users-index/false", "operacion": "version1%user%index", "icon": "person" },
+        { "name": "Manage profiles", "route": "/roles-index", "operacion": "version1%roles%roles%index", "icon": "people" },
+        { "name": "Manage operations", "route": "/operations-index", "operacion": "version1%roles%roles-operaciones%index", "icon": "build" }
+    ],
+    "documentManagement": [
+        { "name": "Dependencies", "route": "/dependencies-index", "operacion": "version1%gestionDocumental%trd-dependencias%index", "icon": "dns" },
+        { "name": "Upload TRD", "route": "/upload-trd", "operacion": "version1%gestionDocumental%trd%load-trd-file", "icon": "settings_applications" },
+        { "name": "Versioning TRD", "route": "/version-trd-index", "operacion": "version1%gestionDocumental%trd-tmp%index", "icon": "bookmarks" },
+        { "name": "Folder", "route": "/folder-index/false", "operacion": "version1%gestionDocumental%expedientes%index", "icon": "fact_check" }
+    ],
+    "correspondenceManagement": [
+        { "name": "Distribution Shipping", "route": "/distribution-shipping-index", "operacion": "version1%radicacion%distribuciony-envio%index", "icon": "dynamic_feed" },
+        { "name": "Mass reassignment", "route": "/mass-reassignment-index", "operacion": "version1%radicacion%reasignacion-radicado%index", "icon": "library_add_check" },
+        { "name": "Annulment", "route": "/annulment-index", "operacion": "version1%radicacion%anulacion%index", "icon": "pan_tool" }
+    ],
+    "filing": [
+        { "name": "Standard filing", "route": "/filing-index/false", "operacion": "version1%radicacion%radicados%index", "icon": "description" },
+        { "name": "Email filing", "route": "/filing-email-index", "operacion": "version1%radicacion%radicacion-email%login-email", "icon": "contact_mail" }
+    ],
+    "setting": [
+        { "name": "Configuration upload TRD", "route": "/upload-trd-index", "operacion": "version1%configuracionApp%cg-trd%index", "icon": "settings_applications" },
+        { "name": "Shipping providers", "route": "/providers-index", "operacion": "version1%configuracionApp%cg-proveedores%index", "icon": "local_shipping" },
+        { "name": "Filing types", "route": "/filing-types-index", "operacion": "version1%configuracionApp%tipos-radicados%index", "icon": "description" },
+        { "name": "User groups", "route": "/user-groups-index", "operacion": "version1%configuracionApp%grupos-usuarios%index", "icon": "edit_location" },
+        { "name": "Working hours", "route": "/times-response-index", "operacion": "version1%configuracionApp%cg-tiempos-respuesta%index", "icon": "query_builder" },
+        { "name": "Non-working days", "route": "/non-working-days-index", "operacion": "version1%configuracionApp%dias-no-laborados%index", "icon": "alarm_off" },
+        { "name": "Template management", "route": "/templates-index", "operacion": "version1%configuracionApp%cg-gestion-plantillas%index", "icon": "widgets" },
+        { "name": "Template Variables", "route": "/templates-variables-index", "operacion": "version1%configuracionApp%cg-plantilla-variables%index", "icon": "mark_chat_read" },
+        { "name": "Interoperability users", "route": "/providers-external-index", "operacion": "version1%configuracionApp%cg-proveedores-externos%index", "icon": "read_more" },
+        { "name": "Satisfaction survey", "route": "/poll-index", "operacion": "version1%configuracionApp%encuestas%index", "icon": "rule" },
+        { "name": "Main and regional", "route": "/region-index", "operacion": "version1%configuracionApp%regionales%index", "icon": "add_business" },
+        { "name": "Filing setting", "route": "/filing-setting-update", "operacion": "version1%configuracionApp%numero-radicado%index-one", "icon": "settings_applications" },
+        { "name": "General configuration", "route": "/general-setting-update", "operacion": "version1%configuracionApp%configuracion-general%index-one", "icon": "policy" },
+        { "name": "Filing label", "route": "/filing-label-index", "operacion": "version1%configuracionApp%configuracion-general%index-label", "icon": "point_of_sale" },
+        { "name": "Third party management", "route": "/third-management-index", "operacion": "version1%configuracionApp%cg-gestion-terceros%index", "icon": "person_search" },
+        { "name": "Provider Certified Signatures", "route": "/certified-signatures-index", "operacion": "version1%configuracionApp%cg-firmas-certificadas%index", "icon": "verified_user" }
+    ],
+    "archiveManagement": [
+        { "name": "Allocation of physical space", "route": "/physical-space-index", "operacion": "version1%gestionArchivo%espacio-fisico%index", "icon": "business" },
+        { "name": "Archive folder", "route": "/archive-filing-index", "operacion": "version1%gestionArchivo%gestion-archivo%index", "icon": "batch_prediction" },
+        { "name": "Documentary transfers", "route": "/documentary-transfer-index", "operacion": "version1%gestionDocumental%trd-transferencia%index", "icon": "backup_table" }
+    ],
+    "documentaryLoans": [
+        { "name": "Apply for loan", "route": "/apply-for-loan-index", "operacion": "version1%gestionArchivo%prestamo-documental%index", "icon": "preview" },
+        { "name": "Manage loan", "route": "/manage-loan-index", "operacion": "version1%gestionArchivo%prestamo-documental%index-manage-loan", "icon": "batch_prediction" },
+        { "name": "Loan of files", "route": "/loan-of-files", "operacion": "version1%gestionArchivo%prestamo-documental%index-loan-files", "icon": "credit_score" },
+        { "name": "Manage loan of files", "route": "/manage-loan-of-files", "operacion": "version1%gestionArchivo%prestamo-documental%index-manage-loan-files", "icon": "rule_folder" }
+    ],
+    "reports": [
+        { "name": "Reports", "route": "/reports-index", "operacion": "version1%reportes%index-list", "icon": "api" },
+        { "name": "Custom reports", "route": "/reports-custom", "operacion": "version1%reportes%reportes-personalizados%index", "icon": "api" }
+    ],
+    "query": [
+        { "name": "Advanced query", "route": "/advanced-index", "operacion": "version1%radicacion%consultas%index", "icon": "sticky_note_2" },
+        { "name": "Query old orfeo", "route": "/query-old-orfeo", "operacion": "version1%radicacion%consultas-orfeo-antiguo%index", "icon": "query_stats" },
+        { "name": "Query accumulated fund", "route": "/accumulated-fund", "operacion": "version1%radicacion%consultas-fondo-acumulado%index", "icon": "query_builder" }
+    ],
+    "audit": [
+        { "name": "Audit log", "route": "/log-audit-index", "operacion": "version1%configuracionApp%log%index", "icon": "timer" }
+    ],
+    "about": [
+        { "name": "About", "route": "/about-view/MjYw", "operacion": "version1%default%view", "icon": "info" }
+    ]
+}

@@ -1,0 +1,80 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+                <form id="moduleForm" [formGroup]="moduleForm" class="form-horizontal" (ngSubmit)="submitForm()">
+                    <!-- End card One -->
+                    <div class="card ">
+                        <div class="card-header card-header-info card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                            </div>
+                            <h4 class="card-title">{{ textForm | translate }}</h4>
+                        </div>
+                        <div class="card-body ">
+
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Código dependencia' | translate }}</mat-label>
+                                        <input matInput type="text" id="codigoGdTrdDependencia" formControlName="codigoGdTrdDependencia" placeholder="{{ 'dependenciesModule.ingreseCodigoDependencia' | translate }}" maxlength="{{ maxlengthDependency }}" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'codigoGdTrdDependencia').valid && moduleForm.get( 'codigoGdTrdDependencia').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Nombre dependencia' | translate }}</mat-label>
+                                        <input matInput type="text" id="nombreGdTrdDependencia" formControlName="nombreGdTrdDependencia" placeholder="{{ 'dependenciesModule.ingreseNombreDependencia' | translate }}" maxlength="255" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'nombreGdTrdDependencia').valid && moduleForm.get( 'nombreGdTrdDependencia').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Unidad administrativa' | translate }}</mat-label>
+                                        <mat-select id="codigoGdTrdDepePadre" formControlName="codigoGdTrdDepePadre" name="codigoGdTrdDepePadre">
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listDepePadreFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let depePadre of filteredlistDepePadre | async" [value]="depePadre.id">
+                                                {{ depePadre.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'codigoGdTrdDepePadre').valid && moduleForm.get( 'codigoGdTrdDepePadre').touched ">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Seleccione regional' | translate }}</mat-label>
+                                        <mat-select id="idCgRegional" formControlName="idCgRegional" name="idCgRegional" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listRegionalFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let regional of filteredlistRegional | async" [value]="regional.id">
+                                                {{ regional.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'idCgRegional').valid && moduleForm.get( 'idCgRegional').touched ">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+                            <button type="submit" id="sendForm" style="display: none;"></button>
+
+                        </div>
+                    </div>
+                    <!-- End card One -->
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <app-floating-button [iconMenu]="iconMenu" (menuPrimaryEmiterData)="menuPrimaryReceiveData($event)"></app-floating-button>
+</div>

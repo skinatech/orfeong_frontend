@@ -1,0 +1,327 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <!-- Notification -->
+                <div class="{{ initialNotificationClassAlert }} marginNotification" *ngIf="initialNotificationStatus" data-notify="container">
+                    <i class="material-icons" data-notify="icon">notifications</i>
+                    <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="material-icons">close</i>
+                    </button>
+                    <div class="row">
+                        <div class="col-lg-12">{{ initialNotificationMessage | translate }}</div>
+                    </div>
+                </div>
+                <!-- /Notification -->
+
+                <form id="moduleForm" [formGroup]="moduleForm" class="form-horizontal" (ngSubmit)="submitForm()">
+
+                    <!-- Start card One -->
+                    <div class="card ">
+                        <div class="card-header card-header-info card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                            </div>
+                            <h4 class="card-title">{{ textForm | translate }}</h4>
+                        </div>
+                        <div class="card-body ">
+
+                            <div class="row">
+                                <!-- Init jobando-->
+                                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label>&nbsp;</label>
+                                        <i class="material-icons" (click)="changeInputEdificio()" title="{{ 'Seleccionar edificio existente' | translate }}">published_with_changes</i>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" *ngIf="typeInputEdificio == 'select'">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Seleccione el edificio' | translate }}</mat-label>
+                                        <mat-select id="selectGaEdificio" formControlName="selectGaEdificio" name="selectGaEdificio" (selectionChange)="onSelectEdificio($event.value)" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listDepartFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let edificio of filteredlistEdificios | async" [value]="edificio.val">
+                                                {{ edificio.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'selectGaEdificio').valid && moduleForm.get( 'selectGaEdificio').touched ">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+
+                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" *ngIf="typeInputEdificio == 'input'">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Nombre edificio' | translate }}</mat-label>
+                                        <input matInput type="text" id="nombreGaEdificio" formControlName="nombreGaEdificio" placeholder="{{ 'ingreseNombreEdificio' | translate }}" maxlength="80" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'nombreGaEdificio').valid && moduleForm.get( 'nombreGaEdificio').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <!-- Fin jobando-->
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Departamento' | translate }}</mat-label>
+                                        <mat-select id="idDepartamentoGaEdificio" formControlName="idDepartamentoGaEdificio" name="idDepartamentoGaEdificio" (selectionChange)="getListMunicipio($event.value)" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listDepartFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let depart of filteredlistDepart | async" [value]="depart.id">
+                                                {{ depart.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'idDepartamentoGaEdificio').valid && moduleForm.get( 'idDepartamentoGaEdificio').touched ">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Municipio' | translate }}</mat-label>
+                                        <mat-select id="idMunicipioGaEdificio" formControlName="idMunicipioGaEdificio" name="idMunicipioGaEdificio" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listMunicipiosFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let municipio of filteredlistMunicipios | async" [value]="municipio.id">
+                                                {{ municipio.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'idMunicipioGaEdificio').valid && moduleForm.get( 'idMunicipioGaEdificio').touched ">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- End card One -->
+
+                    <!-- Start card Two -->
+                    <div class="card ">
+                        <div class="card-header card-header-info card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                            </div>
+                            <h4 class="card-title">{{ 'Datos de almacenamiento' | translate }}</h4>
+                        </div>
+                        <div class="card-body ">
+
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Piso' | translate }}</mat-label>
+                                        <input matInput type="text" maxlength="2" id="numeroPiso" formControlName="numeroPiso" placeholder="{{ 'Piso' | translate }}" (keypress)="isNumber($event)" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'numeroPiso').valid && moduleForm.get( 'numeroPiso').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Área de archivo' | translate }}</mat-label>
+                                        <input matInput type="text" id="nombreGaBodega" formControlName="nombreGaBodega" placeholder="{{ 'Área de archivo' | translate }}" maxlength="80" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'nombreGaBodega').valid && moduleForm.get( 'nombreGaBodega').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Estante' | translate }}</mat-label>
+                                        <input matInput type="text" value="1" maxlength="3" id="cantidadEstanteGaBodegaContenido" formControlName="cantidadEstanteGaBodegaContenido" placeholder="{{ 'Estante' | translate }}" (keypress)="isNumber($event)">
+                                        <mat-error *ngIf="!moduleForm.get( 'cantidadEstanteGaBodegaContenido').valid && moduleForm.get( 'cantidadEstanteGaBodegaContenido').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Módulo' | translate }}</mat-label>
+                                        <input matInput type="text" value="1" maxlength="3" id="cantidadRackGaBodegaContenido" formControlName="cantidadRackGaBodegaContenido" placeholder="{{ 'Módulo' | translate }}" (keypress)="isNumber($event)">
+                                        <mat-error *ngIf="!moduleForm.get( 'cantidadRackGaBodegaContenido').valid && moduleForm.get( 'cantidadRackGaBodegaContenido').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Entrepaño' | translate }}</mat-label>
+                                        <input matInput type="text" value="1" maxlength="3" id="cantidadEntrepanoGaBodegaContenido" formControlName="cantidadEntrepanoGaBodegaContenido" placeholder="{{ 'Entrepaño' | translate }}" (keypress)="isNumber($event)">
+                                        <mat-error *ngIf="!moduleForm.get( 'cantidadEntrepanoGaBodegaContenido').valid && moduleForm.get( 'cantidadEntrepanoGaBodegaContenido').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Caja' | translate }}</mat-label>
+                                        <input matInput type="text" value="1" maxlength="3" id="cantidadCajaGaBodegaContenido" formControlName="cantidadCajaGaBodegaContenido" placeholder="{{ 'Caja' | translate }}" (keypress)="isNumber($event)">
+                                        <mat-error *ngIf="!moduleForm.get( 'cantidadCajaGaBodegaContenido').valid && moduleForm.get( 'cantidadCajaGaBodegaContenido').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Cuerpo' | translate }}</mat-label>
+                                        <mat-select id="cuerpoGaBodegaContenido" formControlName="cuerpoGaBodegaContenido" name="cuerpoGaBodegaContenido" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listCuerpoFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let cuerpo of filteredlistCuerpo | async" [value]="cuerpo.id">
+                                                {{ cuerpo.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'cuerpoGaBodegaContenido').valid">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div *ngIf="statusButtonAdd" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <button type="button" mat-raised-button class="btn btn-success btn-round" title="{{ 'Agregar' | translate }}" (click)="addItem()" style="float: right;">
+                                        <i class="material-icons">offline_pin</i>{{ 'Agregar' | translate }}
+                                    </button>
+                                </div>
+
+                                <!-- Start view floor -->
+                                <div *ngIf="statusButtonAdd" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="accordion" role="tablist">
+                                    <div *ngFor="let pisos of dataForm; let iPiso = index;" class="card-collapse">
+                                        <div *ngIf="pisos" class="card-header" role="tab" [attr.id]="'headingOne'+ iPiso">
+                                            <h5 class="mb-0">
+                                                <!-- Input del campo Pisos -->
+                                                <a data-toggle="collapse" [attr.href]="'#collapseOne'+ iPiso" aria-expanded="false" class="collapsed">
+                                                    <small class="description">{{ 'Piso' | translate }}: </small> {{ iPiso }}
+                                                    <i class="material-icons">keyboard_arrow_down</i>
+                                                    <span class="material-icons" title="{{ 'Eliminar' | translate }}" style="float: right;" (click)="deleteItem( iPiso, 'Piso')">
+                                                        delete_forever
+                                                    </span>
+                                                </a>
+                                            </h5>
+                                        </div>
+                                        <div *ngIf="pisos" [attr.id]="'collapseOne'+ iPiso" class="collapse show" role="tabpanel" style="">
+                                            <div *ngFor="let bodega of viewDataForm(pisos.nombreGaBodega); let iBodega = index;" class="card-collapse">
+                                                <div class="card-header" role="tab" [attr.id]="'headingSubOne'+ iPiso + iBodega">
+                                                    <h5 class="mb-0">
+                                                        <!-- Input del campo Bodegas -->
+                                                        <a data-toggle="collapse" [attr.href]="'#collapseSubOne'+ iPiso + iBodega" aria-expanded="false" class="collapsed">
+                                                            <small class="description">{{ 'Área de archivo' | translate }}: </small>{{ bodega }}
+                                                            <i class="material-icons">keyboard_arrow_down</i>
+                                                            <span class="material-icons" title="{{ 'Eliminar' | translate }}" style="float: right;" (click)="deleteItem( bodega, 'Bodega', iPiso)">
+                                                                delete_forever
+                                                            </span>
+                                                        </a>
+                                                    </h5>
+                                                </div>
+                                                <div [attr.id]="'collapseSubOne'+iPiso + iBodega" class="collapse show" role="tabpanel" style="">
+                                                    <div class="card-body">
+
+                                                        <div class="row d-flex justify-content-center">
+                                                            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                                                <table style="width: 100%;">
+                                                                    <tr>
+                                                                        <th class="tabledep">
+                                                                            {{ 'Estante' | translate }}
+                                                                        </th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="tabledep">
+                                                                            {{ dataForm[iPiso]['nombreGaBodega'][bodega]['cantidadEstanteGaBodegaContenido'] }}
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+
+                                                            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                                                <table style="width: 100%;">
+                                                                    <tr>
+                                                                        <th class="tabledep">
+                                                                            {{ 'Módulo' | translate }}
+                                                                        </th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="tabledep">
+                                                                            {{ dataForm[iPiso]['nombreGaBodega'][bodega]['cantidadRackGaBodegaContenido'] }}
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+
+                                                            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                                                <table style="width: 100%;">
+                                                                    <tr>
+                                                                        <th class="tabledep">
+                                                                            {{ 'Entrepaño' | translate }}
+                                                                        </th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="tabledep">
+                                                                            {{ dataForm[iPiso]['nombreGaBodega'][bodega]['cantidadEntrepanoGaBodegaContenido'] }}
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                                                <table style="width: 100%;">
+                                                                    <tr>
+                                                                        <th class="tabledep">
+                                                                            {{ 'Caja' | translate }}
+                                                                        </th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="tabledep">
+                                                                            {{ dataForm[iPiso]['nombreGaBodega'][bodega]['cantidadCajaGaBodegaContenido'] }}
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+
+                                                            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                                                <table style="width: 100%;">
+                                                                    <tr>
+                                                                        <th class="tabledep">
+                                                                            {{ 'Cuerpo' | translate }}
+                                                                        </th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="tabledep">
+                                                                            {{ dataForm[iPiso]['nombreGaBodega'][bodega]['cuerpoGaBodegaContenido'] }}
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- End view floor -->
+
+                        </div>
+
+                    </div>
+                    <!-- End card Two -->
+
+                    <button type="submit" id="sendForm" style="display: none;"></button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <app-floating-button [iconMenu]="iconMenu" (menuPrimaryEmiterData)="menuPrimaryReceiveData($event)"></app-floating-button>
+</div>

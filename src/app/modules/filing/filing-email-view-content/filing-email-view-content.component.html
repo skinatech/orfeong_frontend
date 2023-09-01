@@ -1,0 +1,93 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <app-flash-view> </app-flash-view>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div *ngIf="initCardHeaderStatus" class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                        </div>
+                        <h4 class="card-title"><b>{{ initCardHeaderTitle | translate }}:</b> {{ this.asuntoRadiRadicado }}</h4>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th>{{ 'De' | translate }}</th>
+                                                <td style="border-top: 1px solid rgba(0, 0, 0, 0.06)">{{ this.nombreCliente }} {{ '<' + this.correoElectronicoCliente + '>' }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th>{{ 'Fecha envío' | translate }}</th>
+                                                <td style="border-top: 1px solid rgba(0, 0, 0, 0.06)">{{ this.date }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th>{{ 'Tipo de vista disponible' | translate }}</th>
+                                                <td style="border-top: 1px solid rgba(0, 0, 0, 0.06)">{{ this.vistaDisponible }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="vertical-align: initial;">{{ 'Archivos adjuntos' | translate }}</th>
+                                                <td style="border-top: 1px solid rgba(0, 0, 0, 0.06)">
+                                                    <span *ngFor="let item of attachment">
+                                                        {{ item }}<br>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="border-top: 1px solid rgba(0, 0, 0, 0.06)">
+                                    <div [innerHTML]="mailBody | sanitizeHtml"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!-- end content-->
+                </div>
+                <!--  end card  -->
+            </div>
+            <!-- end col-md-12 -->
+        </div>
+        <!-- end row -->
+    </div>
+</div>

@@ -1,0 +1,7 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive">
+</app-breadcrumb>
+<app-view-list [reuteLoadView]="reuteLoadView" [initCardHeaderIcon]="initCardHeaderIcon" [textFormView]="textFormView" [redirectionPath]="redirectionPath" [dtCollapStatus]="dtCollapStatus" (actionsDocsButtonEmiter)="actionsDocsButton($event)"></app-view-list>
+<!-- Boton flotante -->
+<app-floating-button *ngIf="statusMenuButton" [iconMenu]="iconMenu" [menuButtons]="menuButtons" (menuEmiterData)="menuReceiveData($event)"></app-floating-button>
+<!-- visor de documentos -->
+<app-view-pdf-modal *ngIf="statusModalviewPdf" [idDocument]="paramsDownload" [dataDocumentos]="dataDocumentos" [ruoteServiceDocuments]="ruoteServiceDownloadFile" (closeModalEmiter)="closePdfModal($event)"></app-view-pdf-modal>

@@ -1,0 +1,33 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="card">
+
+                    <div class="card-header card-header-info card-header-icon row">
+                        <div class="card-icon">
+                            <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                        </div>
+                        <h4 class="card-title">{{ textForm | translate }}</h4>
+
+                    </div>
+
+                    <div class="card-body">    
+                        <div *ngIf="viewPdfStatus" class="row">
+                            <div [ngClass]="colGrip" [ngStyle]="styleContent">
+                                <iframe [ngStyle]="styleIframe" id="frameViewPdf" width="100%" height="100%" allowfullscreen webkitallowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

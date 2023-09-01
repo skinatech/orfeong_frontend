@@ -1,0 +1,28 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+
+<app-view-list *ngIf="statusViewList" (actionsDocsButtonEmiter)="actionsDocsButton($event)" (dataUserTramitadorEmiter)="getDataUserTramitador($event)" (dataExpedientEmiter)="getDataExpedient($event)" [reuteLoadView]="reuteLoadView" [reuteLoadViewHistorico]="reuteLoadViewHistorico"
+    [dtCollapStatus]="dtCollapStatus" [initCardHeaderIcon]="initCardHeaderIcon" [routeBotonUpdateView]="routeBotonUpdateView" [textFormView]="textFormView" [redirectionPath]="redirectionPath"></app-view-list>
+
+<!-- Accion Carga de Documentos-->
+<app-form-modal *ngIf="statusModalUploadFile" [ruoteServiceDocuments]='ruoteServiceDocuments' [eventClickButtonSelectedData]='eventClickButtonSelectedData' (closeModalSendDocsEmiter)="closeModalSendDocs($event)"></app-form-modal>
+
+<!-- Accion agenda, reasignacion, anulacion, VOBO, Copiar informado -->
+<app-observation *ngIf="statusModalMain" [textFormObservaHeader]="textFormObservaHeader" (closeObservaEmiter)="closeObserva($event)" [showAgenda]="showAgenda" [showReasignacion]="showReasignacion" [showVOBO]="showVOBO" [showCopyInformaded]="showCopyInformaded"></app-observation>
+
+<!-- Modal para enviar respuesta por correo -->
+<app-send-reply-mail *ngIf="statusSendReplyMailModal" [dataSend]="dataSend" (closeModalEmiter)="closeSendReplyMailModal($event)"></app-send-reply-mail>
+
+<app-floating-button *ngIf="statusMenuButton" [iconMenu]="iconMenu" [menuButtons]="menuButtons" (menuEmiterData)="menuReceiveData($event)"></app-floating-button>
+
+<app-view-pdf-modal *ngIf="statusModalviewPdf" [idDocument]="paramsDownload" [ruoteServiceDocuments]="ruoteServiceDownloadAnexo" (closeModalEmiter)="closePdfModal($event)"></app-view-pdf-modal>
+
+<app-upload-files-modal *ngIf="statusUploadFileAne" [statusReturnDataClose]="statusReturnDataClose" [statusNameFile]="statusNameFile" [valueNameFile]="valueNameFile" [showObservacion]="showObservacion" [showTipoDocumental]="showTipoDocumental" [ruoteServiceDocuments]="ruoteServiceDocumentsModal"
+    [textForm]="textFormObservaHeader" [dataSend]="dataSend" [validateFile]="validateFile" (closeModalEmiter)="closeObserva($event)"></app-upload-files-modal>
+
+<app-upload-massive-files-modal *ngIf="statusUploadFileAneMasive" [showTipoDocumental]="showTipoDocumental" [ruoteServiceDocuments]="ruoteServiceDocumentsAne" [dataSend]="dataSend" [validateFile]="validateFileAnexos" [textForm]="textFormAttachment" [maxRowsFiles]="maxRowsFilesAttachment" [showButtonClean]="showButtonCleanAttachment" [showButtonClear]="showButtonClearAttachment" (closeModalEmiter)="closeObserva($event)"></app-upload-massive-files-modal>
+
+<!-- Modal Inclusion en expediente -->
+<app-include-in-file *ngIf="statusModalIncludeInFile" [eventClickButtonSelectedData]="eventClickButtonSelectedData" (closeIncludeInFileEmiter)="closeObserva($event)"></app-include-in-file>
+<!--Modal para mostrar el versionamiento de los documentos principales  -->
+<app-simple-table-modal *ngIf="statusSimpleTableModal" [dataUserTramitador]="dataUserTramitador" [dataSend]="dataSend" [ruoteServiceDownloadDocuments]="ruoteServiceDownloadDocuments" [routeLoadDataTablesServiceMod]="routeLoadDataTablesServiceMod" (closeModalEmiter)="closeObserva($event)"
+    [modalNotificationStatus]="modalNotificationStatus" [modalNotificationClassAlert]="modalNotificationClassAlert" [modalNotificationMessage]="modalNotificationMessage"></app-simple-table-modal>

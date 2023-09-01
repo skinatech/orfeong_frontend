@@ -1,0 +1,62 @@
+.marginNotification {
+    margin-top: 20px !important;
+}
+
+.grid-options {
+    width: 80%;
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(3, auto);
+    justify-content: center;
+}
+
+.grid-options div {
+    width: 130px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ebebeb;
+    border-radius: 18px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.grid-options div:hover {
+    cursor: pointer;
+    background-color: rgba(0, 165, 223, 0.5);
+}
+
+.iconSign {
+    font-size: 50px;
+    margin-top: 30px;
+    color: #365c8a;
+}
+
+.labelSign {
+    font-size: 14px;
+    font-weight: 400;
+    color: #2b333f;
+    text-align: center;
+}
+
+.alert {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+}
+
+.alert.alert-danger {
+    box-shadow: none;
+}
+
+.modalActionsButtons {
+    margin-top: 40px;
+}

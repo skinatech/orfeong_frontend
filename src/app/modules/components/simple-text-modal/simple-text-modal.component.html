@@ -1,0 +1,33 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <!-- Notification -->
+                <div class="{{ modalNotificationClassAlert }} marginNotification" *ngIf="modalNotificationStatus" data-notify="container">
+                    <i class="material-icons" data-notify="icon">notifications</i>
+                    <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="material-icons">close</i>
+                    </button>
+                    <div class="row">
+                        <div class="col-lg-12">{{ modalNotificationMessage | translate }}</div>
+                    </div>
+                </div>
+                <!-- /Notification -->
+
+                <div class="card">
+                    <div *ngIf="initCardHeaderStatus" class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                        </div>
+                        <h4 class="card-title">{{ initCardHeaderTitle | translate }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title" innerHTML={{dataText}}>{{ dataText }}</h4>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

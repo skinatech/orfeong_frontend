@@ -1,0 +1,31 @@
+
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+
+<app-initial-list *ngIf="initialListStatus == true"
+
+    [initCardHeaderStatus]="initCardHeaderStatus" 
+    [initCardHeaderIcon]="initCardHeaderIcon" 
+    [initCardHeaderTitle]="initCardHeaderTitle" 
+    [dtTitles]="dtTitles" 
+    [routeLoadDataTablesService]="routeLoadDataTablesService" 
+    [initBotonCreateRoute]="initBotonCreateRoute"
+    (selectedRowsEmiter)="selectedRowsReceiveData($event)" 
+    [routeChangeStatus]="routeChangeStatus" 
+    [routeData]="route"
+    [moduleEmail]="moduleEmail"
+    [mailBox]="mailBox"
+    [viewColumStatus]="viewColumStatus"
+    (changeDataMailEmiter)="changeDataMailRecibe($event)"
+
+    [moduleFormInitial]="moduleFormInitial"
+>
+
+</app-initial-list>
+
+<app-filing-email-view-content
+    *ngIf="statusViewContent" 
+    [dataViewContent]="dataViewContent"
+    [mailBox]="mailBox"
+    (closeViewContentEmiter)="closeViewContent($event)"
+></app-filing-email-view-content>
+<app-floating-button [menuButtons]="menuButtons" (menuEmiterData)="menuReceiveData($event)"></app-floating-button>

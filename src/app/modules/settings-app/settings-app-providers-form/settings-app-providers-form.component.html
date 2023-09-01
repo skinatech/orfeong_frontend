@@ -1,0 +1,74 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+                <form id="moduleForm" [formGroup]="moduleForm" class="form-horizontal" (ngSubmit)="submitForm()">
+
+                    <!-- End card One -->
+                    <div class="card ">
+                        <div class="card-header card-header-info card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                            </div>
+                            <h4 class="card-title">{{ textForm | translate }}</h4>
+                        </div>
+                        <div class="card-body ">
+
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Nombre proveedor' | translate }}</mat-label>
+                                        <input matInput type="text" id="nombreCgProveedor" formControlName="nombreCgProveedor" placeholder="{{ 'ingreseNombreProveedor' | translate }}" maxlength="80" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'nombreCgProveedor').valid && moduleForm.get( 'nombreCgProveedor').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'selectServicios' | translate }}</mat-label>
+                                        <mat-select multiple id="idServicioCgProveedor" formControlName="idServicioCgProveedor" name="idServicioCgProveedor" ariaLabel="servicio[0]" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listServiciosFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let servicio of filteredlistServicios | async" [value]="servicio.id">
+                                                {{ servicio.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'idServicioCgProveedor').valid && moduleForm.get( 'idServicioCgProveedor').touched ">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Seleccione regional' | translate }}</mat-label>
+                                        <mat-select multiple id="idCgRegional" formControlName="idCgRegional" name="idCgRegional" ariaLabel="regional[0]" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listRegionalesFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let regional of filteredlistRegionales | async" [value]="regional.id">
+                                                {{ regional.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'idCgRegional').valid && moduleForm.get( 'idCgRegional').touched ">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- End card One -->
+
+                    <button type="submit" id="sendForm" style="display: none;"></button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <app-floating-button [iconMenu]="iconMenu" (menuPrimaryEmiterData)="menuPrimaryReceiveData($event)"></app-floating-button>
+</div>

@@ -1,0 +1,75 @@
+<!-- <div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12"> -->
+
+<form [formGroup]="moduleForm" class="form-horizontal" (ngSubmit)="submitForm()">
+    <div class="card">
+
+        <div class="card-header card-header-info card-header-icon row">
+            <div class="card-icon">
+                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+            </div>
+            <h4 class="card-title">{{ textForm | translate }}</h4>
+            <h4 class="card-title"> {{ textFormLabel | translate }}</h4>
+            <div class="col-lg-12">
+                <button *ngIf="showButtonDowload" mat-raised-button class="btn btn-primary btn-round" title="{{ 'Descargar Formato' | translate }}" (click)="onDownloadFormat()" style="float: right;">
+                    <i class="material-icons">import_export</i>
+                </button>
+            </div>
+
+        </div>
+
+        <div class="card-body custom-content-overflow">
+
+            <!-- Card para seleccion de archivos multiples -->
+            <div class="card" *ngIf="viewInputFileMultiple">
+
+                <div *ngIf="!uploadProcess" class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label for="fileUpload2">{{ 'Seleccione el archivo' | translate }}</label>
+                        <input #inputFileMultiple multiple type="file" name="fileUpload2" class="form-control" (change)="onSelectedFileNew($event)" />
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: right; padding: 0px !important;">
+                        <button [disabled]="false" type="button" title="{{ 'Nuevo archivo' | translate }}" (click)="addRowFileToList(false)" mat-raised-button class="btn btn-info btn-just-icon btn-round buttonIconMenu">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /Card para seleccion de archivos multiples -->
+
+            <!-- Card para el forArray de los archivos -->
+            <div formArrayName="filesForm">
+                <div class="card" *ngFor="let fileForm of moduleForm.get('filesForm').controls; let i = index">
+
+                    <app-upload-massive-files-detail-modal [filesFormLength]="moduleForm.get('filesForm').controls.length" [showFechaDoc]="showFechaDoc" [moduleForm]="moduleForm" [indexComponent]="i" [translate]="translator" [fileSelected]="[]" [fileForm]="fileForm" (addRowFileToListEmiter)="addRowFileToListRecibe($event)"
+                        (clearRowFileToListEmiter)="clearRowFileToListRecibe($event)" [ruoteServiceDocuments]="ruoteServiceDocuments" [redirectionPath]="redirectionPath" [uploadResponse]="uploadResponse" [validateFile]="validateFile" [maxSize]="maxSize" [showTipoDocumental]="showTipoDocumental"
+                        [textFormObserva]="textFormObserva" [dataDepen]="dataDepen" [dataSend]="dataSend" [listTipoDocumental]="listTipoDocumental" [listTipoDocumentalStatus]="listTipoDocumentalStatus" [maxRowsFiles]="maxRowsFiles" [showButtonClean]="showButtonClean" [showButtonClear]="showButtonClear"></app-upload-massive-files-detail-modal>
+
+                </div>
+            </div>
+            <!-- /Card para el forArray de los archivos -->
+
+        </div>
+        <div class="card-footer">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: right; padding: 0px !important;">
+                <button [disabled]="!moduleForm.valid" type="submit" title="{{ 'Cargar archivo' | translate }}" mat-raised-button class="btn btn-success btn-just-icon btn-round buttonIconMenu">
+                    <mat-icon>cloud_upload</mat-icon>
+                </button>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+<!-- </div>
+
+        </div>
+    </div>
+</div> -->

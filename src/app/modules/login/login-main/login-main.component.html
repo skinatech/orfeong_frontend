@@ -1,0 +1,105 @@
+<app-auth-nav></app-auth-nav>
+
+<div class="wrapper wrapper-full-page">
+  <div
+    class="page-header login-page header-filter"
+    filter-color="black"
+    style="
+      background-image: url('./assets/img/fondos/aeropuerto-10-10_azul.jpg');
+      background-size: cover;
+      background-position: top center;
+    "
+  >
+    <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+    <div class="container loginStyle">
+      <div class="row">
+        <div class="col-lg-5 col-md-7 col-sm-9 col-xs-12 ml-auto mr-auto">
+          <!-- <form class="form" [formGroup]="loginForm" (ngSubmit)="validateRecaptcha(captchaRef)"> -->
+          <form class="form" [formGroup]="loginForm" (ngSubmit)="aceptaLicencia()">
+            <div @enterState class="card card-login card-profile text-center">
+              <div class="card-header">
+                <div class="card-avatar">
+                  <img class="img" src="./assets/img/logos/icono_blanco_130x130.jpg" />
+                </div>
+              </div>
+              <div class="card-body">
+                <p class="text-center text-size-login">
+                  <span class="text-info-bdo"
+                    ><b>{{ "login.welcome" | translate }}</b></span
+                  ><br />
+                  <b>{{ "login.welcomeText" | translate }}</b>
+                </p>
+                <p class="text-center">{{ "login.linkLoginUsersBdo" | translate }}<br /></p>
+                <hr class="hr-short" />
+                <div class="col col-sm-10 ml-auto mr-auto">
+                  <span class="bmd-form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">person</i>
+                        </span>
+                      </div>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="{{ 'login.placeholderUser' | translate }}"
+                        formControlName="username"
+                        maxlength="80"
+                      />
+                    </div>
+                  </span>
+                  <span class="bmd-form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">lock_outline</i>
+                        </span>
+                      </div>
+                      <input
+                        type="password"
+                        class="form-control"
+                        placeholder="{{ 'login.placeholderPassword' | translate }}"
+                        formControlName="password"
+                        autocomplete="off"
+                        maxlength="25"
+                      />
+                    </div>
+                  </span>
+                </div>
+              </div>
+              <div class="card-footer justify-content-center">
+                <div class="col col-sm-10 ml-auto mr-auto">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center">
+                    <button
+                      style="width: 100%"
+                      mat-raised-button
+                      type="submit"
+                      [disabled]="!loginForm.valid"
+                      class="btn-responsive btn btn-success"
+                    >
+                      {{ "login.botonSubmitForm" | translate }}
+                    </button>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center">
+                    <span [routerLink]="['/resetpass']" class="btn text-info-bdo btn-link btn-sm"
+                      ><i class="material-icons">help_outline</i> {{ "login.linkResetPass" | translate }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <re-captcha
+              *ngIf="activeRecaptcha"
+              size="invisible"
+              #captchaRef="reCaptcha"
+              (resolved)="responseCaptcha($event)"
+              [siteKey]="captchaSiteKey"
+            ></re-captcha>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <app-auth-footer></app-auth-footer>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-md-7 col-sm-9 col-xs-12 ml-auto mr-auto">
+                        <form class="form" [formGroup]="moduleForm" (ngSubmit)="submitForm()">
+                            <div class="card card-login card-profile text-center">
+                                
+                                <!-- <div class="card-header">
+                                    <div class="card-avatar">
+                                        <img class="img" src="./assets/img/logos/icono_blanco_130x130.jpg">
+                                    </div>
+                                </div> -->
+
+                                <div class="card-body">
+                                    <p class="text-center text-size-login">
+                                        <span class="text-info-bdo"><b>{{ 'loginRadiEmail.welcome' | translate }}</b></span><br>
+                                    </p>
+                                    <p class="text-justify">
+                                        <b>{{ 'loginRadiEmail.welcomeText' | translate }}</b>
+                                    </p>
+                                    <hr class="hr-short">
+                                    <br>
+                                    <div class="col col-sm-10 ml-auto mr-auto">
+                                        <span class="bmd-form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="material-icons">person</i>
+                                                </span>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="{{ 'loginRadiEmail.placeholderUser' | translate }}" formControlName="username" style="margin-right: 10px" />
+                                            </div>
+                                        </span>
+
+                                        <span class="bmd-form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="material-icons">lock_outline</i>
+                                                </span>
+                                                </div>
+                                                <input type="password" class="form-control" placeholder="{{ 'loginRadiEmail.placeholderPassword' | translate }}" formControlName="password" autocomplete="off" style="margin-right: 10px" />
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="card-footer justify-content-center">
+                                    <div class="col col-sm-10 ml-auto mr-auto">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
+                                            <button style="width: 100%" mat-raised-button type="submit" [disabled]="!moduleForm.valid" class="btn-responsive btn btn-success">{{ 'loginRadiEmail.botonSubmitForm' | translate }}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

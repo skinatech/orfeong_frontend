@@ -1,0 +1,345 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <!-- Notification -->
+        <div class="alert alert-info alert-with-icon marginNotification" data-notify="container">
+          <i class="material-icons" data-notify="icon">notifications</i>
+          <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="material-icons">close</i>
+          </button>
+          <span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span>
+          <span data-notify="message">{{ "textFormGeneralConfiguration" | translate }}</span>
+        </div>
+        <!-- /Notification -->
+        <form id="moduleForm" [formGroup]="moduleForm" class="form-horizontal" (ngSubmit)="submitForm()">
+          <!-- End card One -->
+          <div class="card">
+            <div class="card-header card-header-info card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+              </div>
+              <h4 class="card-title">{{ "Configuración inicial" | translate }}</h4>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field>
+                    <mat-label>{{ "Tamaño de archivo" | translate }}</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      id="tamanoArchivoCgGeneral"
+                      formControlName="tamanoArchivoCgGeneral"
+                      maxlength="15"
+                      (keypress)="onlyNumberKey($event)"
+                    />
+                    <span matSuffix> MB</span>
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('tamanoArchivoCgGeneral').valid ||
+                        moduleForm.get('tamanoArchivoCgGeneral').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field>
+                    <mat-label>{{ "Tiempo para que las contraseñas se venzan" | translate }}</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      value="90"
+                      formControlName="diasLimiteCgGeneral"
+                      maxlength="2"
+                      (keypress)="onlyNumberKey($event)"
+                    />
+                    <span matSuffix> {{ "Días" | translate }}</span>
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('diasLimiteCgGeneral').valid || moduleForm.get('diasLimiteCgGeneral').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field>
+                    <mat-label>{{ "Tiempo de inactividad de la sesión en minutos" | translate }}</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      value="90"
+                      formControlName="tiempoInactividadCgGeneral"
+                      maxlength="2"
+                      (keypress)="onlyNumberKey($event)"
+                    />
+                    <span matSuffix> {{ "Minutos" | translate }}</span>
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('tiempoInactividadCgGeneral').valid ||
+                        moduleForm.get('tiempoInactividadCgGeneral').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <mat-form-field>
+                    <mat-label>{{ "Correo administrador transferencias documentales" | translate }}</mat-label>
+                    <input matInput email formControlName="correoNotificadorAdminCgGeneral" maxlength="80" required />
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('correoNotificadorAdminCgGeneral').valid ||
+                        moduleForm.get('correoNotificadorAdminCgGeneral').touched
+                      "
+                    >
+                      {{ "Ingrese un correo válido" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End card One -->
+
+          <!-- End card Two -->
+          <div class="card">
+            <div class="card-header card-header-info card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+              </div>
+              <h4 class="card-title">{{ "Configuración PQRSD" | translate }}</h4>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <mat-form-field>
+                    <mat-label>{{ "Correo electrónico administrador de PQRSD" | translate }}</mat-label>
+                    <input
+                      matInput
+                      email
+                      placeholder="Correo electrónico administrador de PQRSD"
+                      formControlName="correoNotificadorPqrsCgGeneral"
+                      maxlength="80"
+                      required
+                    />
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('correoNotificadorPqrsCgGeneral').valid ||
+                        moduleForm.get('correoNotificadorPqrsCgGeneral').touched
+                      "
+                    >
+                      {{ "Ingrese un correo válido" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <mat-form-field>
+                    <mat-label>{{ "Días de notificación antes de vencimiento" | translate }}</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      value="3"
+                      placeholder="Días de notificación antes de vencimiento"
+                      formControlName="diasNotificacionCgGeneral"
+                      maxlength="1"
+                    />
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('diasNotificacionCgGeneral').valid ||
+                        moduleForm.get('diasNotificacionCgGeneral').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <mat-form-field>
+                    <mat-label> {{ "Dependencia Responsable" | translate }} </mat-label>
+                    <mat-select
+                      id="idDependenciaPqrsCgGeneral"
+                      formControlName="idDependenciaPqrsCgGeneral"
+                      name="idDependenciaPqrsCgGeneral"
+                      required
+                    >
+                      <mat-option>
+                        <ngx-mat-select-search
+                          [placeholderLabel]="'Buscar...' | translate"
+                          [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate"
+                          formControlName="listDependenciasFilter"
+                          [searching]="true"
+                        ></ngx-mat-select-search>
+                      </mat-option>
+                      <mat-option *ngFor="let valye of filteredlistDependencias | async" [value]="valye.id">
+                        {{ valye.val }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="!moduleForm.get('idDependenciaPqrsCgGeneral').valid">{{
+                      "El campo es obligatorio" | translate
+                    }}</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <mat-form-field>
+                    <mat-label>{{ "Días hábiles para el ciudadano responder" | translate }}</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      value="10"
+                      placeholder="Días hábiles para el ciudadano responder"
+                      formControlName="diaRespuestaPqrsCgGeneral"
+                      maxlength="2"
+                    />
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('diaRespuestaPqrsCgGeneral').valid ||
+                        moduleForm.get('diaRespuestaPqrsCgGeneral').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <mat-form-field>
+                    <mat-label>{{ "Términos y condiciones" | translate }} </mat-label>
+                    <textarea matInput formControlName="terminoCondicionCgGeneral" maxlength="2500" required></textarea>
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('terminoCondicionCgGeneral').valid ||
+                        moduleForm.get('terminoCondicionCgGeneral').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End card Two -->
+          <div class="card">
+            <div class="card-header card-header-info card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+              </div>
+              <h4 class="card-title">{{ "benefitsConfigurations" | translate }}</h4>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-card-content>
+                    <label>{{ "resoluciones" | translate }}</label>
+                    <section>
+                      <mat-slide-toggle
+                        (change)="matSlideToggleChange($event)"
+                        formControlName="resolucionesCgGeneral"
+                        class=""
+                        [color]="'primary'"
+                      >
+                        {{ activateResolutionsMessage | translate }}
+                      </mat-slide-toggle>
+                    </section>
+                  </mat-card-content>
+                </div>
+
+                <div *ngIf="activateResolutionsMessage === 'Si'" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field>
+                    <mat-label>{{ "idResoluciones" | translate }}</mat-label>
+                    <input
+                      matInput
+                      type="number"
+                      [value]="valueIdTypeRadiResolutions"
+                      [readonly]="true"
+                      formControlName="resolucionesIdCgGeneral"
+                    />
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('resolucionesIdCgGeneral').valid ||
+                        moduleForm.get('resolucionesIdCgGeneral').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div *ngIf="activateResolutionsMessage === 'Si'" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field>
+                    <mat-label>{{ "nameResoluciones" | translate }}</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      [readonly]="true"
+                      formControlName="resolucionesNameCgGeneral"
+                      maxlength="80"
+                    />
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('resolucionesNameCgGeneral').valid ||
+                        moduleForm.get('resolucionesNameCgGeneral').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <mat-form-field>
+                    <mat-label>{{ "dependencyCodeFinancialBenefits" | translate }}</mat-label>
+                    <input matInput type="text" formControlName="codDepePrestaEconomicasCgGeneral" />
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('codDepePrestaEconomicasCgGeneral').valid ||
+                        moduleForm.get('codDepePrestaEconomicasCgGeneral').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <mat-form-field>
+                    <mat-label>{{ "idDocumentaryTypePeaceAndSafe" | translate }}</mat-label>
+                    <input matInput type="text" formControlName="idPrestaPazYsalvoCgGeneral" />
+                    <mat-error
+                      *ngIf="
+                        !moduleForm.get('idPrestaPazYsalvoCgGeneral').valid ||
+                        moduleForm.get('idPrestaPazYsalvoCgGeneral').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" id="sendForm" style="display: none"></button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <app-floating-button
+    [iconMenu]="iconMenu"
+    (menuPrimaryEmiterData)="menuPrimaryReceiveData($event)"
+  ></app-floating-button>
+</div>

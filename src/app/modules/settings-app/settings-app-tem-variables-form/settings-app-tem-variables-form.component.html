@@ -1,0 +1,71 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-info card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">{{ initCardHeaderIcon }}</i>
+            </div>
+            <h4 class="card-title">{{ textForm | translate }}</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="formGroup" class="form-horizontal" (ngSubmit)="submitmoduleForm()">
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "nombreVariableDePlantilla" | translate }}</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      id="nombreCgPlantillaVariable"
+                      formControlName="nombreCgPlantillaVariable"
+                      placeholder="{{ 'nombreVariableDePlantilla' | translate }}"
+                      maxlength="80"
+                      required
+                    />
+                    <mat-error
+                      *ngIf="
+                        !formGroup.get('nombreCgPlantillaVariable').valid &&
+                        formGroup.get('nombreCgPlantillaVariable').touched
+                      "
+                    >
+                      {{ "formatoNoValido" | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>{{ "descripcionVariableDePlantilla" | translate }}</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      id="descripcionCgPlantillaVariable"
+                      formControlName="descripcionCgPlantillaVariable"
+                      placeholder="{{ 'descripcionVariableDePlantilla' | translate }}"
+                      maxlength="80"
+                      required
+                    />
+                    <mat-error
+                      *ngIf="
+                        !formGroup.get('descripcionCgPlantillaVariable').valid &&
+                        formGroup.get('descripcionCgPlantillaVariable').touched
+                      "
+                    >
+                      {{ "El campo es obligatorio" | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <button type="submit" id="sendForm" style="display: none"></button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-floating-button [iconMenu]="iconMenu" (menuPrimaryEmiterData)="menuPrimaryReceiveData()"></app-floating-button>
+</div>

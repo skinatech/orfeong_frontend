@@ -1,0 +1,79 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <!-- Notification -->
+                <div class="{{ modalNotificationClassAlert }} marginNotification" *ngIf="modalNotificationStatus" data-notify="container">
+                    <i class="material-icons" data-notify="icon">notifications</i>
+                    <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="material-icons">close</i>
+                    </button>
+                    <div class="row">
+                        <div class="col-lg-12">{{ modalNotificationMessage | translate }}</div>
+                    </div>
+                </div>
+                <!-- /Notification -->
+
+                <div class="card">
+                    <div *ngIf="initCardHeaderStatus" class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                        </div>
+                        <h4 class="card-title">{{ initCardHeaderTitle | translate }}</h4>
+                        <form [formGroup]="moduleForm" class="form-horizontal">
+                            <div *ngIf="estadoDocuGenerado && isRadiSigned == false" class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-center float-right">
+                                <mat-card-content>
+                                    <label>{{ tittleNewFiling | translate }}</label>
+                                    <section class="example-section">
+                                        <mat-slide-toggle (change)="MatSlideToggleChange($event)" formControlName="isNewFiling" class="" [color]="color">
+                                            {{ messageIsNewFiling | translate }}
+                                        </mat-slide-toggle>
+                                    </section>
+                                </mat-card-content>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th *ngFor="let dtTitle of dtTitles; ">{{ dtTitle.title | translate }}</th>
+                                        <th *ngIf="viewColumStatus == true">{{ 'initialList.status' | translate }}</th>
+                                        <!--<th *ngIf="dtActionsStatus" class="disabled-sorting text-right">Acciones</th>-->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of dtData; index as i" (click)="clickRow({ data: row, index: i})" [style.background-color]="row.rowSelect == true ? 'rgba(0, 165, 223, 0.5)' : ''">
+                                        <td>{{ i + 1}}</td>
+                                        <td *ngFor="let cols of dtTitles">
+                                            <p *ngIf="cols.data != 'imagenPrincipalRadiDocumento'" [class]="cols.dataClass">{{ row[cols.data] }}</p>
+                                            <!-- Imagen principal -->
+                                            <p *ngIf="cols.data == 'imagenPrincipalRadiDocumento' && row.imagenPrincipalRadiDocumento" [class]="cols.dataClass">
+                                                <span class="material-icons">
+                                                    star_rate
+                                                </span>
+                                            </p>
+                                        </td>
+                                        <td *ngIf="(viewColumStatus == true) && (row.status != 999)"> {{ row.statusText | translate }}</td>
+                                        <td *ngIf="(viewColumStatus == true) && (row.status == 999)">
+                                            <mat-spinner [diameter]="20"></mat-spinner>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<app-floating-button [menuButtons]="menuButtons" (menuEmiterData)="menuReceiveData($event)"></app-floating-button>
+
+<app-view-pdf-modal *ngIf="statusModalviewPdf" [idDocument]="idDocument" [ruoteServiceDocuments]="ruoteServiceDocumentPdf" (closeModalEmiter)="closePdfModal($event)" [textForm]="textFormViewPdf"></app-view-pdf-modal>
+<app-view-pdf-modal-signature *ngIf="statusModalviewSignaturePdf" [idDocument]="idDocument" [ruoteServiceDocuments]="ruoteServiceDocumentPdf" (closeModalEmiter)="closePdfModal($event)" [textForm]="textFormViewPdf"></app-view-pdf-modal-signature>

@@ -1,0 +1,16 @@
+.navbar-nav .nav-item .imgI18n {
+    padding-left: 3px !important;
+    padding-right: 3px !important;
+    cursor: pointer;
+}
+
+.nav-item .imgI18n {
+    width: 25px;
+}
+
+.navbar-absolute-skn {
+    position: absolute;
+    width: 100%;
+    z-index: 1029;
+    top: 0px;
+}

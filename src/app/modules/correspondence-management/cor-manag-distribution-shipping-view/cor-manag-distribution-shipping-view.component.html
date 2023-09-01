@@ -1,0 +1,29 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+
+<app-view-list 
+    (actionsDocsButtonEmiter)="actionsDocsButton($event)" 
+    [reuteLoadView]="reuteLoadView" 
+    [reuteLoadViewHistorico]="reuteLoadViewHistorico" 
+    [dtCollapStatus]="dtCollapStatus" 
+    [initCardHeaderIcon]="initCardHeaderIcon"
+    [routeBotonUpdateView]="routeBotonUpdateView" 
+    [textFormView]="textFormView" 
+    [redirectionPath]="redirectionPath" 
+    [showCorrespondencia]="showCorrespondencia" 
+    (dataUserTramitadorEmiter)="getDataUserTramitador($event)"
+></app-view-list>
+
+<!-- Devolucion de correspondencia-->
+<app-observation *ngIf="statusModalObserva" [textFormObservaHeader]="textFormObservaHeader" (closeObservaEmiter)="closeObserva($event)" [showMotivoDevolucion]="showMotivoDevolucion"></app-observation>
+
+<!-- Accion Envio de Documentos-->
+<app-form-modal *ngIf="statusModalUploadFile" [ruoteServiceDocuments]='ruoteServiceDocuments' [eventClickButtonSelectedData]='eventClickButtonSelectedData' (closeModalSendDocsEmiter)="closeObserva($event)"></app-form-modal>
+
+<!-- Modal view PDF -->
+<app-view-pdf-modal *ngIf="statusModalviewPdf" [idDocument]="paramsDownload" [ruoteServiceDocuments]="ruoteServiceDownloadFile" (closeModalEmiter)="closePdfModal($event)"></app-view-pdf-modal>
+
+<!--Modal para mostrar el versionamiento de los documentos principales  -->
+<app-simple-table-modal *ngIf="statusSimpleTableModal" [dataUserTramitador]="dataUserTramitador" [dataSend]="dataSend" [ruoteServiceDownloadDocuments]="ruoteServiceDownloadDocuments" [routeLoadDataTablesServiceMod]="routeLoadDataTablesServiceMod" (closeModalEmiter)="closeObserva($event)"
+    [modalNotificationStatus]="false" [modalNotificationClassAlert]="false" [modalNotificationMessage]="false" [onlyDownloadStatus]="true"></app-simple-table-modal>
+
+<app-floating-button *ngIf="statusMenuButton" [menuButtons]="menuButtons" (menuEmiterData)="menuReceiveData($event)"></app-floating-button>

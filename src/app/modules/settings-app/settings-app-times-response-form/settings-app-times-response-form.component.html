@@ -1,0 +1,95 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card ">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                        </div>
+                        <h4 class="card-title">{{ textFormRol | translate }}</h4>
+                    </div>
+                    <div class="card-body ">
+                        <form [formGroup]="moduleForm" class="form-horizontal" (ngSubmit)="submitmoduleForm()">
+
+                            <div class="row">
+
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'FormHorarioLaboral.diaInicioCgHorarioLaboral' | translate }}</mat-label>
+                                        <mat-select id="diaInicioCgHorarioLaboral" formControlName="diaInicioCgHorarioLaboral" name="diaInicioCgHorarioLaboral" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listFechaInicioFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let diaHorarioLaboral of filteredlistFechaInicio | async" [value]="diaHorarioLaboral.id">
+                                                {{ diaHorarioLaboral.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'diaInicioCgHorarioLaboral').valid">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'FormHorarioLaboral.diaFinCgHorarioLaboral' | translate }}</mat-label>
+                                        <mat-select id="diaFinCgHorarioLaboral" formControlName="diaFinCgHorarioLaboral" name="diaFinCgHorarioLaboral" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listFechaFinFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let diaHorarioLaboral of filteredlistFechaFin | async" [value]="diaHorarioLaboral.id">
+                                                {{ diaHorarioLaboral.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'diaFinCgHorarioLaboral').valid">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'FormHorarioLaboral.horaInicioCgHorarioLaboral' | translate }}</mat-label>
+                                        <input matInput placeholder="Append to input" formControlName="horaInicioCgHorarioLaboral" [ngxTimepicker]="appendedToInputOne" required readonly>
+                                        <ngx-material-timepicker #appendedToInputOne></ngx-material-timepicker>
+                                        <mat-error *ngIf="!moduleForm.get( 'horaInicioCgHorarioLaboral').valid || moduleForm.get( 'horaInicioCgHorarioLaboral').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'FormHorarioLaboral.horaFinCgHorarioLaboral' | translate }}</mat-label>
+                                        <input matInput placeholder="Append to input" formControlName="horaFinCgHorarioLaboral" [ngxTimepicker]="appendedToInput" required readonly>
+                                        <ngx-material-timepicker #appendedToInput></ngx-material-timepicker>
+                                        <mat-error *ngIf="!moduleForm.get( 'horaFinCgHorarioLaboral').valid || moduleForm.get( 'horaFinCgHorarioLaboral').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'FormHorarioLaboral.statusHorarioLaboral' | translate }}</mat-label>
+                                        <mat-select id="estadoCgHorarioLaboral" formControlName="estadoCgHorarioLaboral" name="estadoCgHorarioLaboral" required>
+                                            <mat-option [value]="10"> {{ 'Activo' | translate }} </mat-option>
+                                            <mat-option [value]="0"> {{ 'Inactivo' | translate }} </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'estadoCgHorarioLaboral').valid">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+                            <div class="card-footer text-right ">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"></div>
+                                <button mat-raised-button type="submit" id="sendForm" style="display: none;" class="btn btn-fill btn-rose">{{ textButtonForm }}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <app-floating-button [iconMenu]="iconMenu" (menuPrimaryEmiterData)="menuPrimaryReceiveData($event)"></app-floating-button>
+</div>

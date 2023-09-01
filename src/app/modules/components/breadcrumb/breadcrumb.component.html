@@ -1,0 +1,17 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="row contentBreadcrumb">
+        <table width="100%">
+            <tr>
+                <td width="100%" align="right">
+                    <p class="text-right breadcrumbs" align="right">
+                        <span style="cursor:pointer;"><a routerLink="/dashboard"><i class="fa fa-dashboard"></i> {{ 'Tablero de inicio' | translate }} / </a></span>
+                        <span style="cursor:pointer;" *ngFor="let breadcrumbData of breadcrumbOn">
+                            <a routerLink="{{ breadcrumbData.route }}"> {{ breadcrumbData.name | translate}} / </a>
+                        </span>
+                        <span class="active">{{ breadcrumbRouteActive | translate }}</span>
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

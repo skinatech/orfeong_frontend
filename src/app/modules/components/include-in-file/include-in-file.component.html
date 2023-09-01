@@ -1,0 +1,93 @@
+<form [formGroup]="moduleForm" class="form-horizontal" (ngSubmit)="submitForm()">
+
+    <div class="row">
+
+        <!-- Header -->
+        <div class="modal-header col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-2">
+            <h4 class="modal-title w-100" id="myModalLabel">
+                <mat-label><b> {{ textFormHeader | translate }} </b></mat-label>
+                <a style="float: right; color:#365c8a !important;" routerLink="{{routeCreateFolder}}" (click)="closeDialog()">{{ 'Crear expediente' | translate }}</a>
+            </h4>
+            <button mat-button type="button" (click)="closeDialog()" title="{{ 'Cerrar' | translate }}" class="close" data-dismiss="alert" aria-label="Close">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+        <!-- /Header -->
+
+        <!-- Body -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <label>{{ 'Información' | translate }}</label>
+            <section class="example-section">
+                {{ informacionMsg | translate }}
+            </section>
+        </div>
+
+        <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <mat-card-content>
+                <label>{{ tittleSelectTipoExpeidiente | translate }}</label>
+                <section class="example-section">
+                    <mat-slide-toggle formControlName="newFile" (change)="MatSlideToggleChange($event)" class="" [color]="color">
+                        {{ messageSelectTipoExpeidiente | translate }}
+                    </mat-slide-toggle>
+                </section>
+            </mat-card-content>
+        </div> -->
+
+        <div [ngClass]="{'col-lg-6 col-md-6 col-sm-12 col-xs-12': isNuevoExpediente == true, 'col-lg-5 col-md-5 col-sm-12 col-xs-12': isNuevoExpediente == false}">
+            <mat-form-field>
+                <mat-label>{{ 'Número expediente' | translate }}</mat-label>
+                <input matInput type="text" formControlName="numeroExpediente" maxlength="20">
+                <mat-error *ngIf="!moduleForm.get( 'numeroExpediente').valid || moduleForm.get( 'numeroExpediente').touched ">
+                    {{ 'El campo es obligatorio' | translate }}.
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <mat-form-field>
+                <mat-label>{{ 'Nombre expediente' | translate }}</mat-label>
+                <input matInput type="text" formControlName="nombreExpediente" maxlength="80">
+                <mat-error *ngIf="!moduleForm.get( 'nombreExpediente').valid || moduleForm.get( 'nombreExpediente').touched ">
+                    {{ 'El campo es obligatorio' | translate }}.
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div *ngIf="!isNuevoExpediente" style="text-align: right;" class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+            <button [disabled]="!(moduleForm.get( 'numeroExpediente').value.length > '2') && !(moduleForm.get( 'nombreExpediente').value.length > '2')" mat-raised-button class="btn btn-primary btn-round" type="button" (click)="searchExpedientes()">
+                <span>
+                    <i class="material-icons">search</i>
+                </span>
+            </button>
+        </div>
+
+        <div *ngIf="!isNuevoExpediente" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2">
+            <mat-form-field>
+                <mat-label>{{ 'Listado de expedientes' | translate }}</mat-label>
+                <mat-select id="idExpediente" formControlName="idExpediente" name="idExpediente" (selectionChange)="onChangeExp()" required>
+                    <mat-option>
+                        <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listExpedientesFilter" [searching]="true"></ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option *ngFor="let expediente of filteredlistExpedientes | async" [value]="expediente.id">
+                        {{ expediente.val }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="!moduleForm.get( 'idExpediente').valid && moduleForm.get( 'idExpediente').touched ">{{ 'El campo es obligatorio' | translate }}</mat-error>
+            </mat-form-field>
+        </div>
+        <!-- /Body -->
+
+    </div>
+
+    <!-- Footer -->
+    <div mat-dialog-actions style="float: right !important;">
+        <button mat-raised-button class="btn btn-primary btn-round" type="submit" [disabled]="!moduleForm.valid">
+            <span>
+                <i class="material-icons">{{ botonSubmitIcon }}</i>
+            </span>
+        </button>
+    </div>
+    <!-- /Footer -->
+
+</form>
+<!-- <app-doc-manag-folder-create *ngIf="statusCreateFolder" (closeFolderEmiter)="closeDialog($event)"></app-doc-manag-folder-create> -->

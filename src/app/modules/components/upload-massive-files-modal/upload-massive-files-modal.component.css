@@ -1,0 +1,4 @@
+.custom-content-overflow{
+    max-height: 500px;
+    overflow-y: auto;
+}

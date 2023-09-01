@@ -1,0 +1,43 @@
+<div class="wrapper">
+    <div class="sidebar" data-color="white" data-background-color="blue" data-image="./assets/img/fondos/sidebar.jpg">
+        <app-admin-aside-nav-bar></app-admin-aside-nav-bar>
+        <div class="sidebar-background" style="background-image: url(assets/img/fondos/sidebar.jpg)"></div>
+    </div>
+    <div class="main-panel">
+        <app-admin-top-nav-bar [topNavBarTitle]="topNavBarTitle" [topNavBarOn]="topNavBarOn" [topNavBarRouteActive]="topNavBarRouteActive"></app-admin-top-nav-bar>
+
+
+        <!-- Data Tables -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="cursor: pointer;" *ngFor="let jsonManualLoad of jsonManualesLoad">
+                            <a download="{{ jsonManualLoad.nameDownload }}" href="{{ jsonManualLoad.file }}">
+                                <div class="card card-stats">
+                                    <div class="card-header card-header-info card-header-icon">
+                                        <div class="card-icon">
+                                            <i class="material-icons">{{ jsonManualLoad.icon }}</i>
+                                        </div>
+                                        <h4 class="card-title text-right">{{ jsonManualLoad.name }}</h4>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="stats">
+                                            <i class="material-icons">cloud_download</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="!isMap()">
+            <app-admin-footer-nav-bar></app-admin-footer-nav-bar>
+        </div>
+    </div>
+</div>

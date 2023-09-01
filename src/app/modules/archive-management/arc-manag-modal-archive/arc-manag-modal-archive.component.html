@@ -1,0 +1,211 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <!-- Notification -->
+                <div class="{{ initialNotificationClassAlert }} marginNotification" *ngIf="initialNotificationStatus" data-notify="container">
+                    <i class="material-icons" data-notify="icon">notifications</i>
+                    <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="material-icons">close</i>
+                    </button>
+                    <div class="row">
+                        <div class="col-lg-12">{{ initialNotificationMessage | translate }}</div>
+                    </div>
+                </div>
+                <!-- /Notification -->
+
+                <form id="moduleForm" [formGroup]="moduleForm" class="form-horizontal" (ngSubmit)="submitForm()">
+
+                    <!-- Start card One -->
+                    <div class="card ">
+                        <div class="card-header card-header-info card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                            </div>
+                            <h4 class="card-title">{{ textForm | translate }}</h4>
+                        </div>
+                        <div class="card-body ">
+
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Departamento' | translate }}</mat-label>
+                                        <mat-select id="idDepartamentoGaEdificio" formControlName="idDepartamentoGaEdificio" name="idDepartamentoGaEdificio" (selectionChange)="getListMunicipio($event.value)" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listDepartFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let depart of filteredlistDepart | async" [value]="depart.id">
+                                                {{ depart.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'idDepartamentoGaEdificio').valid && moduleForm.get( 'idDepartamentoGaEdificio').touched ">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Municipio' | translate }}</mat-label>
+                                        <mat-select id="idMunicipioGaEdificio" formControlName="idMunicipioGaEdificio" name="idMunicipioGaEdificio" (selectionChange)="getListGeneral($event.value)" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listMunicipiosFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let municipio of filteredlistMunicipios | async" [value]="municipio.id">
+                                                {{ municipio.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'idMunicipioGaEdificio').valid && moduleForm.get( 'idMunicipioGaEdificio').touched ">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Edificio' | translate }}</mat-label>
+                                        <mat-select id="idGaEdificio" formControlName="idGaEdificio" name="idGaEdificio" (selectionChange)="getListGeneral($event.value)" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listEdificioFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let edificio of filteredlistEdificio | async" [value]="edificio.id">
+                                                {{ edificio.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'idGaEdificio').valid && moduleForm.get( 'idGaEdificio').touched ">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Piso' | translate }}</mat-label>
+                                        <mat-select id="idGaPiso" formControlName="idGaPiso" name="idGaPiso" (selectionChange)="getListGeneral($event.value)" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listPisoFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let piso of filteredlistPiso | async" [value]="piso.id">
+                                                {{ piso.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'idGaPiso').valid && moduleForm.get( 'idGaPiso').touched ">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Área de archivo' | translate }}</mat-label>
+                                        <mat-select id="idGaBodega" formControlName="idGaBodega" name="idGaBodega" (selectionChange)="getListGeneral($event.value)" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listBodegaFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let bodega of filteredlistBodega | async" [value]="bodega.id">
+                                                {{ bodega.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'idGaBodega').valid && moduleForm.get( 'idGaBodega').touched ">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div *ngFor="let uconserva of dataUConserva ? viewDataForm(dataUConserva) : [] ; let iUconser = index; " class="col-lg-3 col-md-3 col-sm-12 col-xs-12 checkbox-radios">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                        <input class="form-check-input"  type="radio" formControlName="unidadConservacionGaArchivo" name="unidadConservacionGaArchivo" value="{{ dataUConserva[uconserva] }}" [checked]="( valueConservacion == dataUConserva[uconserva] ? true : false )"   > {{ uconserva }}
+                                        <span class="circle">
+                                          <span class="check"></span>
+                                        </span>
+                                      </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Estante' | translate }}</mat-label>
+                                        <mat-select id="estanteGaArchivo" formControlName="estanteGaArchivo" name="estanteGaArchivo" (selectionChange)="getListGeneral($event.value)" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listEstanteFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let row of filteredlistEstante | async" [value]="row.id">
+                                                {{ row.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'estanteGaArchivo').valid && moduleForm.get( 'estanteGaArchivo').touched ">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Módulo' | translate }}</mat-label>
+                                        <mat-select id="rackGaArchivo" formControlName="rackGaArchivo" name="rackGaArchivo" (selectionChange)="getListGeneral($event.value)" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listRackFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let rack of filteredlistRack | async" [value]="rack.id">
+                                                {{ rack.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'rackGaArchivo').valid && moduleForm.get( 'rackGaArchivo').touched ">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Entrepaño' | translate }}</mat-label>
+                                        <mat-select id="entrepanoGaArchivo" formControlName="entrepanoGaArchivo" name="entrepanoGaArchivo" (selectionChange)="getListGeneral($event.value)" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listEntrepanoFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let entrepano of filteredlistEntrepano | async" [value]="entrepano.id">
+                                                {{ entrepano.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'entrepanoGaArchivo').valid && moduleForm.get( 'entrepanoGaArchivo').touched ">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Caja' | translate }}</mat-label>
+                                        <mat-select id="cajaGaArchivo" formControlName="cajaGaArchivo" name="cajaGaArchivo" (selectionChange)="getListGeneral($event.value)" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listCajaFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let caja of filteredlistCaja | async" [value]="caja.id">
+                                                {{ caja.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'cajaGaArchivo').valid && moduleForm.get( 'cajaGaArchivo').touched ">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Cuerpo' | translate }}</mat-label>
+                                        <input matInput type="text" id="cuerpoGaArchivo" formControlName="cuerpoGaArchivo" readonly required>
+                                        <mat-error *ngIf="!moduleForm.get( 'cuerpoGaArchivo').valid && moduleForm.get( 'cuerpoGaArchivo').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Unidad de conservación' | translate }}</mat-label>
+                                        <input matInput type="text" id="unidadCampoGaArchivo" formControlName="unidadCampoGaArchivo" maxlength="20" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'unidadCampoGaArchivo').valid && moduleForm.get( 'unidadCampoGaArchivo').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- End card One -->
+
+                    <button type="submit" id="sendForm" style="display: none;"></button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <app-floating-button [iconMenu]="iconMenu" (menuPrimaryEmiterData)="menuPrimaryReceiveData($event)"></app-floating-button>
+</div>

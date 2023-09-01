@@ -1,0 +1,67 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+                <form id="moduleForm" [formGroup]="moduleForm" class="form-horizontal" (ngSubmit)="submitForm()">
+
+                    <!-- End card One -->
+                    <div class="card ">
+                        <div class="card-header card-header-info card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                            </div>
+                            <h4 class="card-title">{{ textForm | translate }}</h4>
+                        </div>
+                        <div class="card-body ">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Longitud de dependencia' | translate }}</mat-label>
+                                        <input matInput type="text" value="1" id="longitudDependenciaCgNumeroRadicado" formControlName="longitudDependenciaCgNumeroRadicado" placeholder="{{ 'Longitud de dependencia' | translate }}" maxlength="1" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'longitudDependenciaCgNumeroRadicado').valid && moduleForm.get( 'longitudDependenciaCgNumeroRadicado').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Estructura del radicado' | translate }}</mat-label>
+                                        <mat-select id="estructuraCgNumeroRadicado" formControlName="estructuraCgNumeroRadicado" name="estructuraCgNumeroRadicado" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listEstructuraFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let estructura of filteredlistEstructura | async" [value]="estructura.id">
+                                                {{ estructura.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'estructuraCgNumeroRadicado').valid && moduleForm.get( 'estructuraCgNumeroRadicado').touched ">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Longitud de consecutivo' | translate }}</mat-label>
+                                        <input matInput type="text" value="1" id="longitudConsecutivoCgNumeroRadicado" formControlName="longitudConsecutivoCgNumeroRadicado" placeholder="{{ 'Longitud de consecutivo' | translate }}" maxlength="1" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'longitudConsecutivoCgNumeroRadicado').valid && moduleForm.get( 'longitudConsecutivoCgNumeroRadicado').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- End card One -->
+
+                    <button type="submit" id="sendForm" style="display: none;"></button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <app-floating-button [iconMenu]="iconMenu" (menuPrimaryEmiterData)="menuPrimaryReceiveData($event)"></app-floating-button>
+</div>

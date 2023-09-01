@@ -1,0 +1,56 @@
+<div>
+  <div class="texto-licencia texto-licencia-titulo">{{ "login.licensingMessageTitle" | translate }}</div>
+
+  <div class="texto-licencia">{{ "login.licensingMessageBody1" | translate }}</div>
+
+  <div class="texto-licencia">{{ "login.licensingMessageBody2" | translate }}</div>
+
+  <div class="texto-licencia">{{ "login.licensingMessageBody3" | translate }}</div>
+
+  <div class="texto-licencia">{{ "login.licensingMessageBody4" | translate }}</div>
+
+  <div class="texto-licencia">{{ "login.licensingMessageBody5" | translate }}</div>
+
+  <br />
+
+  <div class="form-check">
+    <label class="form-check-label">
+      <input
+        class="form-check-input"
+        (change)="changeCheckbox({ type: 'termsAndConditions', event: $event })"
+        type="checkbox"
+        value="1"
+      />
+      {{ "login.termsAndConditions" | translate }}
+      <span class="form-check-sign">
+        <span class="check"></span>
+      </span>
+    </label>
+    <a class="http-license" target="_blank" href="https://license.md/">(LICENSE.md)</a>
+  </div>
+
+  <div class="form-check">
+    <label class="form-check-label">
+      <input
+        class="form-check-input"
+        (change)="changeCheckbox({ type: 'habeasData', event: $event })"
+        type="checkbox"
+        value="1"
+      />
+      {{ "login.habeasData" | translate }}
+      <span class="form-check-sign">
+        <span class="check"></span>
+      </span>
+    </label>
+  </div>
+
+  <div mat-dialog-actions style="float: right !important">
+    <button mat-raised-button class="btn btn-fill btn-round" (click)="close()">
+      {{ "login.cancel" | translate }} <i class="material-icons">close</i>
+    </button>
+
+    <button mat-raised-button class="btn btn-primary btn-round" (click)="login()" [disabled]="disabledAcceptLicense">
+      {{ "login.acceptLicense" | translate }} <i class="material-icons">check_circle_outline</i>
+    </button>
+  </div>
+</div>

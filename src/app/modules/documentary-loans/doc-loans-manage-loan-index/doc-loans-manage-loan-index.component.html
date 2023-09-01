@@ -1,0 +1,6 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<app-initial-list [initCardHeaderStatus]="initCardHeaderStatus" [initCardHeaderIcon]="initCardHeaderIcon" [initCardHeaderTitle]="initCardHeaderTitle" [dtTitles]="dtTitles" [routeLoadDataTablesService]="routeLoadDataTablesService" [initBotonCreateRoute]="initBotonCreateRoute"
+    (selectedRowsEmiter)="selectedRowsReceiveData($event)" [routeData]="route"></app-initial-list>
+<!-- Accion Solicitar préstamo y transferencia documental -->
+<app-observation-loans *ngIf="statusModalMain" [showPass]="showPass" [prestamoFisico]="prestamoFisico" [textFormObservaHeader]="textFormObservaHeader" (closeObservaEmiter)="closeObserva($event)" [titleFecha]="titleFecha"></app-observation-loans>
+<app-floating-button [menuButtons]="menuButtons" (menuEmiterData)="menuReceiveData($event)"></app-floating-button>

@@ -1,0 +1,43 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<app-initial-list
+  [initCardHeaderStatus]="initCardHeaderStatus"
+  [initCardHeaderIcon]="initCardHeaderIcon"
+  [initCardHeaderTitle]="initCardHeaderTitle"
+  [dtTitles]="dtTitles"
+  [routeLoadDataTablesService]="routeLoadDataTablesService"
+  [initBotonCreateRoute]="initBotonCreateRoute"
+  (selectedRowsEmiter)="selectedRowsReceiveData($event)"
+  [routeChangeStatus]="routeChangeStatus"
+  [routeData]="route"
+  [filterActive]="paramFilterActive"
+></app-initial-list>
+<!-- Modal de carga masiva de archivos -->
+<app-upload-massive-files-modal
+  *ngIf="statusUploadFileAneMasive"
+  [dataDepen]="dataDepen"
+  [showFechaDoc]="showFechaDoc"
+  [textForm]="textForm"
+  [textFormLabel]="textFormLabel"
+  [ruoteServiceDocuments]="ruoteServiceDocumentsAne"
+  [dataSend]="dataSend"
+  [validateFile]="validateFileAnexos"
+  (closeModalEmiter)="closeObserva($event)"
+></app-upload-massive-files-modal>
+<!-- Modal para solicitar contrasena de cerrar archivo -->
+<app-observation-loans
+  *ngIf="statusModalMain"
+  [showPass]="showPass"
+  [observacionModal]="observacionModal"
+  [textFormObservaHeader]="textFormObservaHeader"
+  [initialNotificationMessageArray]="initialNotificationMessageArray"
+  (closeObservaEmiter)="closeObserva($event)"
+  [textPassword]="textPassword"
+></app-observation-loans>
+<!-- Modal de referencia cruzada -->
+<app-doc-manag-cross-reference-modal
+  *ngIf="statusModalCrossReference"
+  [eventSelectData]="eventClickButtonSelectedData"
+  (closeModalEmiter)="closeCrossReferenceModal($event)"
+></app-doc-manag-cross-reference-modal>
+<!-- Buttons -->
+<app-floating-button [menuButtons]="menuButtons" (menuEmiterData)="menuReceiveData($event)"></app-floating-button>

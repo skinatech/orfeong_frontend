@@ -1,0 +1,14 @@
+<div *ngIf="flashStorageStatus" class="alert alert-success">
+    <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <i class="material-icons">close</i>
+    </button>
+    <span>
+      <b> {{ 'varTextPerfect' | translate }}! </b> {{ flashText }} </span>
+</div>
+<div *ngIf="flashStorageStatusError" class="alert alert-danger">
+    <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <i class="material-icons">close</i>
+    </button>
+    <span>
+      <b> {{ 'varTextError' | translate }}! </b> {{ flashTextError }}</span>
+</div>

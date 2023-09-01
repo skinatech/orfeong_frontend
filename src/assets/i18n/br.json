@@ -1,0 +1,104 @@
+{
+    "login": {
+        "welcome": "Bem vindo",
+        "welcomeText": "Faça login com suas credenciais",
+        "linkLoginUsersBdo": "Somente para usuários internos do sistema",
+        "placeholderUser": "Usuário",
+        "placeholderPassword": "Senha",
+        "botonSubmitForm": "LOGIN",
+        "linkResetPass": "ESQUECEU SUA SENHA?"
+    },
+
+    "resetpass": {
+        "headText": "Em seguida, insira o email com o qual você faz login",
+        "placeHolderMail": "Correio eletrônico",
+        "botonSubmitForm": "RECUPERAR SENHA",
+        "botonBack": "VOLTAR"
+    },
+
+    "resettokenpass": {
+        "headText": "Digite sua nova senha para continuar",
+        "placeholderPassword": "Senha",
+        "placeholderPasswordRepeat": "Confirmar senha",
+        "botonSubmitForm": "SEND",
+        "botonBak": "VOLTAR",
+        "minimoCaracteres": "Mínimo de 6 caracteres",
+        "contrasenasDiferentes": "Senhas não correspondem",
+        "validacionCaracteres": "A senha deve conter pelo menos três das seguintes opções: minúscula, maiúscula, número e caractere especial"
+    },
+    "Token inválido!": "Token inválido!",
+    "El token es inválido o se encuentra vencido, por favor solicítalo de nuevo": "O token é inválido ou expirou, solicite-o novamente",
+    "Correcto!": "Correto!",
+    "Se estableció la nueva contraseña de forma correcta": "A nova senha foi definida corretamente",
+
+    "adminAsside": {
+        "myAcount": "Minha conta",
+        "logout": "Fechar Sessão"
+    },
+    "Gestión de usuarios": "Gerenciamento de usuários",
+    "Configuración": "Configuração",
+    "Gestión de clientes": "Gerenciamento de clientes",
+    "Gestión de rentas": "Gerenciamento de aluguel",
+
+    "subMenu": {
+        "goToModule": "Ir para o módulo"
+    },
+    "Seleccione el módulo que desea consultar.": "Selecione o módulo que você deseja consultar.",
+
+    "initialList": {
+        "status": "Status"
+    },
+    "Activo": "Ativo",
+    "Inactivo": "Inativo",
+
+    "usersModule": {
+        "cardTitle": "Função do usuário no sistema",
+        "selectTipoUsuario": "Selecione o tipo de usuário",
+        "selectPerfil": "Selecionar perfil"
+    },
+    "Listado de usuarios": "Lista de usuários",
+    "Administrar usuarios": "Gerenciar usuários",
+    "Nuevo usuario": "Novo usuário",
+    "Modificar usuario": "Modificar usuário",
+    "Detalle del usuario": "Detalhe do Usuário",
+    "Crear": "Criar",
+    "Actualizar": "Actualizar",
+    "Detalles": "Detalhes",
+    "Datos del usuario": "Dados do usuário",
+    "Buscar...": "Buscar...",
+    "No se encontraron coincidencias": "Nenhuma correspondência encontrada",
+    "El campo es obligatorio": "O campo é obrigatório.",
+    "Nombres": "Names",
+    "Apellidos": "Sobrenome",
+    "Documento": "Documento",
+    "Correo electrónico": "Email",
+    "Cargo": "Função",
+    "Seleccione el tipo de identificación": "Selecione o tipo de identificação",
+    "Ingrese el nombre del usuario": "Digite o nome do usuário",
+    "Ingrese el apellido del usuario": "Digite o sobrenome do usuário",
+    "Ingrese el número del documento": "Digite o número do documento",
+    "Ingrese el correo electrónico": "Digite o email",
+    "Ingrese el cargo del usuario": "Insira a cobrança do usuário",
+    "Ingrese solo números": "Digite apenas números",
+    "Ingrese un correo válido": "Digite um email válido",
+    "Administrar perfiles": "Gerenciar perfis",
+    "Listado de perfiles": "Lista de perfis",
+    "Detalle del perfil": "Detalhe do perfil",
+    "Detalle": "Detalhe",
+    "Información de accesos para el perfil": "Acessar informações para o perfil",
+    "Nombre del perfil": "Nome do perfil",
+    "Modificar permiso": "Modificar permissão",
+    "Modificar permisos del perfil": "Modifique as permissões de perfil",
+    "Nuevo perfil": "Criar perfil",
+    "Administrar operaciones": "Gerenciar operações",
+    "Listado de operaciones": "Lista de operações",
+    "Nueva operación": "Nova operação",
+    "Modificar operación": "Modificar operação",
+    "Ruta": "Rota",
+    "Seleccione el módulo en el menú": "Selecione o módulo no menu",
+    "Nombre": "Nome",
+    "Módulo": "Módulo",
+    "Ingrese la ruta": "Digite a rota",
+    "Ingrese el nombre": "Digite o nome",
+    "Ingrese el módulo": "Entre no módulo"
+}

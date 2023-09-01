@@ -1,0 +1,139 @@
+<h5>
+  <b> {{ "Entidad Certificadora" | translate }} </b>
+</h5>
+
+<div mat-dialog-content class="mat-typography">
+  <div class="col-12 grid-options">
+    <div
+      *ngIf="dataDialog.andes"
+      (click)="onSelected('Andes')"
+      [ngStyle]="'Andes' == selectedoption ? { 'background-color': '#007fff42' } : ''"
+    >
+      <i class="material-icons iconSign"> <img src="./assets/img/logo-andes.png" width="97%" alt="Colombia" /></i>
+      <h4 class="labelSign">{{ "Andes" | translate }}</h4>
+    </div>
+
+    <div
+      *ngIf="dataDialog.orfeoNG"
+      (click)="onSelected('OrfeoNG')"
+      [ngStyle]="'OrfeoNG' == selectedoption ? { 'background-color': '#007fff42' } : ''"
+    >
+      <i class="material-icons iconSign"> <img src="./assets/img/logo-orfeo.png" width="97%" alt="Colombia" /></i>
+      <h4 class="labelSign">{{ "Orfeo Ng" | translate }}</h4>
+    </div>
+  </div>
+
+  <div *ngIf="noneOptionFirma">
+    <div class="alert alert-danger" role="alert">
+      {{ "El usuario no tiene habilitadas las opciones para firmar un documento." | translate }}
+    </div>
+  </div>
+
+  <mat-error *ngIf="statusSelectedoption && !noneOptionFirma">
+    <br />
+    {{ "Seleccione una opción" | translate }}
+  </mat-error>
+
+  <hr />
+
+  <!-- Sección donde se solicitan las cordenadas de la firma -->
+  <div class="row" *ngIf="dataDialog.mostrarfirma">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <button mat-button (click)="viewimage()" style="background-color: #365c8a; color: white">
+        {{ "btnVerImagen" | translate }}
+      </button>
+    </div>
+  </div>
+  <br />
+
+  <form [formGroup]="moduleForm" (ngSubmit)="submit()">
+    <div class="row" *ngIf="dataDialog.mostrarfirma">
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <mat-form-field>
+          <mat-label> {{ "Cordenadas Firma" | translate }}</mat-label>
+          <input
+            matInput
+            type="text"
+            id="coordenadasFirma"
+            formControlName="coordenadasFirma"
+            placeholder="{{ 'login.placeholderUserCertificada' | translate }}"
+            autocomplete="off"
+            readonly="readonly"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <mat-form-field class="example-full-width">
+          <mat-label>{{ "Número Pagina Firma" | translate }}</mat-label>
+          <input
+            matInput
+            type="text"
+            id="numeroPaginaFirma"
+            formControlName="numeroPaginaFirma"
+            placeholder="{{ 'login.placeholderUserCertificada' | translate }}"
+            autocomplete="off"
+            readonly="readonly"
+          />
+          <mat-error *ngIf="!moduleForm.get('numeroPaginaFirma').valid && moduleForm.get('numeroPaginaFirma').touched">
+            {{ "El campo es obligatorio" | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <hr />
+
+    <!-- Sección donde se solicitan los datos del usuario que firma -->
+    <h4 class="labelSign">{{ "Datos del Firmante" | translate }}</h4>
+    <br />
+    <div class="row" *ngIf="!dataDialog.usuariofirmaprueba">
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <mat-form-field>
+          <mat-label>{{ "Digite su Usuario" | translate }}</mat-label>
+          <input
+            matInput
+            type="text"
+            id="user"
+            formControlName="user"
+            placeholder="{{ 'login.placeholderUserCertificada' | translate }}"
+            autocomplete="off"
+            maxlength="25"
+            required
+          />
+          <mat-error *ngIf="!moduleForm.get('user').valid && moduleForm.get('user').touched">
+            {{ "El campo es obligatorio" | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <mat-form-field class="example-full-width">
+          <mat-label>{{ "Digite su contraseña" | translate }}</mat-label>
+          <input
+            matInput
+            type="password"
+            id="passUser"
+            formControlName="passUser"
+            placeholder="{{ 'login.placeholderPassword' | translate }}"
+            autocomplete="off"
+            maxlength="25"
+            required
+          />
+          <mat-error *ngIf="!moduleForm.get('passUser').valid && moduleForm.get('passUser').touched">
+            {{ "El campo es obligatorio" | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Button submit -->
+    <button type="submit" id="sendFormOption" style="display: none"></button>
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>{{ "Cancelar" | translate }}</button>
+  <button mat-button (click)="sendFormOption($event)" cdkFocusInitial>{{ "btnConfirmar" | translate }}</button>
+</div>
+
+<app-view-image-modal *ngIf="statusModalviewPdf"></app-view-image-modal>

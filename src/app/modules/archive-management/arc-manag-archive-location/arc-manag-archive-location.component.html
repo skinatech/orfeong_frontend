@@ -1,0 +1,127 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+
+<div class="main-content">
+    <div class="container-fluid">
+
+        <!-- Start Row One -->
+        <div class="row">
+            <!-- start Detail card -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="card ">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                        </div>
+                        <h4 class="card-title">
+                            {{ textFormView | translate}}
+                        </h4>
+                    </div>
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr *ngFor="let row of dataRows; let i = index">
+                                                <th [ngClass]="(row.color ? row.color: '')">{{ row.alias | translate }}</th>
+                                                <td [ngClass]="(row.color ? row.color: '')" *ngIf="!row.show">{{ row.value }}</td>
+                                                <td [ngClass]="(row.color ? row.color: '')" *ngIf="row.show">
+                                                    <a routerLink="{{ row.href }}">{{ row.value }}</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- End Detail card -->
+
+            <!-- start Detail card -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="card ">
+                <div class="card-header card-header-info card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                    </div>
+                    <h4 class="card-title">
+                        {{ textFormView2 | translate}}
+                    </h4>
+                </div>
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                        <tr *ngFor="let row of dataLocation; let i = index">
+                                            <th [ngClass]="(row.color ? row.color: '')">{{ row.alias | translate }}</th>
+                                            <td [ngClass]="(row.color ? row.color: '')" *ngIf="!row.show">{{ row.value }}</td>
+                                            <td [ngClass]="(row.color ? row.color: '')" *ngIf="row.show">
+                                                <a routerLink="{{ row.href }}">{{ row.value }}</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            </div>
+            <!-- End Detail card -->
+
+            <!-- End history folder card -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <app-initial-list 
+                    [classMainConten]="classMainConten" 
+                    [classContainerFluid]="classContainerFluid" 
+                    [paramOID]="paramOID" 
+                    [viewColumStatus]="viewColumStatus" 
+                    [initCardHeaderStatus]="initCardHeaderStatus" 
+                    [initCardHeaderIcon]="initCardHeaderIcon" 
+                    [initCardHeaderTitle]="initCardHeaderTitle"
+                    [dtTitles]="dtTitles" 
+                    [showButtonFiltrer]="false"
+                    [routeLoadDataTablesService]="routeLoadDataTablesService" 
+                    (selectedRowsEmiter)="selectedRowsReceiveData($event)">
+                </app-initial-list>
+            </div>
+        </div>
+        <!-- End Row One -->
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

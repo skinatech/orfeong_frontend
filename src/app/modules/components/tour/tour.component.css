@@ -1,0 +1,9 @@
+.contentTour {
+  overflow: hidden;
+  margin-top: -50px;
+  padding-right: 8px;
+}
+
+.botonTour {
+  float: right;
+}

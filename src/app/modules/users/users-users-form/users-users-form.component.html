@@ -1,0 +1,238 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+                <form id="moduleForm" [formGroup]="moduleForm" class="form-horizontal" (ngSubmit)="submitForm()">
+                    <!-- End card One -->
+                    <div class="card ">
+                        <div class="card-header card-header-info card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                            </div>
+                            <h4 class="card-title">{{ textFormRol | translate }}</h4>
+                        </div>
+                        <div class="card-body ">
+                            <h4 class="card-title">{{ 'usersModule.cardTitle' | translate }}</h4>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'usersModule.selectTipoUsuario' | translate }}</mat-label>
+                                        <mat-select id="idUserTipo" formControlName="idUserTipo" name="idUserTipo" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listTipUsersFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let idUserTipo of filteredlistTipUsers | async" [value]="idUserTipo.id">
+                                                {{ idUserTipo.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'idUserTipo').valid && moduleForm.get( 'idUserTipo').touched ">{{ 'El campo es obligatorio' | translate }}.</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'usersModule.selectPerfil' | translate }}</mat-label>
+                                        <mat-select id="idRol" formControlName="idRol" name="idRol" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listRolesFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let roles of filteredlistRoles | async" [value]="roles.id">
+                                                {{ roles.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'idRol').valid && moduleForm.get( 'idRol').touched ">{{ 'El campo es obligatorio' | translate }}.</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End card One -->
+                    <!-- Start card two -->
+                    <div class="card ">
+                        <div class="card-header card-header-info card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">{{ initCardHeaderIconDatos }}</i>
+                            </div>
+                            <h4 class="card-title">{{ textFormDatos | translate }}</h4>
+                        </div>
+                        <div class="card-body ">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Nombres' | translate }}</mat-label>
+                                        <input matInput type="text" id="nombreUserDetalles" formControlName="nombreUserDetalles" placeholder="{{ 'Ingrese el nombre del usuario' | translate }}" maxlength="80" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'nombreUserDetalles').valid && moduleForm.get( 'nombreUserDetalles').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Apellidos' | translate }}</mat-label>
+                                        <input matInput type="text" id="apellidoUserDetalles" formControlName="apellidoUserDetalles" placeholder="{{ 'Ingrese el apellido del usuario' | translate }}" maxlength="80" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'apellidoUserDetalles').valid && moduleForm.get( 'apellidoUserDetalles').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Seleccione el tipo de identificación' | translate }}</mat-label>
+                                        <mat-select id="idTipoIdentificacion" formControlName="idTipoIdentificacion" name="idTipoIdentificacion" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listTipIdensFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let idTipoiden of filteredlistTipIdens | async" [value]="idTipoiden.id">
+                                                {{ idTipoiden.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'idTipoIdentificacion').valid && moduleForm.get( 'idTipoIdentificacion').touched ">{{ 'El campo es obligatorio' | translate }}.</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Documento' | translate }}</mat-label>
+                                        <input matInput type="number" number="true" id="documento" formControlName="documento" placeholder="{{ 'Ingrese el número del documento' | translate }}" maxlength="20" (change)="numberValidationType($event)" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'documento').valid && moduleForm.get( 'documento').touched ">
+                                            {{ 'Ingrese solo números' | translate }}.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Correo electrónico' | translate }}</mat-label>
+                                        <input matInput type="email" id="email" formControlName="email" placeholder="{{ 'Ingrese el correo electrónico' | translate }}" maxlength="150" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'email').valid && moduleForm.get( 'email').touched ">
+                                            {{ 'Ingrese un correo válido' | translate }}.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Cargo' | translate }}</mat-label>
+                                        <input matInput type="text" id="cargoUserDetalles" formControlName="cargoUserDetalles" placeholder="{{ 'Ingrese el cargo del usuario' | translate }}" maxlength="80" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'cargoUserDetalles').valid && moduleForm.get( 'cargoUserDetalles').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Autenticación por LDAP' | translate }}</mat-label>
+                                        <mat-select id="ldap" formControlName="ldap" name="ldap" required>
+                                            <mat-option *ngFor="let listldap of listsldap " [value]="listldap.id">
+                                                {{ listldap.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'ldap').valid && moduleForm.get( 'ldap').touched ">{{ 'El campo es obligatorio' | translate }}.</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Dependencia' | translate }}</mat-label>
+                                        <mat-select id="idGdTrdDependencia" formControlName="idGdTrdDependencia" name="idGdTrdDependencia" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listDependenciasFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let idDependencia of filteredlistDependencias | async" [value]="idDependencia.id">
+                                                {{ idDependencia.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'idGdTrdDependencia').valid && moduleForm.get( 'idGdTrdDependencia').touched ">{{ 'El campo es obligatorio' | translate }}.</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Nombre de usuario para el inicio de sesión' | translate }}</mat-label>
+                                        <input matInput type="text" id="username" formControlName="username" placeholder="{{ 'Ingrese el nombre del usuario para el inicio de sesión' | translate }}" maxlength="80" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'username').valid && moduleForm.get( 'username').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <button type="submit" id="sendForm" style="display: none;"></button>
+
+                        </div>
+                    </div>
+
+                    <div class="card ">
+                        <div class="card-header card-header-info card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">{{ 'image' }}</i>
+                            </div>
+                            <h4 class="card-title">{{ 'Firma mecánica' | translate }}</h4>
+                        </div>
+                        <div class="card-body ">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <label for="fileUpload">{{ 'Firma mecánica' | translate }}</label>
+                                    <input #inputFile type="file" name="fileUpload" class="form-control" (change)="onSelectedFile($event)" />
+                                </div>
+                                <div *ngIf="viewFirma" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <img src="{{'data:image/png;base64,' + imagePathFirma}}" style="max-width: 100%;" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="card ">
+                        <div class="card-header card-header-info card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">{{ 'lock_outline' }}</i>
+                            </div>
+                            <h4 class="card-title">{{ 'Cambio Contraseña' | translate }}</h4>
+                        </div>
+                        <div class="card-body ">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <input matInput type="password" id="password" formControlName="password" placeholder="{{ 'resettokenpass.placeholderPassword' | translate }}" maxlength="80" autocomplete="off">
+                                    <div
+                                        *ngIf="mensaMinCaracteres && !moduleForm.get('password').hasError('charactersValidation')"
+                                        class="mat-error ng-star-inserted text-center"
+                                        role="alert"
+                                        >
+                                        {{ "resettokenpass.minimoCaracteres" | translate }}
+                                    </div>
+                                    <div
+                                        class="mat-error ng-star-inserted text-center"
+                                        *ngIf="
+                                            (moduleForm.get('password').hasError('charactersValidation')) ||
+                                            (moduleForm.get('password').hasError('charactersValidation') &&
+                                            (moduleForm.get('password').touched || moduleForm.get('password').dirty))
+                                        "
+                                        >
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <input matInput type="password" id="passwordConfirma" formControlName="passwordConfirma" placeholder="{{ 'resettokenpass.placeholderPasswordRepeat' | translate }}" maxlength="80" autocomplete="off">
+                                    <div
+                                        *ngIf="contrasenaIgual && !moduleForm.valid && (moduleForm.get('passwordConfirma').dirty ||
+                                        moduleForm.get('passwordConfirma').touched)"
+                                        class="mat-error ng-star-inserted text-center"
+                                        role="alert"
+                                    >
+                                        {{ "resettokenpass.contrasenasDiferentes" | translate }}
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End card four -->
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <app-floating-button [iconMenu]="iconMenu" (menuPrimaryEmiterData)="menuPrimaryReceiveData($event)"></app-floating-button>
+</div>

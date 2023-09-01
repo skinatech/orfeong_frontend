@@ -1,0 +1,195 @@
+<form [formGroup]="moduleForm" class="form-horizontal" (ngSubmit)="submitForm()">
+  <div class="row">
+    <div class="modal-header col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-2">
+      <h4 class="modal-title w-100" id="myModalLabel">
+        <mat-label
+          ><b> {{ "Respuesta por Correo" | translate }} </b></mat-label
+        >
+      </h4>
+      <button
+        mat-button
+        type="button"
+        (click)="closeDialog()"
+        title="{{ 'Cerrar' | translate }}"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <i class="material-icons">close</i>
+      </button>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="alert alert-info alert-with-icon marginNotification">
+        <i class="material-icons" data-notify="icon">notifications</i>
+        {{ "textMsgSendMail" | translate }} {{ radiSendReplyEMail }}
+      </div>
+    </div>
+
+    <!-- <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-center">
+            <mat-card-content>
+                <label>{{ 'Envio al remitente' | translate }}</label>
+                <section class="example-section">
+                    <mat-slide-toggle (change)="MatSlideToggleChangeEmail($event)" [checked]="isSlideChecked" formControlName="userClient" class="" [color]="color">
+                        {{ messageRadioInfoEmail | translate }}
+                    </mat-slide-toggle>
+                </section>
+            </mat-card-content>
+        </div> -->
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2">
+      <small class="description">{{ "Copiar a" | translate }}:</small>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mt-2">
+      <mat-form-field>
+        <mat-label>{{ "selectDependencias" | translate }}</mat-label>
+        <mat-select
+          multiple
+          id="idDependenciasInfo"
+          formControlName="idDependenciasInfo"
+          name="idDependenciasInfo"
+          (selectionChange)="getListUsuarios($event.value, 'informa', false)"
+          ariaLabel="dependencias[0]"
+        >
+          <mat-option>
+            <ngx-mat-select-search
+              [placeholderLabel]="'Buscar...' | translate"
+              [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate"
+              formControlName="listDependenciasInfoFilter"
+              [searching]="true"
+            ></ngx-mat-select-search>
+          </mat-option>
+          <mat-option *ngFor="let dependencias of filteredlistDependenciasInfo | async" [value]="dependencias.id">
+            {{ dependencias.val }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="!moduleForm.get('idDependenciasInfo').valid && moduleForm.get('idDependenciasInfo').touched"
+          >{{ "El campo es obligatorio" | translate }}</mat-error
+        >
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mt-2">
+      <mat-form-field>
+        <mat-label>{{ "selectUsuarios" | translate }}</mat-label>
+        <mat-select
+          multiple
+          id="idUsuariosInfo"
+          formControlName="idUsuariosInfo"
+          name="idUsuariosInfo"
+          ariaLabel="usuarios[0]"
+        >
+          <mat-option>
+            <ngx-mat-select-search
+              [placeholderLabel]="'Buscar...' | translate"
+              [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate"
+              formControlName="listUsuariosInfoFilter"
+              [searching]="true"
+            ></ngx-mat-select-search>
+          </mat-option>
+          <mat-option *ngFor="let usuarios of filteredlistUsuariosInfo | async" [value]="usuarios.id">
+            {{ usuarios.val }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="!moduleForm.get('idUsuariosInfo').valid && moduleForm.get('idUsuariosInfo').touched">{{
+          "El campo es obligatorio" | translate
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-center">
+      <mat-card-content>
+        <label>{{ "Informar usuario externo" | translate }}</label>
+        <section class="example-section">
+          <mat-slide-toggle (change)="MatSlideToggleChange($event)" formControlName="infoUserExt" class="">
+            {{ messageRadioInfo | translate }}
+          </mat-slide-toggle>
+        </section>
+      </mat-card-content>
+    </div>
+
+    <div *ngIf="showExternalUser" class="col-lg-10 col-md-10 col-sm-12 col-xs-12 mt-2">
+      <mat-form-field>
+        <mat-label>{{ "selectUsuariosExter" | translate }}</mat-label>
+        <mat-select
+          multiple
+          id="idUsuariosExternos"
+          formControlName="idUsuariosExternos"
+          name="idUsuariosExternos"
+          ariaLabel="usuarios[0]"
+        >
+          <mat-option>
+            <ngx-mat-select-search
+              [placeholderLabel]="'Buscar...' | translate"
+              [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate"
+              formControlName="listUsuariosInfoExtFilter"
+              [searching]="true"
+            ></ngx-mat-select-search>
+          </mat-option>
+          <mat-option *ngFor="let usuarios of filteredlistUsuariosInfoExt | async" [value]="usuarios.id">
+            {{ usuarios.val }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="!moduleForm.get('idUsuariosExternos').valid && moduleForm.get('idUsuariosExternos').touched"
+          >{{ "El campo es obligatorio" | translate }}</mat-error
+        >
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <hr />
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <!-- table -->
+      <div class="table-responsive">
+        <div class="material-datatables">
+          <table
+            class="table table-striped table-no-bordered table-hover"
+            cellspacing="0"
+            width="100%"
+            style="width: 100%"
+          >
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>{{ "Nombre" | translate }}</th>
+                <th>{{ "Descripción" | translate }}</th>
+                <th>{{ "Tipo de documento" | translate }}</th>
+                <th>{{ "Usuario" | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let row of arrayDocuments; index as i"
+                (click)="clickRow({ data: row, index: i })"
+                [style.background-color]="
+                  row.rowSelect == true ? 'rgba(0, 165, 223, 0.5)' : row.rowClass ? row.rowClass : ''
+                "
+              >
+                <td>{{ i + 1 }}</td>
+                <td>{{ row.nombre }}</td>
+                <td title="{{ row.descripcionTitle }}">
+                  {{ row.descripcion }}
+                </td>
+                <td>{{ row.tipodocumento }}</td>
+                <td>{{ row.usuario }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- /table -->
+    </div>
+  </div>
+
+  <div mat-dialog-actions style="float: right !important">
+    <button mat-raised-button class="btn btn-primary btn-round" type="submit">
+      <span>
+        {{ "SendForm" | translate }}
+      </span>
+    </button>
+  </div>
+</form>

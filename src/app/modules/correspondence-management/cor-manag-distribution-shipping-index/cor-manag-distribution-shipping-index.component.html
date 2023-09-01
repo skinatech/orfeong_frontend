@@ -1,0 +1,22 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+
+<app-initial-list 
+    [initCardHeaderStatus]="initCardHeaderStatus" 
+    [initCardHeaderIcon]="initCardHeaderIcon" 
+    [initCardHeaderTitle]="initCardHeaderTitle" 
+    [dtTitles]="dtTitles" 
+    [routeLoadDataTablesService]="routeLoadDataTablesService" 
+    [initBotonCreateRoute]="initBotonCreateRoute"
+    (selectedRowsEmiter)="selectedRowsReceiveData($event)" 
+    [routeChangeStatus]="routeChangeStatus" 
+    [routeData]="route">
+</app-initial-list>
+
+<!-- Accion agenda, reasignacion, anulacion y VOBO -->
+<app-observation *ngIf="statusModalObserva" [textFormObservaHeader]="textFormObservaHeader" (closeObservaEmiter)="closeObserva($event)" [showMotivoDevolucion]="showMotivoDevolucion" ></app-observation>
+
+<!-- Accion Envio de Documentos-->
+<app-form-modal *ngIf="statusModalUploadFile" [fileLabel]="fileLabel" [ruoteServiceDocuments]='ruoteServiceDocuments' [eventClickButtonSelectedData]='eventClickButtonSelectedData' (closeModalSendDocsEmiter)="closeObserva($event)"></app-form-modal>
+
+<app-floating-button [menuButtons]="menuButtons" (menuEmiterData)="menuReceiveData($event)"></app-floating-button>
+

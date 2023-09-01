@@ -1,0 +1,4 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<app-initial-list [initCardHeaderStatus]="initCardHeaderStatus" [initCardHeaderIcon]="initCardHeaderIcon" [initCardHeaderTitle]="initCardHeaderTitle" [dtTitles]="dtTitles" [routeLoadDataTablesService]="routeLoadDataTablesService" [initBotonCreateRoute]="initBotonCreateRoute"
+    (selectedRowsEmiter)="selectedRowsReceiveData($event)" [routeData]="routeData" [paramOID]="paramOID" [viewColumStatus]="viewColumStatus"></app-initial-list>
+<app-floating-button [iconMenu]="iconMenu" (menuPrimaryEmiterData)="menuPrimaryReceiveData($event)"></app-floating-button>

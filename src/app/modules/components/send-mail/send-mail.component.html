@@ -1,0 +1,118 @@
+<form [formGroup]="formGroup" class="form-horizontal">
+  <div class="row">
+    <div class="modal-header col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-2">
+      <h4 class="modal-title w-100" id="myModalLabel">
+        <mat-label> {{ "mailDelivery" | translate }} </mat-label>
+      </h4>
+
+      <button
+        mat-button
+        type="button"
+        (click)="closeDialog()"
+        title="{{ 'Cerrar' | translate }}"
+        class="close pull-right"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <i class="material-icons">close</i>
+      </button>
+    </div>
+  </div>
+
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <mat-form-field>
+          <mat-label>{{ "emails" | translate }}</mat-label>
+          <input
+            matInput
+            type="text"
+            #emailInput
+            (keydown.enter)="keydownEnter(emailInput.value)"
+            formControlName="emails"
+          />
+        </mat-form-field>
+        <div *ngIf="showMsgErr" class="err-text">{{ showMsgErrVal }}</div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <button
+          mat-raised-button
+          class="btn btn-primary btn-round"
+          (click)="keydownEnter(emailInput.value)"
+          type="button"
+        >
+          Agregar correo
+        </button>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="email" *ngFor="let email of emailsStorage" (click)="deleteEmail(email)">
+          {{ email }} <i class="material-icons icon-close">close</i>
+        </div>
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <mat-form-field>
+          <mat-label>{{ "mailBody" | translate }} </mat-label>
+          <textarea matInput formControlName="mailBody" rows="5"></textarea>
+          <mat-error *ngIf="!formGroup.get('mailBody').valid || formGroup.get('mailBody').touched">
+            {{ "El campo es obligatorio" | translate }}.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <hr />
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <!-- table -->
+        <div class="table-responsive">
+          <div class="material-datatables">
+            <table
+              class="table table-striped table-no-bordered table-hover"
+              cellspacing="0"
+              width="100%"
+              style="width: 100%"
+            >
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>{{ "Nombre" | translate }}</th>
+                  <th>{{ "Descripción" | translate }}</th>
+                  <th>{{ "Fecha" | translate }}</th>
+                  <th>{{ "Documento" | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let row of arrayDocuments; index as i"
+                  (click)="clickRow({ data: row, index: i })"
+                  [style.background-color]="
+                    row.rowSelect == true ? 'rgba(0, 165, 223, 0.5)' : row.rowClass ? row.rowClass : ''
+                  "
+                >
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ row.usuario }}</td>
+                  <td title="{{ row.descripcion }}">
+                    {{ row.descripcion }}
+                  </td>
+                  <td>{{ row.fecha }}</td>
+                  <td>{{ row.documento }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- /table -->
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div mat-dialog-actions style="float: right !important">
+          <button mat-raised-button class="btn btn-primary btn-round" (click)="submitForm()" type="button">
+            <i class="material-icons">check_circle_outline</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

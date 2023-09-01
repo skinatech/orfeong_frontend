@@ -1,0 +1,32 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="row">
+        <br>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-left: 11px;margin-top: 12px;">
+          <div class="about-body">
+            {{ "about.part1" | translate }} 
+            <br>
+          </div>
+          <div class="about-body">
+            {{ "about.part1.1" | translate }} 
+            {{ "about.part1.2" | translate }}
+          </div>
+          <div class="about-body">
+            {{ "about.part2" | translate }}
+          </div>
+          <div class="about-body">
+            {{ "about.part3" | translate }}
+<!-- (<a href="https://orfeolibre.org" target="_blank" rel="orfeolibre">orfeolibre.org</a>)-->
+	     {{ "about.part4" | translate }}
+<!--(<a href="https://skinatech.com" target="_blank" rel="skinatech">skinatech.com</a>) -->
+          </div>
+          <div class="about-body">
+            {{ "about.part5" | translate }} <a href="LICENSE.md" target="_blank" rel="LICENSE.md">LICENSE.md</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

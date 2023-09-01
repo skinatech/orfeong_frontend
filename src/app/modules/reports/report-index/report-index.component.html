@@ -1,0 +1,55 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+                <!-- Start card One -->
+                <div class="card ">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                        </div>
+                        <h4 class="card-title">{{ 'Reportes' | translate }}</h4>
+                    </div>
+                    <div class="card-body ">
+                        <form id="moduleForm" [formGroup]="moduleForm" class="form-horizontal">
+                            <div class="row">
+                                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'seleccioneReporte' | translate }}</mat-label>
+                                        <mat-select id="reportes" formControlName="reportes" name="reportes" (selectionChange)="changeReport($event.value)" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listReportsFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let report of filteredlistReports | async" [value]="report.ruta">
+                                                {{ report.label }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'reportes').valid">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                    <button mat-raised-button class="btn btn-primary btn-round" title="{{ 'Generar' | translate }}" (click)="recargarInitial()">
+                                        <i class="material-icons">pageview</i>{{ 'Generar' | translate }}
+                                    </button>
+                                </div>
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+                <!-- End card One -->
+
+                <!-- Start Initial List -->
+                <app-initial-list *ngIf="statusInitiaList" [viewColumStatus]="viewColumStatus" [initCardHeaderStatus]="initCardHeaderStatus" [initCardHeaderIcon]="initCardHeaderIcon" [initCardHeaderTitle]="initCardHeaderTitle2" [dtTitles]="dtTitles" [routeLoadDataTablesService]="routeLoadDataTablesService"
+                    (selectedRowsEmiter)="selectedRowsReceiveData($event)" [routeData]="route" [classMainConten]="classMainConten" [classContainerFluid]="classContainerFluid"
+                    [initialNotificationMessage]="initialNotificationMessage" [initialNotificationStatus]="initialNotificationStatus"></app-initial-list>
+                <!-- End Initial List -->
+
+            </div>
+
+        </div>
+    </div>
+</div>

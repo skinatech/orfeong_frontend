@@ -1,0 +1,240 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div *ngIf="statusAlert" class="alert alert-info alert-with-icon marginNotification" data-notify="container">
+                    <i class="material-icons" data-notify="icon">notifications</i>
+                    <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <i class="material-icons">close</i>
+                    </button>
+                    <span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span>
+                    <span data-notify="message">{{ 'textFormThirdParty' | translate }}</span>
+                </div>
+                <form id="moduleForm" [formGroup]="moduleForm" class="form-horizontal" (ngSubmit)="submitForm()">
+
+                    <!-- End card One -->
+                    <div class="card ">
+                        <div class="card-header card-header-info card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                            </div>
+                            <h4 class="card-title">{{ 'Datos básicos' | translate }}</h4>
+                        </div>
+                        <div class="card-body ">
+
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'filingModule.NombreRazonSocial' | translate }}</mat-label>
+                                        <input matInput type="text" id="nombreCliente" formControlName="nombreCliente" placeholder="{{ 'filingModule.NombreRazonSocial' | translate }}" maxlength="80" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'nombreCliente').valid && moduleForm.get( 'nombreCliente').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Tipo de persona' | translate }}</mat-label>
+                                        <mat-select id="idTipoPersona" formControlName="idTipoPersona" name="idTipoPersona" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listTipoPersonaFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let value of filteredlistTipoPersona | async" [value]="value.id">
+                                                {{ value.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'idTipoPersona').valid">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'filingModule.DocumentoNIT' | translate }}</mat-label>
+                                        <input matInput type="text" formControlName="numeroDocumentoCliente" (change)="verificarDocNit()" maxlength="15" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'numeroDocumentoCliente').valid || moduleForm.get( 'numeroDocumentoCliente').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Direccion' | translate }}</mat-label>
+                                        <input matInput type="text" formControlName="direccionCliente" maxlength="150" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'direccionCliente').valid || moduleForm.get( 'direccionCliente').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'País' | translate }}</mat-label>
+                                        <mat-select id="idNivelGeografico1" formControlName="idNivelGeografico1" (selectionChange)="nivelGeografico2($event.value)" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listNivelGeografico1Filter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let value of filteredlistNivelGeografico1 | async" [value]="value.id">
+                                                {{ value.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'idNivelGeografico1').valid">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Departamento' | translate }}</mat-label>
+                                        <mat-select id="idNivelGeografico2" formControlName="idNivelGeografico2" (selectionChange)="nivelGeografico3($event.value)" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listNivelGeografico2Filter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let value of filteredlistNivelGeografico2 | async" [value]="value.id">
+                                                {{ value.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'idNivelGeografico2').valid">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Municipio' | translate }}</mat-label>
+                                        <mat-select id="idNivelGeografico3" formControlName="idNivelGeografico3" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listNivelGeografico3Filter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let value of filteredlistNivelGeografico3 | async" [value]="value.id">
+                                                {{ value.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'idNivelGeografico3').valid">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Email' | translate }}</mat-label>
+                                        <input matInput type="mail" placeholder="" formControlName="correoElectronicoCliente" (change)="verificarCorreo()" maxlength="80">
+                                        <mat-error *ngIf="!moduleForm.get( 'correoElectronicoCliente').valid || moduleForm.get( 'correoElectronicoCliente').touched ">
+                                            {{ 'Ingrese un correo válido' | translate }}.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Telefono' | translate }}</mat-label>
+                                        <input matInput type="tel" placeholder="" formControlName="telefonoCliente" maxlength="15">
+                                        <mat-error *ngIf="!moduleForm.get( 'telefonoCliente').valid || moduleForm.get( 'telefonoCliente').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div *ngIf="statusFieldCaracterization" class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-center">
+                                    <mat-card-content>
+                                        <label>{{ 'Datos de caracterización' | translate }}</label>
+                                        <section class="example-section">
+                                            <mat-slide-toggle (change)="MatSlideToggleChange($event)" formControlName="caracterizacion" class="" [color]="color">
+                                                {{ messageIsNuevoRemitente | translate }}
+                                            </mat-slide-toggle>
+                                        </section>
+                                    </mat-card-content>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- End card One -->
+
+                    <!-- End card Two -->
+                    <div *ngIf="showFormCaracterizacion" class="card ">
+                        <div class="card-header card-header-info card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                            </div>
+                            <h4 class="card-title">{{ 'Datos de caracterización' | translate }}</h4>
+                        </div>
+                        <div class="card-body ">
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Género' | translate }}</mat-label>
+                                        <mat-select id="generoClienteCiudadanoDetalle" formControlName="generoClienteCiudadanoDetalle" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listGeneroFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let genero of filteredlistGenero | async" [value]="genero.id">
+                                                {{ genero.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'generoClienteCiudadanoDetalle').valid">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Rango de edad' | translate }}</mat-label>
+                                        <mat-select id="rangoEdadClienteCiudadanoDetalle" formControlName="rangoEdadClienteCiudadanoDetalle" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listRangoEdadFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let dataRangoEdad of filteredlistRangoEdad | async" [value]="dataRangoEdad.id">
+                                                {{ dataRangoEdad.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'rangoEdadClienteCiudadanoDetalle').valid">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Vulnerabilidad' | translate }}</mat-label>
+                                        <mat-select id="vulnerabilidadClienteCiudadanoDetalle" formControlName="vulnerabilidadClienteCiudadanoDetalle" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listVulnerabilidadFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let dataVul of filteredlistVulnerabilidad | async" [value]="dataVul.id">
+                                                {{ dataVul.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'vulnerabilidadClienteCiudadanoDetalle').valid">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-label>{{ 'Etnia' | translate }}</mat-label>
+                                        <mat-select id="etniaClienteCiudadanoDetalle" formControlName="etniaClienteCiudadanoDetalle" required>
+                                            <mat-option>
+                                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listEtniaFilter" [searching]="true"></ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option *ngFor="let dataEtnia of filteredlistEtnia | async" [value]="dataEtnia.id">
+                                                {{ dataEtnia.val }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="!moduleForm.get( 'etniaClienteCiudadanoDetalle').valid">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- End card Two -->
+
+                    <button type="submit" id="sendForm" style="display: none;"></button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <app-floating-button [iconMenu]="iconMenu" (menuPrimaryEmiterData)="menuPrimaryReceiveData($event)"></app-floating-button>
+</div>

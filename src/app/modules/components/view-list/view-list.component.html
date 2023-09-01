@@ -1,0 +1,381 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Notification -->
+                <div class="{{ initialNotificationClassAlert }} marginNotification" *ngIf="initialNotificationMessageArray.length > 0" data-notify="container">
+                    <i class="material-icons" data-notify="icon">notifications</i>
+                    <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="material-icons">close</i>
+                    </button>
+                    <div *ngIf="initialNotificationMessageArray.length > 0">
+                        <div *ngFor="let rowNotification of initialNotificationMessageArray" class="col-lg-12">
+                            {{ rowNotification | translate }}
+                        </div>
+                    </div>
+                </div>
+                <!-- /Notification -->
+
+                <div class="card ">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                        </div>
+                        <h4 class="card-title">{{ textFormView | translate}}
+                            <a *ngIf="statusRouteExpediente" routerLink="{{routeExpediente}}">
+                                <p style="float: right; color:#365c8a !important;"><small class="description">{{ 'Expediente' | translate }}:</small> {{ nombreExpediente }}</p>
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="card-body" *ngIf="loading">
+                        <p class="text-center">
+                            <img [src]="gifOrfeoNg" alt="{{ 'Loading' | translate }}">
+                            <br>
+                        </p>
+                    </div>
+                    <div class="card-body " *ngIf="!loading">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr *ngFor="let row of data1; let i = index">
+                                                <th [ngClass]="(row.color ? row.color: '')">{{ row.alias | translate }}</th>
+                                                <td [ngClass]="(row.color ? row.color: '')" *ngIf="!row.show">
+                                                    <ng-container *ngIf="row.statuslimitText && row.value.length > 150">
+                                                        {{ row.value | slice:0:row.limitText}}
+                                                        <span class="btn btn-info btn-sm" (click)="row.statuslimitText = false">{{'Ver más' | translate}}</span>
+                                                    </ng-container>
+                                                    <ng-container *ngIf="!row.statuslimitText || row.value.length <= 150">
+                                                        {{ row.value}}
+                                                    </ng-container>
+                                                </td>
+                                                <td [ngClass]="(row.color ? row.color: '')" *ngIf="row.show">
+                                                    <a routerLink="{{ row.href }}">{{ row.value }}</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr *ngFor="let row of data1; let i = index">
+                                                <th [ngClass]="(data2[i].color ? data2[i].color: '')">{{ data2[i].alias | translate }}</th>
+                                                <td [ngClass]="(data2[i].color ? data2[i].color: '')" *ngIf="!data2[i].show">
+                                                    <ng-container *ngIf="data2[i].statuslimitText && data2[i].value.length > 150">
+                                                        {{ data2[i].value | slice:0:data2[i].limitText}}
+                                                        <span class="btn btn-info btn-sm" (click)="data2[i].statuslimitText = false">{{'Ver más' | translate}}</span>
+                                                    </ng-container>
+                                                    <ng-container *ngIf="!data2[i].statuslimitText || data2[i].value.length <= 150">
+                                                        {{ data2[i].value}}
+                                                    </ng-container>
+                                                </td>
+                                                <td [ngClass]="(data2[i].color ? data2[i].color: '')" *ngIf="data2[i].show">
+                                                    <a routerLink="{{ data2[i].href }}">{{ data2[i].value }}</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div *ngIf="dtCollapStatus" class="row">
+
+                    <!-- Start Main Documents Card -->
+                    <div *ngIf="statusDocuPrincipal" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                        <div class="card ">
+                            <div class="card-header card-header-info card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">library_books</i>
+                                </div>
+                                <h4 class="card-title">{{ 'Documentos principales' | translate }}</h4>
+                            </div>
+                            <div class="card-body" *ngIf="loading">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <div class="card-body " *ngIf="!loading">
+
+                                <!-- Row 1 -->
+                                <div class="row">
+                                    <div *ngFor="let dataDocsPrin of (dataRowDocuPrincipal ? dataRowDocuPrincipal.slice(0, numberLimitDocPrincipal) : [] ); let idDivPri = index;" class="col-lg-4 col-md-6 col-sm-12 col-xs-12 p-3">
+                                        <div class="p-3 card contenDocs" (click)="docPriFocus(idDivPri, idDivPri, dataDocsPrin.nombreDocPrincipal)" [ngStyle]="( idDivPri == valselectPri ? {'background-color': stylePri } : '' )">
+                                            <div class="headDocs">
+                                                <span class="material-icons extIco">
+                                                    description
+                                                </span>
+                                            </div>
+                                            <div class="infoDocs">
+                                                <small class="description mt-2 mb-2"> 
+                                                    <span> </span>
+                                                </small> <br>
+                                                <small class="description mt-2 mb-2"> 
+                                                    {{ 'Nombre' | translate }}: <span> {{ dataDocsPrin.nombreDocPrincipal }}</span> 
+                                                </small> <br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Row 1 -->
+
+                                <!-- Start See more -->
+                                <div *ngIf="statusSeeMoreDocPri" class=" moreHistory col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <a *ngIf="statusSeeDocPri" (click)="seeMoreAndLess(statusSeeDocPri, 'DocumentsMain')">{{ 'Ver más' | translate }}</a>
+                                    <a *ngIf="!statusSeeDocPri" (click)="seeMoreAndLess(statusSeeDocPri, 'DocumentsMain')">{{ 'Ver menos' | translate }}</a>
+                                </div>
+                                <!-- End See more -->
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- End Main Documents Card -->
+
+                    <!-- Start Documents Card -->
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                        <div class="card ">
+                            <div class="card-header card-header-info card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">library_books</i>
+                                </div>
+                                <h4 class="card-title">{{ 'Documentos del radicado' | translate }}</h4>
+                            </div>
+                            <div class="card-body" *ngIf="loading">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <div class="card-body " *ngIf="!loading">
+
+                                <!-- Row 1 -->
+                                <div class="row">
+                                    <div *ngFor="let dataDocs of (dataRowDocumentos ? dataRowDocumentos.slice(0, numberLimitDoc) : [] ); let idDiv = index;" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 p-3">
+                                        <div class="p-3 card contenDocs" (click)="docFocus(idDiv,dataDocs.id, dataDocs.isPdf, dataDocs )" [ngStyle]="( idDiv == valselect ? {'background-color': style } : '' )">
+                                            <div class="headDocs">
+                                                <span class="material-icons extIco">
+                                                    description
+                                                </span>
+                                                <h6 class="relativeDocs"> <span> {{ dataDocs.fecha }}</span> </h6>
+                                            </div>
+                                            <div class="infoDocs">
+                                                <small class="description mt-2 mb-2"> 
+                                                    <span> </span>  
+                                                </small> <br>
+                                                <small class="description mt-2 mb-2"> 
+                                                    {{ 'Nombre' | translate }}:        <span> {{ dataDocs.nombre }}</span> 
+                                                </small> <br>
+                                                <small class="description mt-2 mb-2"> 
+                                                    {{ 'Descripción' | translate }}:        <span title="{{ dataDocs.descripcionTitle }}"> {{ dataDocs.descripcion }}</span> 
+                                                </small> <br>
+                                                <small class="description mt-2 mb-2"> 
+                                                    {{ 'Tipo de documento' | translate }}:  <span> {{ dataDocs.tipodocumento }}</span> 
+                                                </small> <br>
+                                                <small class="description mt-2 mb-2"> 
+                                                    {{ 'Usuario' | translate }}:            <span> {{ dataDocs.usuario }}</span> 
+                                                </small> <br>
+                                                <small class="description mt-2 mb-2"> 
+                                                    {{ 'Documento público' | translate }}:            <span> {{ dataDocs.isPublicoRadiDocumento }}</span> 
+                                                </small> <br>
+                                                <small class="description mt-2 mb-2"> 
+                                                    {{ 'Disponibilidad página pública' | translate }}:            <span> {{ dataDocs.statusTextPublic }}</span> 
+                                                </small>
+                                            </div>
+                                            <!-- <div class="accionesDocs">
+
+                                                <a (click)="viewDocuments()">
+                                                    <span class="material-icons accIco span1" title="{{ 'Ver' | translate }}">
+                                                        visibility
+                                                    </span>
+                                                </a>
+                                               
+                                                <a (click)="dowloadDocuments(event)">
+                                                    <span class="material-icons accIco span2" title="{{ 'Descargar' | translate }}">
+                                                        get_app
+                                                    </span>
+                                                </a>
+
+                                                <span class="material-icons accIco span3" title="{{ 'Comentarios' | translate }}">
+                                                    chat
+                                                </span>
+
+                                                <span class="material-icons accIco span4" title="{{ 'Eliminar' | translate }}">
+                                                    delete_outline
+                                                </span>
+
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Row 1 -->
+
+                                <!-- Start See more -->
+                                <div *ngIf="statusSeeMoreDoc" class=" moreHistory col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <a *ngIf="statusSeeDoc" (click)="seeMoreAndLess(statusSeeDoc, 'Documents')">{{ 'Ver más' | translate }}</a>
+                                    <a *ngIf="!statusSeeDoc" (click)="seeMoreAndLess(statusSeeDoc, 'Documents')">{{ 'Ver menos' | translate }}</a>
+                                </div>
+                                <!-- End See more -->
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- End Documents Card -->
+
+                    <!-- Start History Card -->
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="card ">
+                            <div class="card-header card-header-info card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">date_range</i>
+                                </div>
+                                <h4 class="card-title">{{ 'Trazabilidad del radicado' | translate }}</h4>
+                            </div>
+                            <div class="card-body" *ngIf="loading">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <div class="card-body " *ngIf="!loading">
+
+                                <!-- Row 1 -->
+                                <div class="row timeline">
+                                    <div *ngFor="let dataHist of ( dataRowsHistorico ? dataRowsHistorico.slice(0, numberLimitHistory) : [] );" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <!-- Line component -->
+                                        <div class="line text-muted"></div>
+                                        <h5 class="card-title" style="color:#365c8a">
+                                            <span class="material-icons">
+                                                    {{ dataHist.iconTrans ? dataHist.iconTrans : "date_range" }}
+                                                </span> {{ dataHist.transaccion | translate }}
+
+                                            <br class="style-none">
+                                            <small class="description margin-left">{{ dataHist.fecha }}</small>
+                                        </h5>
+                                        <p class="marginHistory"><small class="description">{{ 'Usuario' | translate }}: </small> {{ dataHist.usuario }}</p>
+                                        <p class="marginHistory"><small class="description">{{ 'Dependencia' | translate }}: </small> {{ dataHist.dependencia }}</p>
+                                        <p class="marginHistory"><small class="description">{{ 'Observación' | translate }}: </small> {{ dataHist.observacion }}</p>
+                                    </div>
+                                    <!-- Start See more -->
+                                    <div *ngIf="statusSeeMoreHistory" class=" moreHistory col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <a *ngIf="statusSeeHistory" (click)="seeMoreAndLess(statusSeeHistory, 'History')">{{ 'Ver más' | translate }}</a>
+                                        <a *ngIf="!statusSeeHistory" (click)="seeMoreAndLess(statusSeeHistory, 'History')">{{ 'Ver menos' | translate }}</a>
+                                    </div>
+                                    <!-- End See more -->
+                                </div>
+                                <!-- Row 1 -->
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- End History Card -->
+                </div>
+
+                <div *ngIf="showCorrespondencia" class="row">
+                    <!-- Start History Card -->
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="card ">
+                            <div class="card-header card-header-info card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">library_books</i>
+                                </div>
+                                <h4 class="card-title">{{ 'Correspondencia radicado' | translate }}</h4>
+                            </div>
+                            <div class="card-body" *ngIf="loading">
+                                <!-- <img src="../../../../assets/img/logos/orfeo_ng_gif.gif" alt="{{ 'Loading' | translate }}"> -->
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <div class="card-body " *ngIf="!loading">
+                                <!-- Row 1 -->
+                                <div class="row">
+                                    <div *ngFor="let dataCorr of (dataRowCorrespondencia ? dataRowCorrespondencia.slice(0, numberLimitDoc) : [] ); let idDiv2 = index;" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 p-3">
+                                        <!-- Condicion para ser seleccionado (si existe un archivo de correspondencia)-->
+                                        <div class="p-3 card contenDocs" (click)="!dataCorr.extension || docFocusCor(idDiv2,dataCorr.id)" [ngStyle]="( idDiv2 == valselectCor ? {'background-color': styleCor } : '' )">
+                                            <div [ngStyle]="!dataCorr.extension ? {'cursor':'default'} : {'cursor':'pointer'}">
+                                                <div class="headDocs" >
+                                                    <span class="material-icons extIco">
+                                                            {{ dataCorr.icon }}
+                                                        </span>
+                                                    <h6 class="relativeDocs"> <span> {{ dataCorr.fecha }}</span> </h6>
+                                                </div>
+                                                <div class="infoDocs">
+                                                    <small class="description mt-2 mb-2"> 
+                                                            <span> </span>  
+                                                        </small> <br>
+                                                    <small class="description mt-2 mb-2"> 
+                                                            {{ 'Guia' | translate }}:               <span> {{ dataCorr.guia }}</span> 
+                                                        </small> <br>
+                                                    <small class="description mt-2 mb-2"> 
+                                                            {{ 'Descripción' | translate }}:        <span> {{ dataCorr.descripcion }}</span> 
+                                                        </small> <br>
+                                                    <small class="description mt-2 mb-2"> 
+                                                            {{ 'Proveedor' | translate }}:          <span> {{ dataCorr.proveedor }}</span> 
+                                                        </small> <br>
+                                                    <small class="description mt-2 mb-2"> 
+                                                            {{ 'Servicio' | translate }}:           <span> {{ dataCorr.servicio }}</span> 
+                                                        </small> <br>
+                                                    <small class="description mt-2 mb-2"> 
+                                                            {{ 'Usuario' | translate }}:            <span> {{ dataCorr.usuario }}</span> 
+                                                        </small> <br>
+                                                    <small class="description mt-2 mb-2" *ngIf="dataCorr.motivoDevolucion">
+                                                            {{ 'Motivo de devolución' | translate }}:            <span> {{ dataCorr.motivoDevolucion }}</span> <br>
+                                                    </small>
+                                                    <small class="description mt-2 mb-2" *ngIf="dataCorr.tiempoDevuelto">
+                                                        {{ 'labelTiempoDevuelto' | translate }}:            <span> {{ dataCorr.tiempoDevuelto }}</span> <br>
+                                                    </small>
+                                                    <small class="description mt-2 mb-2" *ngIf="dataCorr.tiempoEntrega">
+                                                        {{ 'labelTiempoEntrega' | translate }}:            <span> {{ dataCorr.tiempoEntrega }}</span> <br>
+                                                    </small>
+                                                </div>
+                                                <!-- 
+                                                <div class="accionesDocs">
+
+                                                    <a (click)="viewDocuments()">
+                                                        <span class="material-icons accIco span1" title="{{ 'Ver' | translate }}">
+                                                            visibility
+                                                        </span>
+                                                    </a>
+                                                
+                                                    <a (click)="dowloadDocuments(event)">
+                                                        <span class="material-icons accIco span2" title="{{ 'Descargar' | translate }}">
+                                                            get_app
+                                                        </span>
+                                                    </a>
+
+                                                    <span class="material-icons accIco span3" title="{{ 'Comentarios' | translate }}">
+                                                        chat
+                                                    </span>
+
+                                                    <span class="material-icons accIco span4" title="{{ 'Eliminar' | translate }}">
+                                                        delete_outline
+                                                    </span>
+
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Row 1 -->
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- End History Card -->
+                </div>
+
+            </div>
+        </div>
+    </div>

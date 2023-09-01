@@ -1,0 +1,5 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<app-initial-list [initCardHeaderStatus]="initCardHeaderStatus" [initCardHeaderIcon]="initCardHeaderIcon" [initCardHeaderTitle]="initCardHeaderTitle" [dtTitles]="dtTitles" [routeLoadDataTablesService]="routeLoadDataTablesService" [initBotonCreateRoute]="initBotonCreateRoute"
+    (selectedRowsEmiter)="selectedRowsReceiveData($event)" [routeData]="route"></app-initial-list>
+<app-observation-loans *ngIf="statusModalMain" [showSoliPrestamo]="showSoliPrestamo" [textFormObservaHeader]="textFormObservaHeader" (closeObservaEmiter)="closeObserva($event)"></app-observation-loans>
+<app-floating-button [menuButtons]="menuButtons" (menuEmiterData)="menuReceiveData($event)"></app-floating-button>

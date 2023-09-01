@@ -1,0 +1,39 @@
+<div *ngIf="subMenuStatus">
+    <div class="main-content">
+        <div class="container-fluid">
+            <!-- Notification -->
+            <div class="{{ subMenuNotificationClassAlert }} marginNotification" data-notify="container">
+                <i class="material-icons" data-notify="icon">notifications</i>
+                <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <i class="material-icons">close</i>
+                </button>
+                <span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span>
+                <span data-notify="message">{{ subMenuNotificationMessage | translate }}</span>
+            </div>
+            <!-- /Notification -->
+            <!-- Card -->
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" *ngFor="let subMenuCol of subMenuCols">
+                    <a routerLink="/{{ subMenuActive }}/{{ subMenuCol.route }}">
+                        <div class="card card-stats">
+                            <div class="card-header card-header-info card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">{{ subMenuCol.icon }}</i>
+                                </div>
+                                <h4 class="card-title text-right">{{ subMenuCol.name }}</h4>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons">link</i> {{ 'subMenu.goToModule' | translate }}
+                                </div>
+                            </div>
+                            <!-- end content-->
+                        </div>
+                    </a>
+                    <!--  end card  -->
+                </div>
+            </div>
+            <!-- /Card -->
+        </div>
+    </div>
+</div>

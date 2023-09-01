@@ -1,0 +1,132 @@
+<form [formGroup]="moduleForm" class="form-horizontal" (ngSubmit)="submitForm()">
+    <div class="row">
+
+        <div class="modal-header col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-2">
+
+            <h4 class="modal-title w-100" id="myModalLabel">
+                <mat-label> {{ 'Correspondence' | translate }} </mat-label>
+            </h4>
+
+            <button mat-button type="button" (click)="closeDialog()" title="{{ 'Cerrar' | translate }}" class="close pull-right" data-dismiss="alert" aria-label="Close">
+                <i class="material-icons">close</i>
+            </button>
+
+        </div>
+
+        <!-- card One -->
+        <div class="modal-body">
+
+            <div *ngIf="validatecliente">
+                <div class="alert alert-danger" role="alert">
+                    {{ 'Alert Cliente Validacion' | translate }}
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <mat-form-field>
+                        <mat-label>{{ 'Seleccione regional' | translate }}</mat-label>
+                        <mat-select id="idCgRegional" formControlName="idCgRegional" name="idCgRegional" (selectionChange)="getSelectsType()" required>
+                            <mat-option>
+                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listCgRegionalFilter" [searching]="true"></ngx-mat-select-search>
+                            </mat-option>
+                            <mat-option *ngFor="let tipoRadicado of filteredlistidCgRegional | async" [value]="tipoRadicado.id">
+                                {{ tipoRadicado.val }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="!moduleForm.get('idCgRegional').valid">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <mat-form-field>
+                        <mat-label>{{ 'FormModule.selectProveedor' | translate }}</mat-label>
+                        <mat-select id="idCgProveedores" formControlName="idCgProveedores" name="idCgProveedores" (selectionChange)="getSelectsType()" required>
+                            <mat-option>
+                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listCgProveedoresFilter" [searching]="true"></ngx-mat-select-search>
+                            </mat-option>
+                            <mat-option *ngFor="let tipoRadicado of filteredlistidCgProveedores | async" [value]="tipoRadicado.id">
+                                {{ tipoRadicado.val }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="!moduleForm.get('idCgRegional').valid">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                    </mat-form-field>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <mat-form-field>
+                        <mat-label>{{ 'FormModule.selectServicioAct' | translate }}</mat-label>
+                        <mat-select id="idCgEnvioServicio" formControlName="idCgEnvioServicio" name="idCgEnvioServicio" required>
+                            <mat-option>
+                                <ngx-mat-select-search [placeholderLabel]="'Buscar...' | translate" [noEntriesFoundLabel]="'No se encontraron coincidencias' | translate" formControlName="listCgEnvioServicioFilter" [searching]="true"></ngx-mat-select-search>
+                            </mat-option>
+                            <mat-option *ngFor="let tipoRadicado of filteredlistidCgEnvioServicio | async" [value]="tipoRadicado.id">
+                                {{ tipoRadicado.val }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="!moduleForm.get('idCgEnvioServicio').valid">{{ 'El campo es obligatorio' | translate }}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <mat-form-field>
+                        <mat-label>{{ 'Guia' | translate }}</mat-label>
+                        <input matInput type="text" value="" formControlName="numeroGuiaRadiEnvio" maxlength="20">
+                        <mat-error *ngIf="!moduleForm.get('numeroGuiaRadiEnvio').valid || moduleForm.get( 'numeroGuiaRadiEnvio').touched ">
+                            {{ 'El campo es obligatorio' | translate }}.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <!-- Inicio Observacion -->
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-2">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>{{ 'Observación' | translate }}</mat-label>
+                        <textarea #observacion matInput type="text" id="observacion" formControlName="observacion" placeholder="{{ 'Ingrese una observación' | translate }}" maxlength="500" required rows="5"></textarea>
+                        <mat-error *ngIf="!moduleForm.get( 'observacion').valid && moduleForm.get( 'observacion').touched ">
+                            {{ 'El campo es obligatorio' | translate }}.
+                        </mat-error>
+                        <mat-hint>{{ observacion.value.length }} / 500</mat-hint>
+                    </mat-form-field>
+                </div>
+                <!-- Fin Observacion -->
+
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                    <div *ngIf="uploadProcess">
+                        <div class="col-lg-12" style="margin-top: 20px;">
+                            <mat-progress-bar mode="determinate" value="{{ uploadResponse.proccess }}"></mat-progress-bar>
+                        </div>
+                        <div class="col-lg-12">
+                            <p style="font-weight: bold;">{{ uploadResponse.proccess }}%</p>
+                        </div>
+                    </div>
+
+                    <div *ngIf="!uploadProcess">
+
+                        <label for="fileUpload">{{ fileLabel | translate }}</label>
+                        <input #inputFile type="file" name="fileUpload" class="form-control" (change)="onSelectedFile($event)" />
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- End card One -->
+
+    </div>
+
+    <div mat-dialog-actions style="float: right !important;">
+        <button mat-raised-button class="btn btn-primary btn-round" type="submit" [disabled]="validatecliente">
+                <!-- <mat-icon>cloud_upload</mat-icon>  --> {{ 'SendForm' | translate }} 
+        </button>
+    </div>
+</form>

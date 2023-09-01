@@ -1,0 +1,12 @@
+.marginNotification {
+    margin-top: 20px !important;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-infix {
+    padding: .4375em 0;
+    padding-top: 15px !important;
+}
+
+.mat-form-field-label {
+    white-space: normal !important;
+}

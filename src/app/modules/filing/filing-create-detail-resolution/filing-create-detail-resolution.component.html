@@ -1,0 +1,93 @@
+<form [formGroup]="formGroup" class="form-horizontal" (ngSubmit)="submitForm()">
+  <div class="row">
+    <div class="modal-header col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-2">
+      <h4 class="modal-title w-100" id="myModalLabel">
+        <mat-label> {{ "DetalleResolución" | translate }} </mat-label>
+      </h4>
+
+      <button
+        mat-button
+        type="button"
+        (click)="closeDialog()"
+        title="{{ 'Cerrar' | translate }}"
+        class="close pull-right"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <i class="material-icons">close</i>
+      </button>
+    </div>
+  </div>
+
+  <div class="modal-body">
+    <div class="row">
+      <div *ngIf="showRowNumberResolutions" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <mat-form-field>
+          <mat-label>{{ "numeroResolucion" | translate }}</mat-label>
+          <input
+            matInput
+            type="text"
+            [value]="dataNumberResolution"
+            [readonly]="true"
+            formControlName="numeroRadiRadicadoResolucion"
+          />
+          <mat-error
+            *ngIf="
+              !formGroup.get('numeroRadiRadicadoResolucion').valid ||
+              formGroup.get('numeroRadiRadicadoResolucion').touched
+            "
+          >
+            {{ "El campo es obligatorio" | translate }}.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <mat-form-field>
+          <mat-label>{{ "fechaResolucion" | translate }}</mat-label>
+          <input
+            matInput
+            [min]="minDate"
+            [max]="maxDate"
+            formControlName="fechaRadiRadicadoResolucion"
+            [matDatepicker]="picker"
+            placeholder="{{ 'Ingrese una fecha' | translate }}"
+            (click)="picker.open()"
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #picker></mat-datepicker>
+          <mat-error
+            *ngIf="
+              (!formGroup.get('fechaRadiRadicadoResolucion').valid &&
+                formGroup.get('fechaRadiRadicadoResolucion').touched) ||
+              !formGroup.get('fechaRadiRadicadoResolucion').valid
+            "
+          >
+            {{ "El campo es obligatorio" | translate }}.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <mat-form-field>
+          <mat-label>{{ "valorResolucion" | translate }}</mat-label>
+          <input matInput type="number" value="" formControlName="valorRadiRadicadoResolucion" maxlength="20" />
+          <mat-error
+            *ngIf="
+              !formGroup.get('valorRadiRadicadoResolucion').valid ||
+              formGroup.get('valorRadiRadicadoResolucion').touched
+            "
+          >
+            {{ "El campo es obligatorio" | translate }}.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div mat-dialog-actions style="float: right !important">
+    <button mat-raised-button class="btn btn-primary btn-round" type="submit">
+      <i class="material-icons">check_circle_outline</i>
+    </button>
+  </div>
+</form>

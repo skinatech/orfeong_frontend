@@ -1,0 +1,91 @@
+<app-breadcrumb [breadcrumbOn]="breadcrumbOn" [breadcrumbRouteActive]="breadcrumbRouteActive"></app-breadcrumb>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+                <form id="moduleForm" [formGroup]="moduleForm" class="form-horizontal" (ngSubmit)="submitForm()">
+                    <!-- Notification -->
+                    <div class="{{ initialNotificationClassAlert }} marginNotification" *ngIf="initialNotificationMessageArray.length > 0" data-notify="container">
+                        <i class="material-icons" data-notify="icon">notifications</i>
+                        <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <i class="material-icons">close</i>
+                        </button>
+                        <div *ngIf="initialNotificationMessageArray.length > 0">
+                            <div *ngFor="let rowNotification of initialNotificationMessageArray" class="col-lg-12">
+                                {{ rowNotification | translate }}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Notification -->
+
+                    <!-- End card One -->
+                    <div class="card ">
+                        <div class="card-header card-header-info card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                            </div>
+                            <h4 class="card-title">{{ textForm | translate }}</h4>
+                        </div>
+                        <div class="card-body ">
+
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                        <mat-label>{{ 'Nombre encuesta' | translate }}</mat-label>
+                                        <input matInput type="text" id="nombreCgEncuesta" formControlName="nombreCgEncuesta" placeholder="{{ 'ingreseNombreEncuesta' | translate }}" maxlength="80" required>
+                                        <mat-error *ngIf="!moduleForm.get( 'nombreCgEncuesta').valid && moduleForm.get( 'nombreCgEncuesta').touched ">
+                                            {{ 'El campo es obligatorio' | translate }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <!-- Start preguntas array -->
+                                <div class="ex3" formArrayName="preguntas">
+                                    <div class="ex3" *ngFor="let preg of moduleForm.get('preguntas')['controls']; let i = index">
+                                        <ng-container [formGroupName]="i">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="row">
+                                                    <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12">
+                                                        <button [disabled]="false" type="button" title="{{ 'Eliminar' | translate }}" (click)="deleteAllItem(i)" class="btn btn-danger btn-just-icon btn-round">
+                                                            <mat-icon>clear</mat-icon>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12">
+                                                        <mat-form-field>
+                                                            <mat-label>{{ 'Pregunta' | translate }} </mat-label>
+                                                            <textarea matInput formControlName="preguntaCgEncuestaPregunta" maxlength="500" required></textarea>
+                                                            <mat-error *ngIf="!preg.get( 'preguntaCgEncuestaPregunta').valid || preg.get( 'preguntaCgEncuestaPregunta').touched ">
+                                                                {{ 'El campo es obligatorio' | translate }}.
+                                                            </mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+
+                                    </div>
+                                </div>
+                                <!-- End preguntas array  -->
+
+                                <div *ngIf="statusButtonAdd" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <button type="button" mat-raised-button class="btn btn-success btn-round" title="{{ 'Agregar' | translate }}" (click)="addItem()" style="float: right;">
+                                        <i class="material-icons">offline_pin</i>{{ 'Agregar' | translate }}
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- End card One -->
+
+                    <button type="submit" id="sendForm" style="display: none;"></button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <app-floating-button [iconMenu]="iconMenu" (menuPrimaryEmiterData)="menuPrimaryReceiveData($event)"></app-floating-button>
+</div>

@@ -1,0 +1,284 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="col-md-12 alert alert-info alert-with-icon marginNotification" *ngIf="notificationHeaderStatus" data-notify="container">
+                    <i class="material-icons" data-notify="icon">notifications</i>
+                    <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="material-icons">close</i>
+                    </button>
+                    <span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span>
+                    <span data-notify="message">{{ 'notificationHeaderMsgViewDepe' | translate }}</span>
+                </div>
+            </div>
+
+            <div class="col-md-12" *ngFor="let dependencia of dependencias">
+                <div class="card ">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">{{ initCardHeaderIcon }}</i>
+                        </div>
+                        <!-- Dependencia -->
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h4 class="card-title">
+                                <small class="description">{{ 'Unidad administrativa' | translate }}: </small> {{ dependencia.nomDepe }}
+                                <small class="description" style="float: right;">{{ 'Fecha de actualización' | translate }}: {{ dependencia.fechaAct }} </small>
+                            </h4>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h4 class="card-title">
+                                <small class="description">{{ 'Oficina productora' | translate }}: </small> {{ dependencia.oficinaProd }}
+                                <small class="description" style="float: right;">{{ 'Versión' | translate }}: {{ dependencia.version }} </small>
+                            </h4>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h4 class="card-title">
+                                <small class="description">{{ 'Regional' | translate }}: </small> {{ dependencia.regional }}
+                                <small *ngIf="dependencia.uuid" class="description" style="float: right;">{{ 'UUID' | translate }}: {{ dependencia.uuid }} </small>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="accordion" role="tablist">
+                            <div *ngFor="let serie of series[ dependencia.idDepe ]; let iSerie = index;" class="card-collapse">
+                                <div class="card-header" role="tab" [attr.id]="'headingOne'+ iSerie">
+                                    <h5 class="mb-0">
+                                        <!-- Input del campo Series -->
+                                        <a *ngIf="!showEditField" data-toggle="collapse" [attr.href]="'#collapseOne'+ iSerie" aria-expanded="false" class="collapsed">
+                                            <small class="description">{{ 'Serie' | translate }}: </small> {{ serie.nomSerie }}
+                                            <i class="material-icons">keyboard_arrow_down</i>
+                                        </a>
+                                        <a *ngIf="showEditField" data-toggle="collapse" [attr.href]="'#collapseOne'+ iSerie" aria-expanded="false" class="collapsed">
+                                            <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                                <mat-label>{{ 'Serie' | translate }} </mat-label>
+                                                <h6>{{ serie.codSerie }}</h6>
+                                                <input matInput type="text" id="Series" [value]="serie.nomSerie" (change)="changeName( $event, serie.idSerie )" placeholder="{{ 'Serie' | translate }}" maxlength="255">
+                                            </mat-form-field>
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div [attr.id]="'collapseOne'+ iSerie + idShowEditField" class="collapse show" role="tabpanel" style="">
+                                    <div *ngFor="let subserie of subseries[ serie.idSerie ]; let iSubserie = index;" class="card-collapse">
+                                        <div class="card-header" role="tab" [attr.id]="'headingSubOne'+iSerie + iSubserie">
+                                            <h5 class="mb-0">
+                                                <!-- Input del campo Subseries -->
+                                                <a *ngIf="!showEditField" data-toggle="collapse" [attr.href]="'#collapseSubOne'+iSerie + iSubserie" aria-expanded="false" class="collapsed">
+                                                    <small class="description">{{ 'Subserie' | translate }}: </small>{{ subserie.nomSubserie }}
+                                                    <i class="material-icons">keyboard_arrow_down</i>
+                                                </a>
+                                                <a *ngIf="showEditField" data-toggle="collapse" [attr.href]="'#collapseSubOne'+ iSerie + iSubserie" aria-expanded="false" class="collapsed">
+                                                    <mat-form-field class="example-full-width" [ngClass]="{ 'has-success':validTextType===true}">
+                                                        <mat-label>{{ 'Subserie' | translate }} </mat-label>
+                                                        <h6>{{ subserie.codSubserie }}</h6>
+                                                        <input matInput type="text" id="Subseries" [value]="subserie.nomSubserie" (change)="changeName( $event, subserie.idSubserie )" placeholder="{{ 'Subserie' | translate }}" maxlength="255">
+                                                    </mat-form-field>
+                                                </a>
+                                            </h5>
+                                        </div>
+                                        <div [attr.id]="'collapseSubOne'+iSerie + iSubserie + idShowEditField" class="collapse show" role="tabpanel" style="">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <!-- Datos Suberies -->
+                                                    <div *ngIf="statusRule" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <table style="width: 100%;">
+                                                            <tr>
+                                                                <th colspan="1" class="tabledep">
+                                                                    {{ 'NormaSIG' | translate }}
+                                                                </th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="tabledep">
+                                                                    {{ dataSubseries[subserie.idSubserie].norma }}
+                                                                </td>
+                                                            </tr>
+
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <br><br>
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                                        <table style="width: 100%;">
+                                                            <tr>
+                                                                <th colspan="2" class="tabledep">
+                                                                    {{ 'Retención Años' | translate }}
+                                                                </th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="tabledep">
+                                                                    {{ 'Años de Gestión' | translate }}
+                                                                </th>
+                                                                <th class="tabledep">
+                                                                    {{ 'Años Central' | translate }}
+                                                                </th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="tabledep">
+                                                                    {{ dataSubseries[subserie.idSubserie].tiempoGestion }}
+                                                                </td>
+                                                                <td class="tabledep">
+                                                                    {{ dataSubseries[subserie.idSubserie].tiempoCentral }}
+                                                                </td>
+                                                            </tr>
+
+                                                        </table>
+
+                                                    </div>
+
+
+                                                    <div *ngIf="statusSuport" class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                                        <table style="width: 100%;">
+                                                            <tr>
+                                                                <th colspan="3" class="tabledep">
+                                                                    {{ 'Soporte' | translate }}
+                                                                </th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="tabledep">
+                                                                    {{ 'SoportePapel' | translate }}
+                                                                </th>
+                                                                <th class="tabledep">
+                                                                    {{ 'SoporteElectronico' | translate }}
+                                                                </th>
+                                                                <th class="tabledep">
+                                                                    {{ 'SoporteOriginal' | translate }}
+                                                                </th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="tabledep">
+                                                                    {{ dataSubseries[subserie.idSubserie].pSoporte }}
+                                                                </td>
+                                                                <td class="tabledep">
+                                                                    {{ dataSubseries[subserie.idSubserie].eSoporte }}
+                                                                </td>
+                                                                <td class="tabledep">
+                                                                    {{ dataSubseries[subserie.idSubserie].oSoporte }}
+                                                                </td>
+                                                            </tr>
+
+                                                        </table>
+
+                                                    </div>
+
+
+                                                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                                        <table style="width: 100%;">
+                                                            <tr>
+                                                                <th colspan="4" class="tabledep">
+                                                                    {{ 'Disposición Final' | translate }}
+                                                                </th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="tabledep">
+                                                                    CT
+                                                                </th>
+                                                                <th class="tabledep">
+                                                                    E
+                                                                </th>
+                                                                <th class="tabledep">
+                                                                    S
+                                                                </th>
+                                                                <th class="tabledep">
+                                                                    M
+                                                                </th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="tabledep">
+                                                                    <!-- <i class="material-icons">clear</i> -->
+                                                                    <div *ngIf="dataSubseries[subserie.idSubserie].disposicionCT"> X </div>
+                                                                </td>
+                                                                <td class="tabledep">
+                                                                    <!-- <i class="material-icons">clear</i> -->
+                                                                    <div *ngIf="dataSubseries[subserie.idSubserie].disposicionE"> X </div>
+                                                                </td>
+                                                                <td class="tabledep">
+                                                                    <!-- <i class="material-icons">clear</i> -->
+                                                                    <div *ngIf="dataSubseries[subserie.idSubserie].disposicionS"> X </div>
+                                                                </td>
+                                                                <td class="tabledep">
+                                                                    <!-- <i class="material-icons">clear</i> -->
+                                                                    <div *ngIf="dataSubseries[subserie.idSubserie].disposicionM"> X </div>
+                                                                </td>
+                                                            </tr>
+
+                                                        </table>
+
+                                                    </div>
+                                                    <div *ngIf="statusSuport == true" class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                                        <table style="width: 100%;">
+                                                            <tr>
+                                                                <th class="tabledep">
+                                                                    {{ 'Procedimiento' | translate }}
+                                                                </th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td rowspan="2">
+                                                                    {{ dataSubseries[subserie.idSubserie].procedimientos }}
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <div *ngIf="statusSuport == false" class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                                        <table style="width: 100%;">
+                                                            <tr>
+                                                                <th class="tabledep">
+                                                                    {{ 'Procedimiento' | translate }}
+                                                                </th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td rowspan="2">
+                                                                    {{ dataSubseries[subserie.idSubserie].procedimientos }}
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <!-- Input del campo Tipos documentales -->
+                                                <small class="description">{{ 'Tipos documentales' | translate }}: </small>
+                                                <div class="row">
+                                                    <div *ngFor="let tipoDoc of tipDocumentales[ subserie.idSubserie ] " class="tab-pane col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                                        <table style="width: 100%;">
+                                                            <tr *ngIf="!showEditField" class="tabledep">
+                                                                <th colspan="2">
+                                                                    {{ tipoDoc.nomTipDoc }}
+                                                                </th>
+                                                            </tr>
+                                                            <tr *ngIf="showEditField" class="tabledep">
+                                                                <th colspan="2">
+                                                                    <mat-form-field class="example-full-width">
+                                                                        <input matInput type="text" id="TiposDocumentales" [value]="tipoDoc.nomTipDoc" (change)="changeName( $event, tipoDoc.idTipDocu )" maxlength="255">
+                                                                    </mat-form-field>
+                                                                </th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="tabledep">
+                                                                    {{ 'Vencimiento' | translate }}
+                                                                </td>
+                                                                <td *ngIf="!showEditField" class="tabledep">
+                                                                    {{ tipoDoc.diasTipDoc }} {{ 'Días' | translate }}
+                                                                </td>
+                                                                <td *ngIf="showEditField" class="tabledep">
+                                                                    <mat-form-field class="example-full-width">
+                                                                        <input matInput type="number" id="TiposDocumentalesDia" [value]="tipoDoc.diasTipDoc" (change)="changeName( $event, tipoDoc.idTipDocu )">
+                                                                    </mat-form-field>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

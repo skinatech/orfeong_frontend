@@ -1,0 +1,34 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12" style="height: 500px">
+        <h5>
+          <b>
+            {{
+              "belowIsThePreviouslyUploadedDocumentPleaseClickWhereYouWantToPrintThesignature"
+                | translate
+            }}
+          </b>
+        </h5>
+        <iframe
+          #iframe
+          id="frameViewPdf"
+          width="100%"
+          height="100%"
+          allowfullscreen
+          webkitallowfullscreen
+        ></iframe>
+      </div>
+      <div class="col-md-12">
+        <div mat-dialog-actions class="modalActionsButtons" style="float: right !important">
+          <button mat-raised-button class="btn btn-fill btn-round" (click)="cerrar()">
+            {{ "login.cancel" | translate }} <i class="material-icons">close</i>
+          </button>
+          <button mat-raised-button class="btn btn-primary btn-round" (click)="continue()">
+            {{ "continue" | translate }} <i class="material-icons">check_circle_outline</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
